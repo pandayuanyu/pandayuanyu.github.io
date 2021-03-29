@@ -21,18 +21,18 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要到学习零样本学习的概念，本文的idea在于将WCT上池化(unpooling)中区域零值改为非零高斯数值。">
+<meta name="description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples">
 <meta property="og:url" content="https://pandayuanyu.github.io/2021/03/29/zeroshot/index.html">
 <meta property="og:site_name" content="YUANYU">
-<meta property="og:description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要到学习零样本学习的概念，本文的idea在于将WCT上池化(unpooling)中区域零值改为非零高斯数值。">
+<meta property="og:description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png">
 <meta property="article:published_time" content="2021-03-29T11:29:03.333Z">
-<meta property="article:modified_time" content="2021-03-29T13:39:07.498Z">
+<meta property="article:modified_time" content="2021-03-29T14:59:06.600Z">
 <meta property="article:author" content="Yu Yuan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png">
@@ -240,10 +240,17 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-29 19:29:03 / Modified: 21:39:07" itemprop="dateCreated datePublished" datetime="2021-03-29T19:29:03+08:00">2021-03-29</time>
+      <time title="Created: 2021-03-29 19:29:03 / Modified: 22:59:06" itemprop="dateCreated datePublished" datetime="2021-03-29T19:29:03+08:00">2021-03-29</time>
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -254,7 +261,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="foreword">Foreword</h2>
-<p>// 由于项目需要，阅读此论文。通过此文章，主要到学习零样本学习的概念，本文的idea在于将WCT上池化(unpooling)中区域零值改为非零高斯数值。<br />
+<p>// 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。<br />
 <span id="more"></span> // 本文作者来自哈工程自动化学院，文章录于应用声学而非图像领域期刊，学术水平较低。</p>
 <h2 id="abstract">Abstract</h2>
 <ul>
@@ -309,6 +316,7 @@
 
 
 
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -346,6 +354,24 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
 </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
@@ -364,6 +390,7 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -401,6 +428,22 @@
 </script>
 
 
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/03/29/zeroshot/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
