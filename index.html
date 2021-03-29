@@ -8,8 +8,8 @@
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon64.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon32.ico">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -232,7 +232,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-03-29 19:29:03 / Modified: 20:20:11" itemprop="dateCreated datePublished" datetime="2021-03-29T19:29:03+08:00">2021-03-29</time>
+      <time title="Created: 2021-03-29 19:29:03 / Modified: 21:39:07" itemprop="dateCreated datePublished" datetime="2021-03-29T19:29:03+08:00">2021-03-29</time>
     </span>
 
   
@@ -245,25 +245,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Foreword"><a href="#Foreword" class="headerlink" title="Foreword"></a>Foreword</h2><p>// 由于项目需要，阅读此论文。通过此文章，主要到学习零样本学习的概念，本文的idea在于将WCT上池化(unpooling)中区域零值改为非零高斯数值。<br>// 本文作者来自哈工程自动化学院，文章录于应用声学而非图像领域期刊，学术水平较低。</p>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>侧扫声纳(Side-Scan Sonar, SSS)</li>
-<li>缺乏SSS数据集引出“零样本学习问题”。</li>
-<li>风格迁移：利用普通光学图像和任何可用的SSS图像合成伪样本，并用这些伪样本训练DNN，转化为传统的监督学习问题。</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/guizilaile23/ZSL-SSS">源代码</a></li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>迁移学习就是将从源域(如光学图像)获取的知识转移到目标域。SSS不同于光学图像，但有一些特征是共同的，所以迁移学习可以很好地工作。</li>
-<li>如果伪样本与真实SSS图像的域偏差较小，可以利用伪样本学习到的知识对SSS图像进行精确分类。</li>
-</ul>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
-<li>KELM</li>
-<li>ECNet</li>
-<li>风格迁移相关 StyleBank</li>
-</ul>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="Problem-definition-and-network-architecture"><a href="#Problem-definition-and-network-architecture" class="headerlink" title="Problem definition and network architecture"></a>Problem definition and network architecture</h3><h4 id="1-提出的网络"><a href="#1-提出的网络" class="headerlink" title="1. 提出的网络"></a>1. 提出的网络</h4><p><img src="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png"><br>     *怀疑这里两个编码器后的特征写反了<br>该网络包含伪样本合成部分和分类部分。伪样本合成部分用于合成伪SSS图像，分类部分用于进行预测。两个部分可以整合成一个统一的形式，也可以独立工作。分开的时候更适合调试，一起更节省运算时间（屁话）。</p>
-<h4 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h4><p>$$L(\omega)=L_{S}+\eta L_{R}+\Omega|\omega|_{2}$$</p>
-
+          <h2 id="foreword">Foreword</h2>
+<p>// 由于项目需要，阅读此论文。通过此文章，主要到学习零样本学习的概念，本文的idea在于将WCT上池化(unpooling)中区域零值改为非零高斯数值。<br />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/29/zeroshot/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -327,8 +318,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Thanks to Mr.Wang, who helps me a lot to finsh this website’s construcion.</p>
-<h2 id="baba-ai-ni"><a href="#baba-ai-ni" class="headerlink" title="baba ai ni"></a>baba ai ni</h2><h3 id="blogroll"><a href="#blogroll" class="headerlink" title="blogroll"></a>blogroll</h3><p><a target="_blank" rel="noopener" href="http://www.wanglindong.com/">www.wanglindong.com</a></p>
+          <p>Thanks to Mr.Wang, who helps me a lot to finsh this website's construcion.</p>
+<h2 id="baba-ai-ni">baba ai ni</h2>
+<h3 id="blogroll">blogroll</h3>
+<p>www.wanglindong.com</p>
 
       
     </div>
