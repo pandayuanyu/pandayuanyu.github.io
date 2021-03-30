@@ -23,16 +23,23 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Falcon&#39;s Space">
-<meta property="og:url" content="https://pandayuanyu.github.io/archives/2021/index.html">
+<meta name="description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/03/30/zeroshot/index.html">
 <meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png">
+<meta property="article:published_time" content="2021-03-30T03:11:11.000Z">
+<meta property="article:modified_time" content="2021-03-30T03:12:30.538Z">
 <meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="2021">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png">
 
 
-<link rel="canonical" href="https://pandayuanyu.github.io/archives/2021/">
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/03/30/zeroshot/">
 
 
 <script class="page-configurations">
@@ -40,11 +47,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
-<title>Archive | Falcon's Space</title>
+<title>Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples | Falcon's Space</title>
   
 
 
@@ -142,7 +149,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -155,6 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#related-work"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-number">5.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-definition-and-network-architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Problem definition and network architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="nav-number">5.1.1.</span> <span class="nav-text">1. 提出的网络</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,70 +217,147 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 2 posts in total. Keep on posting.</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/03/30/zeroshot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="Created: 2021-03-30 11:11:11 / Modified: 11:12:30" itemprop="dateCreated datePublished" datetime="2021-03-30T11:11:11+08:00">2021-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CV/" itemprop="url" rel="index"><span itemprop="name">CV</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>625</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="foreword">Foreword</h2>
+<p>// 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。<br />
+<span id="more"></span> // 本文作者来自哈工程自动化学院，文章录于应用声学而非图像领域期刊，学术水平较低。</p>
+<h2 id="abstract">Abstract</h2>
+<ul>
+<li>侧扫声纳(Side-Scan Sonar, SSS)</li>
+<li>缺乏SSS数据集引出“零样本学习问题”。</li>
+<li>风格迁移：利用普通光学图像和任何可用的SSS图像合成伪样本，并用这些伪样本训练DNN，转化为传统的监督学习问题。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/guizilaile23/ZSL-SSS">源代码</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<ul>
+<li>迁移学习就是将从源域(如光学图像)获取的知识转移到目标域。SSS不同于光学图像，但有一些特征是共同的，所以迁移学习可以很好地工作。</li>
+<li>如果伪样本与真实SSS图像的域偏差较小，可以利用伪样本学习到的知识对SSS图像进行精确分类。</li>
+</ul>
+<h2 id="related-work">Related Work</h2>
+<ul>
+<li>KELM</li>
+<li>ECNet</li>
+<li>风格迁移相关 StyleBank</li>
+</ul>
+<h2 id="method">Method</h2>
+<h3 id="problem-definition-and-network-architecture">Problem definition and network architecture</h3>
+<h4 id="提出的网络">1. 提出的网络</h4>
+<p><img src="https://i.bmp.ovh/imgs/2021/03/b620c200d0c3f0ed.png" /> //*怀疑这里两个编码器后的特征写反了//<br />
+该网络包含伪样本合成部分和分类部分。伪样本合成部分用于合成伪SSS图像，分类部分用于进行预测。两个部分可以整合成一个统一的形式，也可以独立工作。分开的时候更适合调试，一起更节省运算时间（屁话）。 #### 2.</p>
+<p><span class="math display">\[L(\omega)=L_{S}+\eta L_{R}+\Omega\|\omega\|_{2}\]</span></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-03-30T11:11:11+08:00"
-              content="2021-03-30">
-          03-30
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/30/zeroshot/" itemprop="url">
-            <span itemprop="name">Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/2021/" rel="tag"># 2021</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/16/suibian/" rel="prev" title="wangsb">
+                  <i class="fa fa-chevron-left"></i> wangsb
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-03-16T18:36:49+08:00"
-              content="2021-03-16">
-          03-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/16/suibian/" itemprop="url">
-            <span itemprop="name">wangsb</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
 
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -382,6 +467,21 @@
 
 
 
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/03/30/zeroshot/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
