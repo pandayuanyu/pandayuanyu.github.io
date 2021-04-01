@@ -21,7 +21,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 <meta name="description" content="Foreword &#x2F;&#x2F; 由于项目需要，阅读此论文。通过此文章，主要理解了零样本学习的概念技巧，本文的idea在于将WCT网络中上池化(unpooling)中区域零值改为非零高斯数值。">
 <meta property="og:type" content="article">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/03/1f97de18f3027647.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/03/69732a7eba4011c3.png">
 <meta property="article:published_time" content="2021-03-30T03:11:11.000Z">
-<meta property="article:modified_time" content="2021-03-30T10:42:56.265Z">
+<meta property="article:modified_time" content="2021-04-01T09:14:02.413Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
@@ -217,6 +217,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -257,10 +259,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-03-30 11:11:11 / Modified: 18:42:56" itemprop="dateCreated datePublished" datetime="2021-03-30T11:11:11+08:00">2021-03-30</time>
+      <time title="Created: 2021-03-30 11:11:11" itemprop="dateCreated datePublished" datetime="2021-03-30T11:11:11+08:00">2021-03-30</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-01 17:14:02" itemprop="dateModified" datetime="2021-04-01T17:14:02+08:00">2021-04-01</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -521,7 +529,7 @@ a c c_{m e a n}=\frac{1}{\|k\|} \sum_{c=1}^{\|k\|} \frac{\text { correct predict
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
 
@@ -588,3 +596,7 @@ NexT.utils.loadComments('#lv-container', () => {
 
 </body>
 </html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>
