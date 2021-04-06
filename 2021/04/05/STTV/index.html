@@ -30,11 +30,13 @@
 <meta property="og:site_name" content="Falcon&#39;s Space">
 <meta property="og:description" content="结构张量全变分">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png">
 <meta property="article:published_time" content="2021-04-05T08:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-06T05:33:19.504Z">
+<meta property="article:modified_time" content="2021-04-06T08:55:40.127Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png">
 
 
 <link rel="canonical" href="https://pandayuanyu.github.io/2021/04/05/STTV/">
@@ -160,7 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">概念理解</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">概念理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization-for-inverse-problems"><span class="nav-number">5.</span> <span class="nav-text">Regularization for Inverse Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-formulation-and-variational-recovery"><span class="nav-number">5.1.</span> <span class="nav-text">problem formulation and variational recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tv-regularization"><span class="nav-number">5.2.</span> <span class="nav-text">TV regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directional-derivatives-and-the-structure-tensor"><span class="nav-number">5.3.</span> <span class="nav-text">directional derivatives and the structure tensor</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,7 +261,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-06 13:33:19" itemprop="dateModified" datetime="2021-04-06T13:33:19+08:00">2021-04-06</time>
+        <time title="Modified: 2021-04-06 16:55:40" itemprop="dateModified" datetime="2021-04-06T16:55:40+08:00">2021-04-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,14 +288,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>962</span>
+      <span>4.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>3 mins.</span>
+      <span>13 mins.</span>
     </span>
 </div>
 
@@ -312,10 +314,10 @@
 <p>// 论文2015年发表于 SIAM Journal on Imaging Sciences, 四位作者均大牛。</p>
 <h2 id="概念理解">概念理解</h2>
 <ul>
-<li>对偶空间: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23871517">理解</a></li>
-<li>Tensor 张量: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/abella/p/10142935.html">通俗解释</a><br />
-疑惑点：到底是阶数还是维数？</li>
-<li>Structure Tensor 结构张量：<br />
+<li><p>对偶空间: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23871517">理解</a></p></li>
+<li><p>Tensor 张量: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/abella/p/10142935.html">通俗解释</a><br />
+疑惑点：到底是阶数还是维数？</p></li>
+<li><p>Structure Tensor 结构张量：<br />
   结构张量用于角点检测、边缘检测和纹理分析。对一副灰度图像，当两个相邻的像素点无限接近时，微分dI可以表示为：<br />
 <span class="math display">\[
 \mathrm{d} I=\frac{\partial I}{\partial x} \mathrm{~d} x+\frac{\partial I}{\partial y} \mathrm{~d} y
@@ -340,8 +342,60 @@ I_{x} I_{y} &amp; I_{y}^{2}
   结构张量T为半正定矩阵，具有两个非负特征值，可以通过特征值将图像的空间结构信息分为三种：<br />
   平坦区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H=0)，表示图像在该点任何方向灰度变化都很小；<br />
   边缘区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K=0)，表示图像在该点沿某一方向灰度变化率较大；<br />
-  角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</li>
+  角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</p></li>
+<li><p>图像阶梯效应：也叫“块效应”，图像处理后某些区域内灰度相同。</p></li>
+<li><p>Sobolev Space: <a target="_blank" rel="noopener" href="https://blog.csdn.net/baimafujinji/article/details/49835983?utm_source=blogxgwz3&amp;utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">索伯列夫空间</a></p></li>
 </ul>
+<h2 id="abstract">Abstract</h2>
+<ul>
+<li>引入一个新的一般能量泛函，用它来解决变分框架内的逆成像问题。</li>
+<li>所提出的正则化族称为结构张量全变分(STV)，它对结构张量的特征值进行惩罚，适用于灰度图像和向量值图像。</li>
+<li>推广了已有的几种变分惩罚，包括全变分半群及其向量扩展。同时，由于结构张量能够捕获局部邻域的一阶信息，STV泛函能够提供更稳健的图像变化度量。</li>
+<li>进一步证明了STV正则化是凸的，同时它们也满足图像变换的几个不变性。这些特性使它们成为成像应用的理想候选者。</li>
+<li>对于离散版本的STV泛函，推导了一个等价的定义，该定义基于补丁的雅可比算子，这是一种新的线性算子，扩展了雅可比矩阵。</li>
+<li>提出了关于各种逆成像问题的大量实验，将提出的正则化方法与其他正则化方法进行了比较。</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<ul>
+<li>逆问题越来越多地出现在一系列成像应用中。它们也出现在大量的计算机视觉应用中，包括运动估计、图像配准、立体声和密集三维(3D)重建。</li>
+<li>为了恢复的信息在物理上或统计上有意义，需要一个包含底层图像的已知属性的模型。</li>
+<li>处理不适定反问题的一种常用策略是变分法。这个框架的主要元素是正规化函数。</li>
+<li>最流行的成像应用正则化是全变分(TV)半范数。TV是一个凸函数，其成功的主要原因是它能够重建清晰、保存完好的图像边缘。然而，它的缺点是过度平滑均匀区域和产生阶梯伪影。</li>
+</ul>
+<h2 id="regularization-for-inverse-problems">Regularization for Inverse Problems</h2>
+<h3 id="problem-formulation-and-variational-recovery">problem formulation and variational recovery</h3>
+<p>  对于许多成像应用，采集是通过线性过程很好地描述的，可以用数学公式表示为: <span class="math display">\[
+\boldsymbol{v}(\boldsymbol{x}) \sim \mathcal{N}(\mathcal{A} \boldsymbol{u}(\boldsymbol{x}))
+\]</span>   其中，<span class="math inline">\(\boldsymbol{u}(\boldsymbol{x})=\left[u_{1}(\boldsymbol{x}) \ldots u_{M}(\boldsymbol{x})\right]: \mathbb{R}^{2} \mapsto \mathbb{R}^{M}\)</span>表示我们希望重建的具有M个通道的向量值的一般图像，A是一个线性算子，提供了从底层图像空间到测量空间的映射。符号N表示测量噪声，它包含了采集过程中所有可能的误差类型，包括随机噪声。   从测量值v中恢复u属于线性逆问题的范畴。在大多数实际情况下，运算符A要么是病态的，要么是单数的。这种不适定性是在变分框架内处理的，其中u的重构是一个形式的目标函数的最小化问题: <span class="math display">\[
+\mathcal{E}(\boldsymbol{u})=\varphi(\mathcal{A} \boldsymbol{u})+\tau \psi(\boldsymbol{u})
+\]</span>   这个代价函数包括数据保真度项ϕ(Au)，它测量候选解对观测数据的解释程度，以及正则化ψ(u)，它编码关于底层图像的任何可用的先验信息。数据保真度项的确切形式取决于干扰测量的假定噪声模型。从贝叶斯的观点来看，整个重建方法对应于一个惩罚最大似然或最大后验估计问题。</p>
+<h3 id="tv-regularization">TV regularization</h3>
+<p>  TV适用于灰度图像u(M = 1)，对于平滑图像定义为: <span class="math display">\[
+\operatorname{TV}(u)=\int_{\mathbb{R}^{2}}\|\nabla u\|_{2} \mathrm{~d} \boldsymbol{x}
+\]</span>   TV的一个众所周知的缺点是，它支持分段常数解，它可以在图像的平滑区域创建强大的阶梯伪影。此外，TV和VTV的一个基本缺点是，用于惩罚图像在每个x点上变化的梯度大小作为图像描述符过于简单;它只依赖于x而不考虑其邻域的可用信息。</p>
+<h3 id="directional-derivatives-and-the-structure-tensor">directional derivatives and the structure tensor</h3>
+<p>  目标是开发邻域感知的矢量图像变化的措施。   假设向量值图像u属于Sobolev空间<span class="math inline">\(W^{1,2}\left(\mathbb{R}^{2}, \mathbb{R}^{M}\right)\)</span>。设n为任意二维方向(<span class="math inline">\(\|\boldsymbol{n}\|_{2}=1\)</span>)。向量值图像u在n方向上以及任意特定图像点x处的矢量方向导数为： <span class="math display">\[
+\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{n}}(\boldsymbol{x})=(J \boldsymbol{u}(\boldsymbol{x})) \boldsymbol{n}
+\]</span>   u的Jacobian矩阵<span class="math inline">\(J \boldsymbol{u}\)</span>定义为： <span class="math display">\[
+J \boldsymbol{u}(\boldsymbol{x})=\left[\nabla u_{1}(\boldsymbol{x}) \quad \ldots \quad \nabla u_{M}(\boldsymbol{x})\right]^{T}
+\]</span>   方向导数<span class="math inline">\(\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\)</span>的大小衡量在n方向上任何一点x的图像变化量。这种方法的计算完全集中在x处。为了提高程序的鲁棒性和捕捉图像领域表现，用<span class="math inline">\(\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\)</span>的加权均方根代替，称之为方向变化： <span class="math display">\[
+\operatorname{RMS}_{K}\left\{\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\right\}=\sqrt{K *\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}^{2}}=\sqrt{\boldsymbol{n}^{T}\left(S_{k} \boldsymbol{u}\right) \boldsymbol{n}}
+\]</span>   在上面的方程中∗表示卷积运算，K(x)是一个非负的、旋转对称的卷积核，K(x) = K(|x|)，执行加权平均(例如，二维高斯分布)，<span class="math inline">\(S_{K} \boldsymbol{u}\)</span>是图像u在x点处的结构张量，定义为： <span class="math display">\[
+S_{K} \boldsymbol{u}(\boldsymbol{x})=K *\left[J \boldsymbol{u}^{T} J \boldsymbol{u}\right](\boldsymbol{x})
+\]</span></p>
+<p>  设<span class="math inline">\(\lambda^{+}=\lambda^{+}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right), \lambda^{-}=\lambda^{-}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right)\)</span>是<span class="math inline">\(S_{K} \boldsymbol{u}(\boldsymbol{x})\)</span>的特征值，<span class="math inline">\(\lambda^{+} \geq \lambda^{-}\)</span>， <span class="math inline">\(\boldsymbol{\theta}^{+}, \boldsymbol{\theta}^{-}\)</span>是对应的特征向量。<span class="math inline">\(\omega \in(-\pi, \pi]\)</span>定义为方向向量n与特征向量<span class="math inline">\({\theta}^{+}\)</span>之间的夹角。利用特征分解，方向变化可以被定义为角度<span class="math inline">\(\omega\)</span>的函数： <span class="math display">\[
+V(\omega) \triangleq \operatorname{RMS}_{K}\left\{\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\right\}=\sqrt{\lambda^{+} \cos ^{2} \omega+\lambda^{-} \sin ^{2} \omega}
+\]</span></p>
+<p>  由上述参数得到椭圆： <span class="math display">\[
+\boldsymbol{P}(\omega)=\cos \omega \sqrt{\lambda^{+}} \boldsymbol{\theta}^{+}+\sin \omega \sqrt{\lambda^{-}} \boldsymbol{\theta}^{-}, \omega \in[0,2 \pi)
+\]</span></p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png" width="600"/>
+</div>
+<center>
+结构张量椭圆可视化结果
+</center>
+<p>  椭圆的长半径和小半径分别为<span class="math inline">\(\sqrt{\lambda^{+}}\)</span>和<span class="math inline">\(\sqrt{\lambda^{-}}\)</span>，而长轴的方向分别为<span class="math inline">\({\theta}^{+}\)</span>和<span class="math inline">\({\theta}^{-}\)</span>。更重要的是，观察到<span class="math inline">\(V(\omega)=\|\boldsymbol{P}(\omega)\|_{2}\)</span>，意味着方向变化V(ω)可以解释为任意点P(ω)到椭圆中心的距离。</p>
 
     </div>
 
