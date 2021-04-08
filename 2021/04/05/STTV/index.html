@@ -31,8 +31,17 @@
 <meta property="og:description" content="结构张量全变分">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/ff3f005299007f17.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/541b752a2b586b34.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/6ad3d62fda3f5255.png
+">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9f2198c1e69053f0.png
+">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c387bba20c118634.png
+">
 <meta property="article:published_time" content="2021-04-05T08:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-08T03:58:12.668Z">
+<meta property="article:modified_time" content="2021-04-08T08:53:43.373Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
@@ -162,7 +171,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization-for-inverse-problems"><span class="nav-number">5.</span> <span class="nav-text">Regularization for Inverse Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-formulation-and-variational-recovery"><span class="nav-number">5.1.</span> <span class="nav-text">problem formulation and variational recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tv-regularization"><span class="nav-number">5.2.</span> <span class="nav-text">TV regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directional-derivatives-and-the-structure-tensor"><span class="nav-number">5.3.</span> <span class="nav-text">directional derivatives and the structure tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-structure-tensor-tv-functional"><span class="nav-number">5.4.</span> <span class="nav-text">the structure tensor TV functional</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv"><span class="nav-number">6.</span> <span class="nav-text">Discrete STV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#patch-based-jacobian-operator"><span class="nav-number">6.1.</span> <span class="nav-text">patch-based Jacobian operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equivalent-formulation-of-the-discrete-stv"><span class="nav-number">6.2.</span> <span class="nav-text">equivalent formulation of the discrete STV</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv-minimization"><span class="nav-number">7.</span> <span class="nav-text">Discrete STV minimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proximal-map-of-mathrmstv_p"><span class="nav-number">7.1.</span> <span class="nav-text">proximal map of \(\mathrm{STV}_{p}\)</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization-for-inverse-problems"><span class="nav-number">5.</span> <span class="nav-text">Regularization for Inverse Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-formulation-and-variational-recovery"><span class="nav-number">5.1.</span> <span class="nav-text">problem formulation and variational recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tv-regularization"><span class="nav-number">5.2.</span> <span class="nav-text">TV regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directional-derivatives-and-the-structure-tensor"><span class="nav-number">5.3.</span> <span class="nav-text">directional derivatives and the structure tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-structure-tensor-tv-functional"><span class="nav-number">5.4.</span> <span class="nav-text">the structure tensor TV functional</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv"><span class="nav-number">6.</span> <span class="nav-text">Discrete STV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#patch-based-jacobian-operator"><span class="nav-number">6.1.</span> <span class="nav-text">patch-based Jacobian operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equivalent-formulation-of-the-discrete-stv"><span class="nav-number">6.2.</span> <span class="nav-text">equivalent formulation of the discrete STV</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv-minimization"><span class="nav-number">7.</span> <span class="nav-text">Discrete STV Minimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proximal-map-of-mathrmstv_p"><span class="nav-number">7.1.</span> <span class="nav-text">proximal map of \(\mathrm{STV}_{p}\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solving-the-dual-problem"><span class="nav-number">7.2.</span> <span class="nav-text">solving the dual problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numerical-algorithm"><span class="nav-number">7.3.</span> <span class="nav-text">numerical algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solution-of-general-inverse-problems"><span class="nav-number">7.4.</span> <span class="nav-text">solution of general inverse problems</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-and-experiments"><span class="nav-number">8.</span> <span class="nav-text">Application and Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#experimental-setting"><span class="nav-number">8.1.</span> <span class="nav-text">experimental setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-restoration"><span class="nav-number">8.2.</span> <span class="nav-text">image restoration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-magnification"><span class="nav-number">8.3.</span> <span class="nav-text">image magnification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reconstruction-from-sparse-fourier-measurements"><span class="nav-number">8.4.</span> <span class="nav-text">reconstruction from sparse Fourier measurements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#implementation-details-and-computational-runtimes"><span class="nav-number">8.5.</span> <span class="nav-text">implementation details and computational runtimes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusions"><span class="nav-number">9.</span> <span class="nav-text">Conclusions</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -261,7 +270,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-08 11:58:12" itemprop="dateModified" datetime="2021-04-08T11:58:12+08:00">2021-04-08</time>
+        <time title="Modified: 2021-04-08 16:53:43" itemprop="dateModified" datetime="2021-04-08T16:53:43+08:00">2021-04-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -288,14 +297,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>7.9k</span>
+      <span>10k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>22 mins.</span>
+      <span>29 mins.</span>
     </span>
 </div>
 
@@ -345,6 +354,8 @@ I_{x} I_{y} &amp; I_{y}^{2}
   角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</p></li>
 <li><p>图像阶梯效应：也叫“块效应”，图像处理后某些区域内灰度相同。</p></li>
 <li><p>Sobolev Space: <a target="_blank" rel="noopener" href="https://blog.csdn.net/baimafujinji/article/details/49835983?utm_source=blogxgwz3&amp;utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">索伯列夫空间</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.zhujian.life/posts/e51acd5.html">Nesterov 加速梯度</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/81202544">Lipschitz常数</a></p></li>
 </ul>
 <h2 id="abstract">Abstract</h2>
 <ul>
@@ -436,9 +447,91 @@ V(\omega) \triangleq \operatorname{RMS}_{K}\left\{\|\partial \boldsymbol{u} / \p
 <p>  在像素位置n处评估的u的离散结构张量可以根据patch-based Jacobian写成: <span class="math display">\[
 \left[\boldsymbol{S}_{K} \boldsymbol{u}\right]_{n}=\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}^{T}\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}
 \]</span></p>
-<h2 id="discrete-stv-minimization">Discrete STV minimization</h2>
+<h2 id="discrete-stv-minimization">Discrete STV Minimization</h2>
 <h3 id="proximal-map-of-mathrmstv_p">proximal map of <span class="math inline">\(\mathrm{STV}_{p}\)</span></h3>
-<p>  函数ψ的最近邻映射或Moreau邻近算子表示为:</p>
+<p>  函数ψ的最近邻映射或Moreau邻近算子表示为: <span class="math display">\[
+\operatorname{prox}_{\psi}(\mathbf{z})=\underset{\boldsymbol{u}}{\arg \min } \frac{1}{2}\|\boldsymbol{u}-\mathbf{z}\|_{2}^{2}+\psi(\boldsymbol{u})
+\]</span>   在本文中，<span class="math inline">\(\psi(\boldsymbol{u})=\tau \mathrm{STV}_{p}(\boldsymbol{u})+\iota_{\mathcal{C}}\)</span></p>
+<p>有： <span class="math display">\[
+\underset{\boldsymbol{u}}{\arg \min } \frac{1}{2}\|\boldsymbol{u}-\mathbf{z}\|_{2}^{2}+\tau \operatorname{STV}_{p}(\boldsymbol{u})+\iota_{\mathcal{C}}(\boldsymbol{u})
+\]</span></p>
+<h3 id="solving-the-dual-problem">solving the dual problem</h3>
+<p>  作为约束优化问题的解:</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\Omega}}=\underset{\boldsymbol{\Omega} \in \mathcal{B}_{\infty, q}}{\arg \max } \frac{1}{2}\left\|\boldsymbol{w}-\Pi_{C}(\boldsymbol{w})\right\|_{2}^{2}+\frac{1}{2}\left(\|\boldsymbol{z}\|_{2}^{2}-\|\boldsymbol{w}\|_{2}^{2}\right)
+\]</span></p>
+<p>  梯度</p>
+<p><span class="math display">\[
+\nabla d(\mathbf{\Omega})=\tau \boldsymbol{J}_{K} \Pi_{C}\left(\mathbf{z}-\tau \boldsymbol{J}_{K}^{*} \boldsymbol{\Omega}\right)
+\]</span></p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png" width="600"/>
+</div>
+<h3 id="numerical-algorithm">numerical algorithm</h3>
+<p>  调用一个基于梯度的方案来导出对偶问题的解。在这项工作中，对光滑函数采用内斯特罗夫迭代法。该方案显示出比标准梯度上升法高一个数量级的收敛速度。由于我们的双目标是光滑的，具有李普希茨连续梯度，使用了一个常数步长，等Lipschitz常数的倒数。 <span class="math display">\[
+L(d) \leq 8 \sqrt{2} \tau^{2}
+\]</span></p>
+<h3 id="solution-of-general-inverse-problems">solution of general inverse problems</h3>
+<p>  这个基本工具也可以用来解决更一般的反问题。</p>
+<h2 id="application-and-experiments">Application and Experiments</h2>
+<h3 id="experimental-setting">experimental setting</h3>
+<ul>
+<li><p>为验证所提出的STV正则化方法的有效性，我们在几个逆成像问题上将它们与其他相关方法进行了比较。特别考虑了图像恢复(去噪和去模糊)、图像放大和从有限数量的傅立叶测量进行图像重建的问题。</p></li>
+<li><p>在所有情况下，图像强度被归一化，使得它们位于范围[0，1]内。</p></li>
+<li><p>比较项：考虑TGV的二阶扩展 <span class="math display">\[
+\operatorname{TGV}_{\alpha}^{2}(\boldsymbol{u})=\min _{\boldsymbol{v} \in \mathbb{R}^{N \times 2}}\|\nabla \boldsymbol{u}-\boldsymbol{v}\|_{2}+\alpha\|\mathcal{E} \boldsymbol{v}\|_{F}
+\]</span></p></li>
+<li><p>算子<span class="math inline">\(\mathcal{E}\)</span>表示对称梯度，<span class="math inline">\(\mathcal{E} \boldsymbol{v}=0.5\left(\nabla \boldsymbol{v}+\nabla \boldsymbol{v}^{T}\right)\)</span> ,<span class="math inline">\(\alpha\)</span>是用于平衡一阶项和二阶项的权重值，在这里取2。</p></li>
+<li><p>对于结构张量定义中的卷积核K，定义其为标准差<span class="math inline">\(\sigma=0.5\)</span>高斯分布的像素块，窗口大小3*3。</p></li>
+<li><p>四种噪声水平下不同正则化方法的图像去噪比较。性能是以相对于噪声输入的平均信噪比改善(分贝)来衡量的。</p></li>
+</ul>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/ff3f005299007f17.png" width="600"/>
+</div>
+<h3 id="image-restoration">image restoration</h3>
+<ul>
+<li>对于图像去噪问题，考虑独立同分布高斯噪声和分别对应于标准偏差<span class="math inline">\(\sigma_{w}=\{0.1,0.15,0.2,0.25\}\)</span>的四种不同噪声水平。</li>
+<li>在灰度实验中，TV是所有噪声水平中表现最差的方法。TGV比TV有所改进，这反映了它更倾向于分段线性而不是分段常数解，从而避免了TV的阶梯伪影。我们两个版本的正则化器，STV1和STV1，系统地优于TV和TGV2。</li>
+</ul>
+<h3 id="image-magnification">image magnification</h3>
+<p>  图像放大是一个与图像去模糊密切相关的反问题。 再次验证了STV 1不仅提高了信噪比，还导致了增强视觉质量的重建。</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/541b752a2b586b34.png" width="600"/>
+</div>
+<center>
+三个峰值信噪比和四个噪声水平下不同正则化方法的图像去模糊比较。性能是以相对于降级输入的平均PSNR改善(单位为分贝)来衡量的。最上面一行的条形代表灰度结果，而最下面一行的条形代表彩色结果
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/6ad3d62fda3f5255.png
+" width="600"/>
+</div>
+<center>
+图像去模糊示例:输入和最佳结果的特写
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9f2198c1e69053f0.png
+" width="600"/>
+</div>
+<center>
+两种变焦因子下不同正则化因子的图像放大比较
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/c387bba20c118634.png
+" width="600"/>
+</div>
+<center>
+图像放大示例:输入和最佳结果的特写镜头。输入通过简单的零阶保持放大。顶行:缩放因子d = 5时输入的灰度放大倍数。底行:缩放因子d = 5的输入的颜色放大倍数
+</center>
+<h3 id="reconstruction-from-sparse-fourier-measurements">reconstruction from sparse Fourier measurements</h3>
+<p>  考虑从有限数量的傅立叶测量中重建图像的问题。</p>
+<h3 id="implementation-details-and-computational-runtimes">implementation details and computational runtimes</h3>
+<p>  由于卷积核的存在，所提出的Stv2和Stv1函数在当前实现中大约慢3.5-4倍。</p>
+<h2 id="conclusions">Conclusions</h2>
+<ul>
+<li>引入了一个新的凸能量泛函族，它扩展和推广了全变分半范数及其向量扩展。</li>
+<li>我们的泛函的关键特征是，它们通过惩罚结构张量在这一点上的特征值，结合了图像域中每个点附近的信息。因此，它们提供了更丰富、更稳健的图像变化度量，从而提高了重建性能。</li>
+<li>在几个逆成像问题上与竞争方法进行了比较,验证提出的正则化可以代替TV或其矢量扩展。</li>
+</ul>
 
     </div>
 
