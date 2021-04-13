@@ -31,9 +31,10 @@
 <meta property="og:description" content="图像融合">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-11T15:28:41.110Z">
+<meta property="article:modified_time" content="2021-04-13T13:06:30.334Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="图像融合">
+<meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
 
 
@@ -160,7 +161,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -251,10 +252,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-04-11 23:11:11 / Modified: 23:28:41" itemprop="dateCreated datePublished" datetime="2021-04-11T23:11:11+08:00">2021-04-11</time>
+      <time title="Created: 2021-04-11 23:11:11" itemprop="dateCreated datePublished" datetime="2021-04-11T23:11:11+08:00">2021-04-11</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-04-13 21:06:30" itemprop="dateModified" datetime="2021-04-13T21:06:30+08:00">2021-04-13</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -280,7 +287,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>12</span>
+      <span>462</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -304,6 +311,13 @@
 <span id="more"></span>
 <p> </p>
 <h2 id="foreword">Foreword</h2>
+<ul>
+<li>2015年录用于IEEE Transactions Image Processing(TIP)</li>
+<li>第一作者<a target="_blank" rel="noopener" href="https://cchen156.github.io/">chen chen</a>, specially on low level image to image processing.</li>
+</ul>
+<h2 id="abstract">Abstract</h2>
+<p> </p>
+<p>本文提出了一种在同一地理位置上融合高分辨率全色图像和低分辨率多光谱图像的新方法。融合被公式化为凸优化问题，该问题最小化最小二乘拟合项和动态梯度稀疏性正则化的线性组合。前者是为了保持多光谱图像的准确光谱信息，后者是为了保持高分辨率全色图像的清晰边缘。我们还建议在融合过程中同时配准两幅图像，这是通过动态梯度稀疏特性自然实现的。然后设计一种有效的算法来解决优化问题，在每次迭代中实现输出图像大小的线性计算复杂度。我们将我们的方法与来自四颗卫星的多光谱图像数据集上的七种最先进的图像融合方法进行了比较。大量的实验结果表明，所提出的方法在空间和光谱质量方面明显优于其他方法。我们还表明，我们的方法可以从粗配准的真实世界数据集提供高质量的产品。最后，给出了一个MATLAB实现，以方便以后的研究。</p>
 
     </div>
 
@@ -314,6 +328,7 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag"># 图像融合</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
           </div>
 
         
