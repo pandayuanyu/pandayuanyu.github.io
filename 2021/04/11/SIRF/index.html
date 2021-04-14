@@ -31,8 +31,11 @@
 <meta property="og:description" content="图像融合">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png">
 <meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-13T16:13:53.251Z">
+<meta property="article:modified_time" content="2021-04-14T07:39:31.403Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="图像融合">
 <meta property="article:tag" content="CV">
@@ -262,7 +265,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-14 00:13:53" itemprop="dateModified" datetime="2021-04-14T00:13:53+08:00">2021-04-14</time>
+        <time title="Modified: 2021-04-14 15:39:31" itemprop="dateModified" datetime="2021-04-14T15:39:31+08:00">2021-04-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -289,14 +292,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.7k</span>
+      <span>4.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>5 mins.</span>
+      <span>13 mins.</span>
     </span>
 </div>
 
@@ -317,12 +320,18 @@
 <li>2015年录用于IEEE Transactions Image Processing(TIP)</li>
 <li>第一作者<a target="_blank" rel="noopener" href="https://cchen156.github.io/">chen chen</a>, specially on low level image to image processing.</li>
 </ul>
+<p> </p>
 <h2 id="conceptual-understanding">Conceptual Understanding</h2>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/79404806">全色、多光谱、高光谱</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dandelion_2/article/details/96999903">强度色调饱和度(IHS)</a>：强度表示光谱的整体亮度大小，对应于图像的空间分辨率，色调描述纯色的属性，决定与光谱的主波长，是光谱在质的方面的区别，饱和度表征光谱的主波长在强度中的比例，色调和饱和度代表图像的光谱分辨率。</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139018146">变分</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/huang1024rui/article/details/51534524">快速迭代收缩阈值算法(FISTA)</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iverson_49/article/details/38354961?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-5.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-5.control">快速迭代收缩阈值算法(FISTA)</a></p></li>
+<li><p>Frobenius 范数:<br />
+设 <span class="math inline">\(A=\left[a_{i j}\right]_{m \times n}\)</span> 是一个 <span class="math inline">\(m \times n\)</span> 矩阵, 称 <span class="math inline">\(\|A\|_{F}=\sqrt{\operatorname{tr}\left(A^{T} A\right)}=\sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n} a_{i j}^{2}}\)</span> 是这个 矩阵的 Frobenius 范数。</p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fd9e2166cfcc">转置卷积</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouxinxin0202/article/details/78620898">L2,1范数</a><br />
+L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都稀疏）</p></li>
 </ul>
 <p> </p>
 <h2 id="abstract">Abstract</h2>
@@ -353,16 +362,78 @@
 </ul>
 <p> </p>
 <h2 id="modeling">Modeling</h2>
-<p> </p>
 <h3 id="notations">notations</h3>
+<ul>
+<li><p><span class="math inline">\(\mathbf{P} \in \mathbb{R}^{m \times n}\)</span>为Pan图像</p></li>
+<li><p><span class="math inline">\(\mathbf{M} \in \mathbb{R}^{\frac{m}{c} \times \frac{n}{c} \times s}\)</span>为MS图像。c是常数，当Pan图像的分辨率为0.6m，MS图像的分辨率为2.4m时，c = 4</p></li>
+<li><p><span class="math inline">\(\mathbf{X} \in \mathbb{R}^{m \times n \times s}\)</span>是要融合的图像</p></li>
+<li><p><span class="math inline">\(\|\cdot\|_{F}\)</span>是Frobenius范数</p></li>
+<li><p><span class="math inline">\(\mathbf{X}_{i, j, d}\)</span>表示X的第i行、第j列和第d带中的元素</p></li>
+</ul>
 <p> </p>
 <h3 id="local-spectral-consistency">local spectral consistency</h3>
+<p>许多现有方法对MS图像进行上采样，并从该上采样的MS图像中提取光谱信息。然而，向上采样的图像模糊且不准确。因此，我们只假设下采样后的融合图像接近原始的MS图像。最小二乘拟合用于模拟这种关系: <span class="math display">\[
+E_{1}=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}
+\]</span> 其中ψ表示下采样运算符。局部光谱信息被强制与MS每个像素一致。这个函数是物理激励的，因此可以避免结果中的频谱失真。由于极低的下采样率(例如，当c = 4时为1/16)，最小化E1将是一个严重不适定的问题。没有强先验信息，X几乎不可能被准确估计</p>
 <p> </p>
 <h3 id="dynamic-gradient-sparsity">dynamic gradient sparsity</h3>
+<ul>
+<li><p>Pan图像提供了这样的先验信息。</p></li>
+<li><p>由于遥感图像通常是分段平滑的，因此它们的梯度往往是稀疏的，非零值对应于边缘。</p></li>
+<li><p>此外，当图像对齐良好时，这些边缘的位置应与平移图像上的位置相同。根据参考图像，证明了稀疏性不是固定的而是动态的。我们将具有这种性质的数据称为动态梯度稀疏信号/图像。</p></li>
+<li><p>全变分可以促进梯度的稀疏性。然而，在该正则项中没有整合来自Pan图像的参考信息。与以前的工作不同，我们的方法鼓励动态梯度稀疏性。除了先前方法试图使用的先验信息之外，我们还注意到跨不同波段的内部相关性，因为它们是相同陆地对象的表示。因此，不同波段的梯度应该是组稀疏的(group sparse)。L1范数鼓励稀疏，L2,1范数鼓励群体稀疏。因此，我们提出了一个新的能量函数来同时促进动态梯度稀疏性和组稀疏性: <span class="math display">\[
+\begin{aligned}
+E_{2} &amp;=\|\nabla \mathbf{X}-\nabla D(\mathbf{P})\|_{2,1} \\
+&amp;=\sum_{i} \sum_{j} \sqrt{\sum_{d} \sum_{q}\left(\nabla_{q} \mathbf{X}_{i, j, d}-\nabla_{q} \mathbf{P}_{i, j}\right)^{2}}
+\end{aligned}
+\]</span></p></li>
+<li><p>其中q = 1,2，D(P)表示复制P到s波段。有趣的是，当没有参考图像时，即P = 0，结果与矢量全变分(VTV)的结果相同。</p></li>
+<li><p>情形(a)-(d)分别具有组稀疏数8、4、4、2。</p></li>
+</ul>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png" width="600"/>
+</div>
+<ul>
+<li>结合这两个能量函数，图像融合问题可以表述为:</li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{l}
+\min _{\mathbf{X}}\left\{E(\mathbf{X})=E_{1}+\lambda E_{2}\right. \\
+\left.\quad=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla \mathbf{X}-\nabla D(\mathbf{P})\|_{2,1}\right\}
+\end{array}
+\]</span></p>
+<ul>
+<li>所提出的动态梯度稀疏性仅迫使支持集相同，而梯度的符号以及信号的幅度不需要相同。这些属性使其在对比度反转下不变，并且对光照条件不敏感。它可以应用于不同来源或不同采集时间的图像融合。方法还可以同时联合融合多个波段，这提供了对噪声的鲁棒性。</li>
+</ul>
 <p> </p>
 <h3 id="simultaneous-image-registration">simultaneous image registration</h3>
+<ul>
+<li>提出在融合过程中同时配准图像。一方面，多光谱图像被锐化到更高的分辨率。这使我们能够更准确地记录图像。另一方面，未对准被逐渐消除，并且图像可以被更精确地融合。我们反复运行这两个过程，直到收敛。</li>
+<li>基于配准中使用的特征，现有的图像配准方法可以分为基于特征的配准和基于像素(或基于强度)的配准。基于特征的方法依赖于从图像中提取的标志。更感兴趣的是基于强度的配准，它可以在统一的优化方案中与融合相结合。</li>
+<li>图像配准最重要的组成部分之一是能量函数的测量相似度。</li>
+<li>使用动态梯度稀疏性来保存空间信息。任何错位都会增加梯度的稀疏性。动态梯度稀疏性可以自然地用作相似性度量。我们可以修改同时进行图像配准和融合的能量函数: <span class="math display">\[
+E(\mathbf{X}, \mathcal{T})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1} \tag{a}
+\]</span>   其中<span class="math inline">\(\mathcal{T}\)</span>是需要估计的变换</li>
+<li>将提出的相似性度量与现有的方法进行了比较。图中的蓝色曲线显示了不同测量的响应，所有这些测量都可以在零平移时找到最佳对准。在增加强度失真和重新缩放之后，图(b)中所示的源图像的外观与原始Lena图像的外观不一致。红色曲线表示的结果表明，只有RC和所提出的方法可以处理这种强度失真。</li>
+</ul>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png" width="600"/>
+</div>
 <p> </p>
 <h2 id="algorithm">Algorithm</h2>
+<ul>
+<li><p>目标是最小化能量函数(a)。先通过固定T来解决关于X的问题，然后通过固定X来解决关于T的问题，对于X子问题: <span class="math display">\[
+E(\mathbf{X})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1} \tag{b}
+\]</span></p></li>
+<li><p>(b)一个明显的凸函数。第一项是光滑的，而第二项是不光滑的。在FISTA框架中解决这个子问题。已经证明，对于一阶方法，FISTA可以达到最优收敛速度。</p></li>
+<li><p>关于T的第二子问题可以写成: <span class="math display">\[
+\min E(\mathcal{T})=\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1} 、\tag{c}
+\]</span></p></li>
+<li><p>下图总结了提出的同时进行图像配准和融合(SIRF)的泛锐化算法：</p></li>
+</ul>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png" width="600"/>
+</div>
 <p> </p>
 <h2 id="experiments">Experiments</h2>
 <p> </p>
