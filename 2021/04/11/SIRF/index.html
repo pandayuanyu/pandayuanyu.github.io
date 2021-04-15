@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png">
 <meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-15T05:16:16.324Z">
+<meta property="article:modified_time" content="2021-04-15T05:21:14.651Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="图像融合">
 <meta property="article:tag" content="CV">
@@ -265,7 +265,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-15 13:16:16" itemprop="dateModified" datetime="2021-04-15T13:16:16+08:00">2021-04-15</time>
+        <time title="Modified: 2021-04-15 13:21:14" itemprop="dateModified" datetime="2021-04-15T13:21:14+08:00">2021-04-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -372,9 +372,12 @@ L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都�
 </ul>
 <p> </p>
 <h3 id="local-spectral-consistency">local spectral consistency</h3>
-<p>许多现有方法对MS图像进行上采样，并从该上采样的MS图像中提取光谱信息。然而，向上采样的图像模糊且不准确。因此，我们只假设下采样后的融合图像接近原始的MS图像。最小二乘拟合用于模拟这种关系: <span class="math display">\[
+<ul>
+<li>许多现有方法对MS图像进行上采样，并从该上采样的MS图像中提取光谱信息。然而，向上采样的图像模糊且不准确。因此，我们只假设下采样后的融合图像接近原始的MS图像。最小二乘拟合用于模拟这种关系: <span class="math display">\[
 E_{1}=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}
-\]</span> 其中ψ表示下采样运算符。局部光谱信息被强制与MS每个像素一致。这个函数是物理激励的，因此可以避免结果中的频谱失真。由于极低的下采样率(例如，当c = 4时为1/16)，最小化E1将是一个严重不适定的问题。没有强先验信息，X几乎不可能被准确估计</p>
+\]</span></li>
+<li>其中ψ表示下采样运算符。局部光谱信息被强制与MS每个像素一致。这个函数是物理激励的，因此可以避免结果中的频谱失真。由于极低的下采样率(例如，当c = 4时为1/16)，最小化E1将是一个严重不适定的问题。没有强先验信息，X几乎不可能被准确估计</li>
+</ul>
 <p> </p>
 <h3 id="dynamic-gradient-sparsity">dynamic gradient sparsity</h3>
 <ul>
