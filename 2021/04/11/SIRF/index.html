@@ -34,11 +34,27 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
+">
+<meta property="og:image" content="
+https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
+">
 <meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-15T05:21:14.651Z">
+<meta property="article:modified_time" content="2021-04-16T12:12:57.777Z">
 <meta property="article:author" content="Yu Yuan">
-<meta property="article:tag" content="图像融合">
 <meta property="article:tag" content="CV">
+<meta property="article:tag" content="图像融合">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png">
 
@@ -265,7 +281,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-15 13:21:14" itemprop="dateModified" datetime="2021-04-15T13:21:14+08:00">2021-04-15</time>
+        <time title="Modified: 2021-04-16 20:12:57" itemprop="dateModified" datetime="2021-04-16T20:12:57+08:00">2021-04-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,14 +308,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>4.5k</span>
+      <span>7.3k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>13 mins.</span>
+      <span>20 mins.</span>
     </span>
 </div>
 
@@ -430,29 +446,102 @@ E(\mathbf{X})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla 
 \]</span></p></li>
 <li><p>(b)一个明显的凸函数。第一项是光滑的，而第二项是不光滑的。在FISTA框架中解决这个子问题。已经证明，对于一阶方法，FISTA可以达到最优收敛速度。</p></li>
 <li><p>关于T的第二子问题可以写成: <span class="math display">\[
-\min E(\mathcal{T})=\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1} 、\tag{c}
+\min E(\mathcal{T})=\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1} \tag{c}
 \]</span></p></li>
-<li><p>下图总结了提出的同时进行图像配准和融合(SIRF)的泛锐化算法：</p></li>
+<li><p>下图总结了提出的同时进行图像配准和融合(SIRF)的泛锐化(pan-sharpening)算法：.</p></li>
 </ul>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png" width="600"/>
 </div>
+<ul>
+<li><p>这里ψ表示ψ的逆算子。L是<span class="math inline">\(\psi^{T}(\psi \mathbf{X}-\mathbf{M})\)</span>的李普希茨常数。</p></li>
+<li><p>观察到解决方案是基于Xk 和 Xk-1更新的，而在以前的方法中使用的Bregman方法仅基于Xk更新X，也就是为什么我们的方法收敛得更快的原因。</p></li>
+<li><p>SIRF 子问题1中，L=1， <span class="math display">\[
+\mathbf{X}^{k}=\arg \min _{\mathbf{X}}\left\{\frac{1}{2}\|\mathbf{X}-\mathbf{Y}\|_{F}^{2}+\lambda\|\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\|_{2,1}\right\} \tag{d}
+\]</span></p></li>
+<li><p>取<span class="math inline">\(\mathbf{Z}=\mathbf{X}-\mathcal{T}(D(\mathbf{P}))\)</span> ，带入式(d)： <span class="math display">\[
+\mathbf{Z}^{k}=\arg \min _{\mathbf{Z}}\left\{\frac{1}{2}\|\mathbf{Z}-(\mathbf{Y}-\mathcal{T}(D(\mathbf{P})))\|_{F}^{2}+\lambda\|\nabla \mathbf{Z}\|_{2,1}\right\}
+\]</span></p></li>
+<li><p>这个替代问题是一个VTV去噪问题，Xk由<span class="math inline">\(\mathbf{Z}^{k}+\mathcal{T}(D(\mathbf{P}))\)</span>更新。VTV去噪算法的慢版本是基于FISTA框架来加速求解(d)的，这在Algorithm 2中进行了总结</p></li>
+<li><p>线性算子定义: <span class="math inline">\(\mathcal{L}(\mathbf{R}, \mathbf{S})_{i, j, d}=\)</span> <span class="math inline">\(\mathbf{R}_{i, j, d}-\mathbf{R}_{i-1, j, d}+\mathbf{S}_{i, j, d}-\mathbf{S}_{i, j-1, d}\)</span> ，对应的逆算子： <span class="math inline">\(\mathcal{L}^{T}(\mathbf{X})=(\mathbf{R}, \mathbf{S})\)</span> with <span class="math inline">\(\mathbf{R}_{i, j, d}=\mathbf{X}_{i, j, d}-\mathbf{X}_{i+1, j, d}\)</span> and <span class="math inline">\(\mathbf{S}_{i, j, d}=\mathbf{X}_{i, j, d}-\mathbf{X}_{i, j+1, d} \cdot \mathbb{P}\)</span> 是投射算子确保： <span class="math inline">\(\sum_{d=1}^{s}\left(\mathbf{R}_{i, j, d}^{2}+\right.\)</span> <span class="math inline">\(\left.\mathbf{S}_{i, j, d}^{2}\right) \leq 1,\left|\mathbf{R}_{i, n, d}\right| \leq 1\)</span>, and $|_{m, j, d}|  $</p></li>
+</ul>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png" width="600"/>
+</div>
+<ul>
+<li>用带回溯的梯度下降法(gradient descent method with backtracking))来解决第二个子问题(c)，好处是在最小化时没有引入新参数变量</li>
+<li>设<span class="math inline">\(\mathbf{r}=\nabla \mathbf{X}-\nabla \mathcal{T}(D(\mathbf{P}))\)</span> 是残差，对(c)的紧密估计： <span class="math display">\[
+E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}
+\]</span></li>
+<li>根据链式法则，梯度： <span class="math display">\[
+\nabla E(\mathcal{T})=-\frac{\partial E(\mathcal{T})}{\partial \mathbf{r}} \nabla \mathcal{T}(D(\mathbf{P})) \frac{\partial \mathcal{T}}{\partial \theta}
+\]</span></li>
+<li><span class="math inline">\(\epsilon\)</span>是一个小量,<span class="math inline">\(\nabla \mathcal{T}(D(\mathbf{P}))\)</span>表示图像亮度梯度，θ表示变换T的参数，在这里，变换主要是仿射或平移</li>
+<li><span class="math inline">\(\partial \mathcal{T} / \partial \theta\)</span>是基于一阶泰勒近似计算的。我们设置初始步长t0= 1，η = 0.8。所有的运算都是线性的。函数值是在两幅图像的重叠区域上计算的。为了避免平凡解，如放大黑暗区域，在这里使用归一化函数值(除以重叠的像素M)。当没有重叠时，函数值将是无穷大。</li>
+</ul>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png" width="600"/>
+</div>
 <p> </p>
 <h2 id="experiments">Experiments</h2>
-<p> </p>
 <h3 id="simulation">simulation</h3>
+<ul>
+<li>该方法在Quickbird、Geoeye、SPOT和IKONOS卫星的多光谱数据集上进行了验证。Pan图像的分辨率范围为0.41米至1.5米,所对应的MS图像都具有较低的分辨率，c = 4，并且包含蓝、绿、红和近红外波段。为方便起见，仅显示RGB波段。由于缺乏同一场景的多分辨率图像，原始图像被视为 Ground truth，低分辨率图像从 Ground truth下采样得到。</li>
+</ul>
 <p> </p>
 <h3 id="visual-comparison">visual comparison</h3>
+<ul>
+<li>结果
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png" width="600"/>
+</div></li>
+<li>为了更好地可视化，图6和图7以相同的比例显示了与地面真实情况相比的误差图像。从这些误差图像中，可以清楚地观察到光谱失真、块状伪影和模糊。</li>
+</ul>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png" width="600"/>
+</div>
 <p> </p>
 <h3 id="quantitative-analysis">quantitative analysis</h3>
+<ul>
+<li>为了评估不同方法的融合质量，使用四个度量来衡量光谱质量，一个度量来衡量空间质量。光谱度量包括合成中的相对无量纲全局误差(ERGAS) 、光谱角度映射器(SAM) 、通用图像质量指数(Q-average) 和相对平均光谱误差(RASE) 。过滤后的相关系数(FCC) 被用作空间质量度量。此外，峰值信噪比(PSNR)、均方根误差(RMSE)和平均结构相似度(MSSIM) 用于评估与地面真实值相比的融合精度。</li>
+</ul>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png" width="600"/>
+</div>
 <p> </p>
 <h3 id="efficiency-comparison">efficiency comparison</h3>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
+" width="600"/>
+</div>
 <p> </p>
 <h3 id="translation">translation</h3>
+<ul>
+<li>在图1所示的平移图像中添加了3个像素的人工水平平移。SIRF的估计翻译如图10 (a)所示。通过大约100次迭代，可以非常准确地恢复真实的translation。</li>
+</ul>
+<div data-align="center">
+<img src="
+https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
+" width="600"/>
+</div>
 <p> </p>
 <h3 id="real-world-datasets">real-world datasets</h3>
+<ul>
+<li>图像是由IKONOS多光谱成像卫星获取，其中包含预配准的以其捕获分辨率拍摄的Pan和MS图像。</li>
+</ul>
 <p> </p>
 <h2 id="conclusion-and-discussion">Conclusion and Discussion</h2>
+<ul>
+<li>基于动态梯度稀疏性的特性，提出了一种新的变分模型，用于在统一的框架下同时进行图像配准和融合。该模型自然地结合了来自高分辨率全色图像的梯度先验信息和来自低分辨率多光谱图像的光谱信息。</li>
+<li>比现有的方法有几个优点:首先，所提出的动态梯度稀疏性可以直接利用来自Pan图像的尖锐边缘;第二，通过合并不同波段的内部相关性来联合锐化图像，而大多数现有的方法是基于波段间的融合；最后，尽管由于空间分辨率的不同，Pan和MS图像之间的配准相当困难，但我们的方法可以在融合过程中同时配准两个输入图像，直接作用于输入图像，而无需任何预滤波和特征提取。</li>
+<li>方法被证实在空间和光谱质量方面始终优于现有技术。</li>
+</ul>
 
     </div>
 
@@ -462,8 +551,8 @@ E(\mathbf{X})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla 
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag"># 图像融合</a>
               <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag"># 图像融合</a>
           </div>
 
         
