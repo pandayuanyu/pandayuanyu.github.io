@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c387bba20c118634.png
 ">
 <meta property="article:published_time" content="2021-04-05T08:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-17T01:05:56.837Z">
+<meta property="article:modified_time" content="2021-04-21T07:00:47.140Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
@@ -270,7 +270,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-17 09:05:56" itemprop="dateModified" datetime="2021-04-17T09:05:56+08:00">2021-04-17</time>
+        <time title="Modified: 2021-04-21 15:00:47" itemprop="dateModified" datetime="2021-04-21T15:00:47+08:00">2021-04-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -323,10 +323,10 @@
 <p>// 论文2015年发表于 SIAM Journal on Imaging Sciences, 四位作者均大牛。</p>
 <h2 id="conceptual-understanding">Conceptual Understanding</h2>
 <ul>
-<li><p>对偶空间: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23871517">理解</a></p></li>
-<li><p>Tensor 张量: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/abella/p/10142935.html">通俗解释</a><br />
-疑惑点：到底是阶数还是维数？</p></li>
-<li><p>Structure Tensor 结构张量：<br />
+<li>对偶空间: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23871517">理解</a></li>
+<li>Tensor 张量: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/abella/p/10142935.html">通俗解释</a><br />
+疑惑点：到底是阶数还是维数？</li>
+<li>Structure Tensor 结构张量：<br />
   结构张量用于角点检测、边缘检测和纹理分析。对一副灰度图像，当两个相邻的像素点无限接近时，微分dI可以表示为：<br />
 <span class="math display">\[
 \mathrm{d} I=\frac{\partial I}{\partial x} \mathrm{~d} x+\frac{\partial I}{\partial y} \mathrm{~d} y
@@ -334,13 +334,16 @@
   其平方范数可以表示为：<br />
 <span class="math display">\[
 \|\mathrm{d} I\|^{2}=\sum_{m=x, y} \sum_{n=x, y}\left(\frac{\partial I}{\partial m} \cdot \frac{\partial I}{\partial n}\right) \mathrm{d} m \mathrm{~d} n=\left[\begin{array}{ll}
-\mathrm{d} x &amp; \mathrm{~d} y\end{array} ] T
-\left[\begin{array}{l}
+\mathrm{d} x &amp; \mathrm{~d} y
+\end{array}\right] T\left[\begin{array}{l}
 \mathrm{d} x \\
-\mathrm{~d} y
-\end{array}\right]\right.
-\]</span><br />
-  其中，T是结构张量：<br />
+\mathrm{d} y
+\end{array}\right]
+\]</span></li>
+</ul>
+<p>$$</p>
+<p>$$</p>
+<p>  其中，T是结构张量：<br />
 <span class="math display">\[
 T=\left[\begin{array}{cc}
 I_{x}^{2} &amp; I_{x} I_{y} \\
@@ -351,11 +354,13 @@ I_{x} I_{y} &amp; I_{y}^{2}
   结构张量T为半正定矩阵，具有两个非负特征值，可以通过特征值将图像的空间结构信息分为三种：<br />
   平坦区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H=0)，表示图像在该点任何方向灰度变化都很小；<br />
   边缘区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K=0)，表示图像在该点沿某一方向灰度变化率较大；<br />
-  角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</p></li>
+  角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</p>
+<ul>
 <li><p>图像阶梯效应：也叫“块效应”，图像处理后某些区域内灰度相同。</p></li>
 <li><p>Sobolev Space: <a target="_blank" rel="noopener" href="https://blog.csdn.net/baimafujinji/article/details/49835983?utm_source=blogxgwz3&amp;utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">索伯列夫空间</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.zhujian.life/posts/e51acd5.html">Nesterov 加速梯度</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/81202544">Lipschitz常数</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a493823882/article/details/80569888">范数</a></p></li>
 </ul>
 <h2 id="abstract">Abstract</h2>
 <ul>
