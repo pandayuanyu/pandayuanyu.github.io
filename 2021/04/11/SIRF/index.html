@@ -51,7 +51,7 @@ https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
 https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
 ">
 <meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-04-20T12:07:18.682Z">
+<meta property="article:modified_time" content="2021-05-05T06:29:00.130Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="图像融合">
@@ -182,7 +182,7 @@ https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modeling"><span class="nav-number">5.</span> <span class="nav-text">Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#notations"><span class="nav-number">5.1.</span> <span class="nav-text">notations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local-spectral-consistency"><span class="nav-number">5.2.</span> <span class="nav-text">local spectral consistency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamic-gradient-sparsity"><span class="nav-number">5.3.</span> <span class="nav-text">dynamic gradient sparsity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simultaneous-image-registration"><span class="nav-number">5.4.</span> <span class="nav-text">simultaneous image registration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm"><span class="nav-number">6.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experiments"><span class="nav-number">7.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simulation"><span class="nav-number">7.1.</span> <span class="nav-text">simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-comparison"><span class="nav-number">7.2.</span> <span class="nav-text">visual comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quantitative-analysis"><span class="nav-number">7.3.</span> <span class="nav-text">quantitative analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#efficiency-comparison"><span class="nav-number">7.4.</span> <span class="nav-text">efficiency comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#translation"><span class="nav-number">7.5.</span> <span class="nav-text">translation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#real-world-datasets"><span class="nav-number">7.6.</span> <span class="nav-text">real-world datasets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion-and-discussion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion and Discussion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">9.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">9.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modeling"><span class="nav-number">5.</span> <span class="nav-text">Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#notations"><span class="nav-number">5.1.</span> <span class="nav-text">notations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local-spectral-consistency"><span class="nav-number">5.2.</span> <span class="nav-text">local spectral consistency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamic-gradient-sparsity"><span class="nav-number">5.3.</span> <span class="nav-text">dynamic gradient sparsity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simultaneous-image-registration"><span class="nav-number">5.4.</span> <span class="nav-text">simultaneous image registration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm"><span class="nav-number">6.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experiments"><span class="nav-number">7.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simulation"><span class="nav-number">7.1.</span> <span class="nav-text">simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-comparison"><span class="nav-number">7.2.</span> <span class="nav-text">visual comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quantitative-analysis"><span class="nav-number">7.3.</span> <span class="nav-text">quantitative analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#efficiency-comparison"><span class="nav-number">7.4.</span> <span class="nav-text">efficiency comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#translation"><span class="nav-number">7.5.</span> <span class="nav-text">translation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#real-world-datasets"><span class="nav-number">7.6.</span> <span class="nav-text">real-world datasets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion-and-discussion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion and Discussion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">9.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#background-knowledge"><span class="nav-number">9.1.</span> <span class="nav-text">background knowledge</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -281,7 +281,7 @@ https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-20 20:07:18" itemprop="dateModified" datetime="2021-04-20T20:07:18+08:00">2021-04-20</time>
+        <time title="Modified: 2021-05-05 14:29:00" itemprop="dateModified" datetime="2021-05-05T14:29:00+08:00">2021-05-05</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -349,11 +349,8 @@ https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouxinxin0202/article/details/78620898">L2,1范数</a><br />
 L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都稀疏）</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38701868/article/details/89215881">图像直方图 Image Histogram</a>：是用以表示数字图像中亮度分布的直方图，标绘了图像中每个亮度值的像素数。</p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fx677588/article/details/53301740">uint8</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/macunshi/article/details/79819263">直方图规定化</a>与<a target="_blank" rel="noopener" href="https://blog.csdn.net/macunshi/article/details/79815870">均衡化</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42746999/article/details/104039091">SML映射</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/robert_chen1988/article/details/81233738">sup inf</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/isnan.html">isnan</a>:确定数组中哪些元素为NaN</p></li>
 </ul>
 <p> </p>
 <h2 id="abstract">Abstract</h2>
@@ -550,7 +547,13 @@ https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
 </ul>
 <p> </p>
 <h2 id="code">Code</h2>
-<h3 id="section"></h3>
+<h3 id="background-knowledge">background knowledge</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/fx677588/article/details/53301740">uint8</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/robert_chen1988/article/details/81233738">sup inf</a></li>
+<li><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/isnan.html">isnan()</a>:确定数组中哪些元素为NaN</li>
+<li><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/find.html">find()</a>:查找非零元素的索引和值</li>
+</ul>
 
     </div>
 
