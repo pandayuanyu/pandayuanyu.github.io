@@ -23,21 +23,22 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
-<meta name="description" content="小车向前冲">
+<meta name="description" content="自动驾驶交通标志识别算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yolov5 交通标志检测">
-<meta property="og:url" content="https://pandayuanyu.github.io/2021/05/09/yolov5biaozhi/index.html">
+<meta property="og:title" content="Real-Time Traffic Sign Recognition Based on Efficient CNNs in the Wild">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/05/06/TrafficSignRecognition/index.html">
 <meta property="og:site_name" content="Falcon&#39;s Space">
-<meta property="og:description" content="小车向前冲">
+<meta property="og:description" content="自动驾驶交通标志识别算法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-05-09T05:11:11.000Z">
-<meta property="article:modified_time" content="2021-05-10T04:15:26.135Z">
+<meta property="article:published_time" content="2021-05-06T15:11:11.000Z">
+<meta property="article:modified_time" content="2021-05-18T12:04:24.584Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="自动驾驶">
+<meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://pandayuanyu.github.io/2021/05/09/yolov5biaozhi/">
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/05/06/TrafficSignRecognition/">
 
 
 <script class="page-configurations">
@@ -49,7 +50,7 @@
     lang   : 'en'
   };
 </script>
-<title>yolov5 交通标志检测 | Falcon's Space</title>
+<title>Real-Time Traffic Sign Recognition Based on Efficient CNNs in the Wild | Falcon's Space</title>
   
 
 
@@ -128,7 +129,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">7</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">11</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">15</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
   </ul>
 </nav>
@@ -147,7 +148,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -160,6 +161,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -173,7 +175,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -227,7 +229,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/05/09/yolov5biaozhi/">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/05/06/TrafficSignRecognition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -240,7 +242,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          yolov5 交通标志检测
+          Real-Time Traffic Sign Recognition Based on Efficient CNNs in the Wild
         </h1>
 
         <div class="post-meta-container">
@@ -251,14 +253,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-05-09 13:11:11" itemprop="dateCreated datePublished" datetime="2021-05-09T13:11:11+08:00">2021-05-09</time>
+      <time title="Created: 2021-05-06 23:11:11" itemprop="dateCreated datePublished" datetime="2021-05-06T23:11:11+08:00">2021-05-06</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-10 12:15:26" itemprop="dateModified" datetime="2021-05-10T12:15:26+08:00">2021-05-10</time>
+        <time title="Modified: 2021-05-18 20:04:24" itemprop="dateModified" datetime="2021-05-18T20:04:24+08:00">2021-05-18</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +268,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">一些项目</span></a>
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index"><span itemprop="name">一些比赛</span></a>
         </span>
     </span>
 
@@ -285,7 +291,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>24</span>
+      <span>203</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -304,11 +310,25 @@
     
     <div class="post-body" itemprop="articleBody">
         <center>
-小车向前冲
+自动驾驶交通标志识别算法
 </center>
 <span id="more"></span>
 <p> </p>
-<p>xml txt yolov5s 训练 画结构图</p>
+<h2 id="foreword">Foreword</h2>
+<ul>
+<li><del>准备用在Dell智能小车——交通标志识别算法题目</del></li>
+<li>还是yolo来得实在</li>
+<li>2019年录用于IEEE TRANSACTIONS ON INTELLIGENT TRANSPORTATION SYSTEMS</li>
+</ul>
+<p> </p>
+<h2 id="conceptual-understanding">Conceptual Understanding</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31426458">Faster RCNN</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xuhj001/p/3398608.html">向上取整、向下取整</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/makefile/p/nms.html">非极大值抑制 Non-Maximum Suppression ,NMS</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70703846">MobileNet 、深度可分离卷积</a></li>
+<li></li>
+</ul>
 
     </div>
 
@@ -319,14 +339,15 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag"># 自动驾驶</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/05/07/TrafficSignRecognition/" rel="prev" title="Real-Time Traffic Sign Recognition Based on Efficient CNNs in the Wild">
-                  <i class="fa fa-chevron-left"></i> Real-Time Traffic Sign Recognition Based on Efficient CNNs in the Wild
+                <a href="/2021/04/29/azure/" rel="prev" title="Microsoft Azure Kinect DK配置">
+                  <i class="fa fa-chevron-left"></i> Microsoft Azure Kinect DK配置
                 </a>
             </div>
             <div class="post-nav-item">
@@ -461,7 +482,7 @@
 <script>
 NexT.utils.loadComments('#lv-container', () => {
   window.livereOptions = {
-    refer: "2021/05/09/yolov5biaozhi/"
+    refer: "2021/05/06/TrafficSignRecognition/"
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
