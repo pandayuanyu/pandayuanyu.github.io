@@ -1,8 +1,690 @@
-{%- extends "_layout.swig" -%}
-{%- import '_macro/post.swig' as post_template -%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{%- block title -%} {{ page.title }} - {{ config.title }} {%- endblock -%}
 
-{%- block content -%}
-  {{ post_template.render(page) }}
-{%- endblock -%}
+
+<title>
+  
+    春鸠
+  
+</title>
+
+<meta name="description" content="窗台来了对斑鸠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="春鸠">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/07/banjiu/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="窗台来了对斑鸠">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/cc5b366f48886219.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/72ca0db0a6028b36.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/72d82fc5fe773c55.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c486ea063c0fea2f.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9613d9ffdb05a01e.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/5ac99ca6ac3a5eb3.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/837c813edc0f2142.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/5cf55b34db3412c5.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/f39da54128b22edf.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/e7cb362092c71e38.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/a5f06fa294575d9f.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/6350ef5e13c0e332.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/7e60ad22ed15cfaf.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/b374de0185cc93a4.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/42f53e840c96761a.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/3af69dfef83111d7.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/031e4faef9375dab.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/e7e12e85f5021a51.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/e7ce39b695834e47.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/0bc49cfe82c02c1c.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/cff19743a1827186.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/6b0b5b05a2698f80.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/51d9594f55dd498a.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/bb58348c7cfef37b.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/c72efd03ffbba1f3.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/483c605c82fa0a98.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/3bbb83f0167c2f89.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/73cc9e3124175dbd.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/9cb5fe331cbf2742.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/d00d7d05dcf8bd93.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/ae95bd9f2c090104.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/559dfb20a729a747.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/b3b5c64389a9a359.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/e83fe46934627b23.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/1a1667da7d7c95ff.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/b2688748876def9d.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/7f5368f087470aaa.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/eb8d164201a416a2.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/835ac7e025398e4c.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/c933080d020ff9ff.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/69e567e91ba2942e.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/90ffac21286f45cf.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/f6b00a69d92bdb5b.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/17bb97abbae22169.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/9d998807b4ef16b4.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/a51714756eee8e35.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/9bf8089bbd393328.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/16416ccfb784b9e9.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/2a3f8c05b82fa6a2.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/28273f5a4a65ee33.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/05/c033a1388659be5d.png">
+<meta property="og:image" content="https://img11.360buyimg.com/ddimg/jfs/t1/188796/9/19571/345150/6120ffdfE6146fa92/16386437bc3d9364.jpg">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/08/ff2c7f3a69cf409b.jpg">
+<meta property="article:published_time" content="2021-04-07T08:11:11.000Z">
+<meta property="article:modified_time" content="2021-08-21T13:32:45.031Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="好玩的">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/cc5b366f48886219.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Falcon&#39;s Space" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Falcon&#39;s Space</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Falcon&#39;s Space</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Yu Yuan</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E6%8A%80%E8%83%BD/">一些技能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/">一些面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">网站建设</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a><span class="category-list-count">3</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CV/" rel="tag">CV</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag">图像融合</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" rel="tag">好玩的</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/" rel="tag">目标跟踪</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag">自动驾驶</a><span class="tag-list-count">2</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">16</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-banjiu" class="article article-type-post">
+  
+    <h1 class="article-header">
+      春鸠
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2021-04-07
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" rel="tag">好玩的</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <center>
+窗台来了对斑鸠
+</center>
+<span id="more"></span>
+<p> </p>
+<center>
+注：图较多，刷新较慢请耐心等待网页加载
+</center>
+<p> </p>
+<h3 id="section">2021-04-07</h3>
+  2021年4月7日上午，当我在实验室和论文公式斗争时，旁边窗台传来一阵动静，转眼看到一只鸟的尾翼撅起，在玻璃上下跳动。
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/cc5b366f48886219.png" width="600"/>
+</div>
+  走近一看，原来是一只珠颈斑鸠正在筑巢，不远处树梢上还有另一只停留，似乎要开始育雏。
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/72ca0db0a6028b36.png" width="600"/>
+</div>
+<p>  这两只似乎并不很怕人，走到很近的地方也还没飞走。出于尽量减少打扰的考量，关上窗户，拉上窗帘，网购了鸽子粮食，告知实验室兄弟姐妹。准备在接下来的日子里相互陪伴，此博也作为一份记录。</p>
+<p> </p>
+<h3 id="section-1">2021-04-08</h3>
+<p>  昨日下午开始下雨之后一直不见小鸟踪影，怅然若失。 今日中午再来看时，小鸟已归巢。</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/72d82fc5fe773c55.png" width="600"/>
+</div>
+<center>
+这窝搭的真草率
+</center>
+<p> </p>
+<h3 id="section-2">2021-04-09</h3>
+<p>  不知是大风还是何故，鸟巢寥寥零落几根树枝，好在下午仍见到亲鸟归巢。</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/c486ea063c0fea2f.png" width="600"/>
+</div>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9613d9ffdb05a01e.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-3">2021-04-10</h3>
+<p>  上午校庆典礼结束，亲鸟将鸟巢重建完毕，来张特写</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/5ac99ca6ac3a5eb3.png" width="600"/>
+</div>
+  下午四时许，产下第一颗蛋
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/837c813edc0f2142.png" width="600"/>
+</div>
+  蛋和巢
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/5cf55b34db3412c5.png" width="600"/>
+</div>
+  晚上也一直在守着孵蛋，肉眼看黑乎乎的一坨蹲在墙角，一动不动，长曝光拍的照片：
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/f39da54128b22edf.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-4">2021-04-11</h3>
+  风雨大作。<br />
+  中午到实验室时，鸟窝空空，鸟蛋坠落破碎，心碎。。。<br />
+
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/e7cb362092c71e38.png" width="600"/>
+</div>
+  悼念还未降临的小精灵
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/a5f06fa294575d9f.png" width="600"/>
+</div>
+  给重建了个足够结实的窝，蛋再也掉不下去了
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/6350ef5e13c0e332.png" width="600"/>
+</div>
+<p>  23时，雨夜，小鸟未归。故事就这样结束了么？</p>
+<p> </p>
+<h3 id="section-5">2021-04-12</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-6">2021-04-13</h3>
+<p>  未归<br />
+  用白水泥和树枝重建人工鸟窝2.0</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/7e60ad22ed15cfaf.png" width="600"/>
+</div>
+<p>  窗台粮食变少，莫名欣慰</p>
+<p> </p>
+<h3 id="section-7">2021-04-14</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-8">2021-04-15</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-9">2021-04-16</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-10">2021-04-17</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-11">2021-04-18</h3>
+<p>  未归</p>
+<p> </p>
+<h3 id="section-12">2021-04-19</h3>
+<p>  听闻早上有斑鸠在窗台上停留数十秒后离开</p>
+<p> </p>
+<h3 id="section-13">2021-04-20</h3>
+  傻鸟回来蹭吃的
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/b374de0185cc93a4.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-14">2021-04-25</h3>
+  室友给我说鸟跑他们实验室下蛋去了，2333，原来本科prp导师的实验室
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/42f53e840c96761a.png" width="600"/>
+</div>
+<p>  看起来结实一些</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/3af69dfef83111d7.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-15">2021-04-26</h3>
+  乖巧.jpg
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/031e4faef9375dab.png" width="600"/>
+</div>
+  分不清到底是不是同一只
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/e7e12e85f5021a51.png" width="600"/>
+</div>
+<p>  到晚上时，听说窝里只有一个蛋了</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/e7ce39b695834e47.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-16">2021-04-28</h3>
+  空空
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/0bc49cfe82c02c1c.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-17">2021-05-05</h3>
+  原本捡了几根树枝，准备给我窗台的人工鸟窝搭一搭。刚一推窗，鸟竟然从窝里飞起。小鸟回归！
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/cff19743a1827186.png" width="600"/>
+</div>
+<p>  喂了点粮食，第一次拍到了两只同框的画面。</p>
+<p> </p>
+<h3 id="section-18">2021-05-06</h3>
+  建窝中
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/6b0b5b05a2698f80.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-19">2021-05-07</h3>
+  老夫掐指一算，应该快下蛋了
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/51d9594f55dd498a.png" width="600"/>
+</div>
+  这个窝看起来靠谱很多
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/bb58348c7cfef37b.png" width="600"/>
+</div>
+  下蛋中，另外一只也在旁边
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/c72efd03ffbba1f3.png" width="600"/>
+</div>
+  下午4时许，又又又下蛋了
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/483c605c82fa0a98.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-20">2021-05-08</h3>
+  蹲了一天，咕咕咕去旁边吃东西了
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/3bbb83f0167c2f89.png" width="600"/>
+</div>
+  准备热锅煎蛋（误
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/73cc9e3124175dbd.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-21">2021-05-09</h3>
+  第二枚蛋
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/9cb5fe331cbf2742.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-22">2021-05-10</h3>
+  中午最热的时候，亲鸟玩忽职守，两小时不回家
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/d00d7d05dcf8bd93.png" width="600"/>
+</div>
+  给你两开直播，晚饭两只同框
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/ae95bd9f2c090104.png" width="600"/>
+</div>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/559dfb20a729a747.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-23">2021-05-11</h3>
+  风雨大作，雨点打湿了咕咕屁股
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/b3b5c64389a9a359.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-24">2021-05-12</h3>
+  因为准备考试通宵，观察到咕咕安安静静蹲了一晚
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/e83fe46934627b23.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-25">2021-05-13</h3>
+  岁月静好
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/1a1667da7d7c95ff.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-26">2021-05-14</h3>
+  白天天气异常沉闷
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/b2688748876def9d.png" width="600"/>
+</div>
+  晚上雷暴，咕咕稳得住！
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/7f5368f087470aaa.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-27">2021-05-15</h3>
+  参加导学活动，以你的名字
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/eb8d164201a416a2.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-28">2021-05-16</h3>
+  周日，和琛宝去自然博物馆前拍摄
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/835ac7e025398e4c.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-29">2021-05-17</h3>
+  风太大，炸毛了
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/c933080d020ff9ff.png" width="600"/>
+</div>
+  吃
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/69e567e91ba2942e.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-30">2021-05-18</h3>
+  瞅什么瞅
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/90ffac21286f45cf.png" width="600"/>
+</div>
+<p>  </p>
+<p> </p>
+<h3 id="section-31">2021-05-19</h3>
+  在镜头前表现感极强
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/f6b00a69d92bdb5b.png" width="600"/>
+</div>
+  
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/17bb97abbae22169.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-32">2021-05-20</h3>
+  吹大风的一天
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/9d998807b4ef16b4.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-33">2021-05-21</h3>
+  夫妻两再次同框，从体型、尾羽终于能明显分清两只鸟
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/a51714756eee8e35.png" width="600"/>
+</div>
+  你两孵蛋有点不认真
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/9bf8089bbd393328.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-34">2021-05-22</h3>
+  修理修理羽毛
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/16416ccfb784b9e9.png" width="600"/>
+</div>
+<p>  晚上又出去晃悠数小时不回家，第二天早上才看到母鸟</p>
+<p> </p>
+<h3 id="section-35">2021-05-23</h3>
+  亲鸟在窝里躁动不安
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/2a3f8c05b82fa6a2.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="section-36">2021-05-24</h3>
+  (专业直播
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/28273f5a4a65ee33.png" width="600"/>
+</div>
+  临近中午时，终于拍到破壳！
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/05/c033a1388659be5d.png" width="600"/>
+</div>
+<p> </p>
+<div data-align="center">
+<img src="https://img11.360buyimg.com/ddimg/jfs/t1/188796/9/19571/345150/6120ffdfE6146fa92/16386437bc3d9364.jpg" width="600"/>
+</div>
+<p>  之后亲鸟一直未归</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/08/ff2c7f3a69cf409b.jpg" width="600"/>
+</div>
+<p>  傍晚过后，将已经孵化出的一只小鸟接进实验室准备手养，当晚只有牛奶加豆浆机打的小米糊，琛宝特意从华师顺过来的注射器喂养，是日晚上10点，小鸟离开，将其安葬。</p>
+<p> </p>
+<h3 id="section-37">2021-08-21</h3>
+<p>  结：2021年的夏天快要过去，鸟窝依旧，风雨如初。</p>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2021 Falcon&#39;s Space - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

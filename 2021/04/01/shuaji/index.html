@@ -1,8 +1,356 @@
-{%- extends "_layout.swig" -%}
-{%- import '_macro/post.swig' as post_template -%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{%- block title -%} {{ page.title }} - {{ config.title }} {%- endblock -%}
 
-{%- block content -%}
-  {{ post_template.render(page) }}
-{%- endblock -%}
+
+<title>
+  
+    Nvidia TX2 &amp; NX &amp; AGX刷机
+  
+</title>
+
+<meta name="description" content="英伟达的哪款AI板子我没用过？NAIVE!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nvidia TX2 &amp; NX &amp; AGX刷机">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/01/shuaji/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="英伟达的哪款AI板子我没用过？NAIVE!">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-01T12:58:38.245Z">
+<meta property="article:modified_time" content="2021-04-01T15:24:56.783Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+  <link rel="alternative" href="/atom.xml" title="Falcon&#39;s Space" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Falcon&#39;s Space</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Falcon&#39;s Space</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Yu Yuan</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E6%8A%80%E8%83%BD/">一些技能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/">一些面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">网站建设</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a><span class="category-list-count">3</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CV/" rel="tag">CV</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag">图像融合</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" rel="tag">好玩的</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/" rel="tag">目标跟踪</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag">自动驾驶</a><span class="tag-list-count">2</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">16</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-shuaji" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Nvidia TX2 & NX & AGX刷机
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2021-04-01
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <center>
+英伟达的哪款AI板子我没用过？NAIVE!
+</center>
+<span id="more"></span>
+<p> </p>
+<h2 id="jetson-tx2">Jetson TX2</h2>
+<ul>
+<li>网上刷机教程很多，在此仅列出以下关键点和踩坑点</li>
+<li>首先确保有良好的网络环境，出现问题最多的便在网络上！有网线就不要连Wifi。网络实在不行就换其他网络，比如用手机开热点</li>
+<li>最有参考价值的是这篇<a target="_blank" rel="noopener" href="https://www.it610.com/article/1293370881787109376.htm">TX2 刷Jetpack4.4</a></li>
+<li>新版本Jetpack均通过<a target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a>刷入</li>
+<li>刷机前需要准备的硬件与环境: 1.装有Ubuntu操作系统（16.04/18.04/20.04均可）的主机(尽量避免虚拟机)，硬盘空间至少60GB以上，不然使用SDK Manager安装时会提示空间不足; 2.准备好USB hub(TX2板子上仅有一个USB A 接口，需要hub连接键鼠等)</li>
+<li>在主机下载安装好SDK Manager后运行软件，第一次需要登录英伟达账号，选择对应板子型号，按照step 01——&gt;step 02——&gt;step 03顺序操作。可以先不连板子，先下载安装包。不用安装主机(host)的相关部分</li>
+<li>SDK Manager登录账号容易失败，多试几次</li>
+<li>主机在下载过Jetpack后，下一次再刷机时，可以不用登录账号，直接在登录界面点最右离线安装(安装包已经下好了，在主机里)</li>
+<li>不要在TX2刷CUDA时主机终端还在占用apt命令</li>
+<li>主机在整个刷机过程中不要息屏</li>
+<li>不要轻易换源，我所有的刷机几乎都没换过源</li>
+<li>SDK Manager刷机所有选项均选手动，不要自动</li>
+<li>板子可以不用和主机连接同一网络(网上很多教程都错了)；板子甚至不用联网，直接用数据线连接主机更靠谱，此时ip一般为192.168.55.1</li>
+<li>给板子刷机时，板子会有重启过程，直接物理重启即可</li>
+</ul>
+<p> </p>
+<h2 id="jetson-xavier-nx">Jetson Xavier NX</h2>
+<ul>
+<li>NX 刷机简单许多，只要一个TF卡和读卡器、Windows PC</li>
+<li>主要参考教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014531804/article/details/108684128">NX刷机</a>第一种方法</li>
+</ul>
+<p> </p>
+<h2 id="jetson-agx-xavier">Jetson AGX Xavier</h2>
+<ul>
+<li>刷机大致过程和TX2相似</li>
+<li>注意button位置与其对应功能</li>
+<li>Type C 接口两边都有，刷机时数据线只能连接近4个button那端</li>
+</ul>
+<p> </p>
+<h2 id="其他注意事项">其他注意事项</h2>
+<ul>
+<li>刷机完毕，看有无CUDA <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure> 如果没有 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib</span><br><span class="line">export PATH=$PATH:/usr/local/cuda/<span class="built_in">bin</span></span><br></pre></td></tr></table></figure> 再次查看就有了</li>
+<li>若需要卸载CUDA <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get --purge remove <span class="string">&quot;*cublas*&quot;</span> <span class="string">&quot;*cufft*&quot;</span> <span class="string">&quot;*curand*&quot;</span> \</span><br><span class="line"> <span class="string">&quot;*cusolver*&quot;</span> <span class="string">&quot;*cusparse*&quot;</span> <span class="string">&quot;*npp*&quot;</span> <span class="string">&quot;*nvjpeg*&quot;</span> <span class="string">&quot;cuda*&quot;</span> <span class="string">&quot;nsight*&quot;</span></span><br></pre></td></tr></table></figure> 自动卸载残余 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2021 Falcon&#39;s Space - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>

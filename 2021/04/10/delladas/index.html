@@ -1,8 +1,458 @@
-{%- extends "_layout.swig" -%}
-{%- import '_macro/post.swig' as post_template -%}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{%- block title -%} {{ page.title }} - {{ config.title }} {%- endblock -%}
 
-{%- block content -%}
-  {{ post_template.render(page) }}
-{%- endblock -%}
+
+<title>
+  
+    Dell ADAS 公开课
+  
+</title>
+
+<meta name="description" content="小车向前冲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dell ADAS 公开课">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/10/delladas/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="小车向前冲">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/56b32cceefd709f1.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9f82a115fcb47c1d.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/6c70f6cc4911bb2d.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/4e15d2441105b40d.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/ccf3d61a2cfecba8.png">
+<meta property="article:published_time" content="2021-04-10T05:11:11.000Z">
+<meta property="article:modified_time" content="2021-04-19T05:34:18.635Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="自动驾驶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/56b32cceefd709f1.png">
+
+
+  <link rel="alternative" href="/atom.xml" title="Falcon&#39;s Space" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+
+
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Falcon&#39;s Space</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Falcon&#39;s Space</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Yu Yuan</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E6%8A%80%E8%83%BD/">一些技能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/">一些面试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">网站建设</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a><span class="category-list-count">3</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CV/" rel="tag">CV</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag">图像融合</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" rel="tag">好玩的</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/" rel="tag">目标跟踪</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag">自动驾驶</a><span class="tag-list-count">2</span></li></ul>
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">16</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage" external="false">Homepage</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/archives" title="By Year" external="false">By Year</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/denjones/hexo-theme-chan" title="Chan" target="_blank" rel="noopener">Chan</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/denjones" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="/atom.xml" title="RSS" external="false">RSS</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-delladas" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Dell ADAS 公开课
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2021-04-10
+</span>
+
+    
+	<span class="article-category tagcloud">
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a></li></ul>
+	</span>
+
+
+    
+	<span class="article-tag tagcloud">
+		<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" rel="tag">自动驾驶</a></li></ul>
+	</span>
+
+
+  </div>
+  <div class="article-entry">
+    <center>
+小车向前冲
+</center>
+<span id="more"></span>
+<p> </p>
+<h2 id="任务">任务</h2>
+<ul>
+<li>先遥控小车在赛道上行驶，采集数据，完成AI学习进而实现自动驾驶
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/56b32cceefd709f1.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h2 id="小车部件组成">小车部件组成</h2>
+<h3 id="总结构">总结构</h3>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9f82a115fcb47c1d.png" width="600"/>
+</div>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/6c70f6cc4911bb2d.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="步进电机">步进电机</h3>
+<ul>
+<li>步进电机：脉冲控制、精细、不需要刹车</li>
+</ul>
+<p> </p>
+<h3 id="麦克纳姆轮">麦克纳姆轮</h3>
+<ul>
+<li>全向移动</li>
+<li>安装时四个轮斜轴向小车中心</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/banzhuan133/article/details/69229922">麦克纳姆轮速度计算</a>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/4e15d2441105b40d.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h3 id="主控模组">主控模组</h3>
+<ul>
+<li>Nvidia Jetson Nano</li>
+</ul>
+<p> </p>
+<h3 id="tof">TOF</h3>
+<ul>
+<li>测距2m</li>
+</ul>
+<p> </p>
+<h3 id="安装">安装</h3>
+<ul>
+<li>驱动板电机安装不需要区分，因为有跳线自动识别</li>
+</ul>
+<p> </p>
+<h2 id="自动驾驶训练">自动驾驶训练</h2>
+<h3 id="数据传递">数据传递</h3>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/ccf3d61a2cfecba8.png" width="600"/>
+</div>
+<p> </p>
+<h3 id="摄像头">摄像头</h3>
+<ul>
+<li>分辨率最高1920*1080，帧率30FPS，25度倾角对地面</li>
+</ul>
+<p> </p>
+<h3 id="小车控制">小车控制</h3>
+<ul>
+<li>分手动驾驶和自动驾驶两个模式</li>
+<li>手动驾驶时需要连接手柄，且当速度不为0时会以每秒20帧的速度记录摄像头数据和手柄的records数据</li>
+<li>自动驾驶时不需要连接手柄，也不会记录数据</li>
+</ul>
+<p> </p>
+<h3 id="收集数据">收集数据</h3>
+<ul>
+<li>收集方法：手柄遥控小车走"正确"的路线和"正确"的行为</li>
+<li>演示有如下几个场景
+<ol type="1">
+<li>轨道内无障碍物前进</li>
+<li>躲避障碍物前进(直角、拐弯处)</li>
+<li>遇到正面障碍物则停止</li>
+</ol></li>
+</ul>
+<p> </p>
+<h3 id="清洗数据">清洗数据</h3>
+<ul>
+<li>数据上传到GPU服务器 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar cvf tub.tar tub&#x2F;                               # pack</span><br><span class="line">scp tub.tar it_stu199@192.168.40.2:~&#x2F;mycar&#x2F;        # upload</span><br></pre></td></tr></table></figure></li>
+<li>登录GPU服务器，查看数据 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -X it_stu199@202.121.181.113                   # login</span><br><span class="line">cd mycar &amp;&amp; tar xvf tub.tar                        # unpack</span><br><span class="line">eog tub&#x2F;                                           # view data</span><br></pre></td></tr></table></figure></li>
+<li>清洗数据:清洗掉错误的操控驾驶行为，手动剔除</li>
+</ul>
+<p> </p>
+<h3 id="训练模型">训练模型</h3>
+<ul>
+<li>准备训练环境</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp ~&#x2F;..&#x2F;it_stu199&#x2F;train_pkg.tar ~&#x2F;                 # copy</span><br><span class="line">tar xvf train_pkg.tar                              # unpack</span><br><span class="line">cd train_pkg</span><br><span class="line">mv ~&#x2F;tub .&#x2F;                                        # move dataset</span><br></pre></td></tr></table></figure>
+<ul>
+<li>根据需要修改训练作业run.sh</li>
+<li>提交作业，进行模型训练</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sbatch run.sh                                      # submit job</span><br><span class="line">watch -n 1 &quot;sq | grep &amp;USER                        # check job</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>等待训练结束，检查是否正常结束 cat log/<最新的log文件> # check train log</p></li>
+<li><p>说明 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">run.sh                                   # gpu slurm 集群调度要求的作业脚本</span><br><span class="line">train.py                                 # 训练程序入口</span><br><span class="line">config.py                                # 训练程序常量</span><br><span class="line">dellcar                                  # 训练程序子模块</span><br><span class="line">models                                   # 训练出的模型保存目录</span><br><span class="line">log                                      # 训练过程日志</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<p> </p>
+<h3 id="小车自动驾驶">小车自动驾驶</h3>
+<ul>
+<li>将训练好的模型拷贝到小车的 ~/mycar/models 目录内</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~&#x2F;mycar&#x2F;models&#x2F;&lt;模型名&gt; mousika@172.18.24.103:~&#x2F;mycar&#x2F;models&#x2F;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用自动驾驶模型</li>
+</ul>
+<p>  a.命令行方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh mousika@172.18.24.103</span><br><span class="line">cd ~&#x2F;mycar</span><br><span class="line">vi dellcar&#x2F;parts&#x2F;drive.py</span><br><span class="line">sudo python3 dellcar&#x2F;parts&#x2F;drive.py</span><br></pre></td></tr></table></figure>
+<p>  b.Web 方式</p>
+<p>  浏览器访问小车ip---&gt;connection/configuration<br />
+  Auto driving--&gt;选择<模型名>--&gt;点击start driving</p>
+<ul>
+<li>小车会启动程序并开始自动行驶</li>
+</ul>
+<p> </p>
+<h2 id="其他">其他</h2>
+<ul>
+<li>采集图像与对应标签关系：某时刻下采集的图像生成的标签一一对应（标签主要是转弯信号、前进/后退/停止信号等遥控器行为）</li>
+<li>遥控器操控舵量和标签关系：分段常数，如大于0.3取1，小于取0</li>
+<li>行驶速度和操控量关系：在算法中简化处理</li>
+<li>相关文件<a target="_blank" rel="noopener" href="https://jbox.sjtu.edu.cn/l/h1HVCb">提取码: gmya</a></li>
+<li>调试辅助软件：<a target="_blank" rel="noopener" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY</a>或者<a target="_blank" rel="noopener" href="https://mobaxterm.mobatek.net/">MobaXterm</a></li>
+</ul>
+<h2 id="网络">网络</h2>
+<h3 id="neural-network-architecture-for-adas">neural network architecture for ADAS</h3>
+<p>超参数：一开始就要给定<br />
+参数：可以后面算出来</p>
+<p>W特别大，激活函数在哪一点（梯度在接近于0的位置）</p>
+<p>top5:即对一个图片，如果概率前五中包含正确答案，即认为正确。<br />
+top1:即对一个图片，如果概率最大的是正确答案，才认为正确</p>
+<p>模型蒸馏</p>
+<h2 id="训练">训练</h2>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.e" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2021 Falcon&#39;s Space - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/denjones/hexo-theme-chan" target="_blank">Chan</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+
+  
+<link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<script src="/PhotoSwipe/photoswipe.js"></script>
+
+  
+<script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+
+
+<script src="/scripts/main.js"></script>
+
+
+</body>
+</html>
