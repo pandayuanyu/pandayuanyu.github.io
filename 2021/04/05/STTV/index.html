@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon64.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon64.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon32.ico">
+  <link rel="mask-icon" href="/images/favicon64.ico" color="#222">
+  <link rel="manifest" href="/images/favicon64.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="结构张量全变分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Structure Tensor Total Variation">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/05/STTV/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="结构张量全变分">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/ff3f005299007f17.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/541b752a2b586b34.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/6ad3d62fda3f5255.png
+">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/9f2198c1e69053f0.png
+">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c387bba20c118634.png
+">
+<meta property="article:published_time" content="2021-04-05T08:11:11.000Z">
+<meta property="article:modified_time" content="2021-05-05T06:28:49.187Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png">
+
+
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/04/05/STTV/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Structure Tensor Total Variation | Falcon's Space</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Falcon's Space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization-for-inverse-problems"><span class="nav-number">5.</span> <span class="nav-text">Regularization for Inverse Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-formulation-and-variational-recovery"><span class="nav-number">5.1.</span> <span class="nav-text">problem formulation and variational recovery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tv-regularization"><span class="nav-number">5.2.</span> <span class="nav-text">TV regularization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#directional-derivatives-and-the-structure-tensor"><span class="nav-number">5.3.</span> <span class="nav-text">directional derivatives and the structure tensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-structure-tensor-tv-functional"><span class="nav-number">5.4.</span> <span class="nav-text">the structure tensor TV functional</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv"><span class="nav-number">6.</span> <span class="nav-text">Discrete STV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#patch-based-jacobian-operator"><span class="nav-number">6.1.</span> <span class="nav-text">patch-based Jacobian operator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equivalent-formulation-of-the-discrete-stv"><span class="nav-number">6.2.</span> <span class="nav-text">equivalent formulation of the discrete STV</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discrete-stv-minimization"><span class="nav-number">7.</span> <span class="nav-text">Discrete STV Minimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#proximal-map-of-mathrmstv_p"><span class="nav-number">7.1.</span> <span class="nav-text">proximal map of \(\mathrm{STV}_{p}\)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solving-the-dual-problem"><span class="nav-number">7.2.</span> <span class="nav-text">solving the dual problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numerical-algorithm"><span class="nav-number">7.3.</span> <span class="nav-text">numerical algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solution-of-general-inverse-problems"><span class="nav-number">7.4.</span> <span class="nav-text">solution of general inverse problems</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-and-experiments"><span class="nav-number">8.</span> <span class="nav-text">Application and Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#experimental-setting"><span class="nav-number">8.1.</span> <span class="nav-text">experimental setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-restoration"><span class="nav-number">8.2.</span> <span class="nav-text">image restoration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-magnification"><span class="nav-number">8.3.</span> <span class="nav-text">image magnification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reconstruction-from-sparse-fourier-measurements"><span class="nav-number">8.4.</span> <span class="nav-text">reconstruction from sparse Fourier measurements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#implementation-details-and-computational-runtimes"><span class="nav-number">8.5.</span> <span class="nav-text">implementation details and computational runtimes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusions"><span class="nav-number">9.</span> <span class="nav-text">Conclusions</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yu Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/04/05/STTV/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Structure Tensor Total Variation
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-05 16:11:11" itemprop="dateCreated datePublished" datetime="2021-04-05T16:11:11+08:00">2021-04-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-05-05 14:28:49" itemprop="dateModified" datetime="2021-05-05T14:28:49+08:00">2021-05-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>29 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
+结构张量全变分
+</center>
+<span id="more"></span>
+<h2 id="foreword">Foreword</h2>
+<p>// 论文2015年发表于 SIAM Journal on Imaging Sciences, 四位作者均大牛。</p>
+<h2 id="conceptual-understanding">Conceptual Understanding</h2>
+<ul>
+<li>对偶空间: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/23871517">理解</a></li>
+<li>Tensor 张量: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/abella/p/10142935.html">通俗解释</a><br />
+疑惑点：到底是阶数还是维数？</li>
+<li>Structure Tensor 结构张量：<br />
+  结构张量用于角点检测、边缘检测和纹理分析。对一副灰度图像，当两个相邻的像素点无限接近时，微分dI可以表示为：<br />
+<span class="math display">\[
+\mathrm{d} I=\frac{\partial I}{\partial x} \mathrm{~d} x+\frac{\partial I}{\partial y} \mathrm{~d} y
+\]</span><br />
+  其平方范数可以表示为：<br />
+<span class="math display">\[
+\|\mathrm{d} I\|^{2}=\sum_{m=x, y} \sum_{n=x, y}\left(\frac{\partial I}{\partial m} \cdot \frac{\partial I}{\partial n}\right) \mathrm{d} m \mathrm{~d} n=\left[\begin{array}{ll}
+\mathrm{d} x &amp; \mathrm{~d} y
+\end{array}\right] T\left[\begin{array}{l}
+\mathrm{d} x \\
+\mathrm{d} y
+\end{array}\right]
+\]</span></li>
+</ul>
+<p>$$</p>
+<p>$$</p>
+<p>  其中，T是结构张量：<br />
+<span class="math display">\[
+T=\left[\begin{array}{cc}
+I_{x}^{2} &amp; I_{x} I_{y} \\
+I_{x} I_{y} &amp; I_{y}^{2}
+\end{array}\right]
+\]</span><br />
+  其中<span class="math inline">\(I_{x}\)</span>和<span class="math inline">\(I_{y}\)</span>分别是沿x轴和y轴的一阶偏导数。矩阵T的行列式为K，迹为H。<br />
+  结构张量T为半正定矩阵，具有两个非负特征值，可以通过特征值将图像的空间结构信息分为三种：<br />
+  平坦区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H=0)，表示图像在该点任何方向灰度变化都很小；<br />
+  边缘区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K=0)，表示图像在该点沿某一方向灰度变化率较大；<br />
+  角点区域：两个特征值<span class="math inline">\(\mu_{1}=\mu_{2}=0\)</span>(H&gt;0 &amp; K&gt;0)，表示图像在该点两个垂直方向上的灰度变化都很大；</p>
+<ul>
+<li><p>图像阶梯效应：也叫“块效应”，图像处理后某些区域内灰度相同。</p></li>
+<li><p>Sobolev Space: <a target="_blank" rel="noopener" href="https://blog.csdn.net/baimafujinji/article/details/49835983?utm_source=blogxgwz3&amp;utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">索伯列夫空间</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.zhujian.life/posts/e51acd5.html">Nesterov 加速梯度</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/81202544">Lipschitz常数</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a493823882/article/details/80569888">范数</a></p></li>
+</ul>
+<h2 id="abstract">Abstract</h2>
+<ul>
+<li>引入一个新的一般能量泛函，用它来解决变分框架内的逆成像问题。</li>
+<li>所提出的正则化族称为结构张量全变分(STV)，它对结构张量的特征值进行惩罚，适用于灰度图像和向量值图像。</li>
+<li>推广了已有的几种变分惩罚，包括全变分半群及其向量扩展。同时，由于结构张量能够捕获局部邻域的一阶信息，STV泛函能够提供更稳健的图像变化度量。</li>
+<li>进一步证明了STV正则化是凸的，同时它们也满足图像变换的几个不变性。这些特性使它们成为成像应用的理想候选者。</li>
+<li>对于离散版本的STV泛函，推导了一个等价的定义，该定义基于补丁的雅可比算子，这是一种新的线性算子，扩展了雅可比矩阵。</li>
+<li>提出了关于各种逆成像问题的大量实验，将提出的正则化方法与其他正则化方法进行了比较。</li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<ul>
+<li>逆问题越来越多地出现在一系列成像应用中。它们也出现在大量的计算机视觉应用中，包括运动估计、图像配准、立体声和密集三维(3D)重建。</li>
+<li>为了恢复的信息在物理上或统计上有意义，需要一个包含底层图像的已知属性的模型。</li>
+<li>处理不适定反问题的一种常用策略是变分法。这个框架的主要元素是正规化函数。</li>
+<li>最流行的成像应用正则化是全变分(TV)半范数。TV是一个凸函数，其成功的主要原因是它能够重建清晰、保存完好的图像边缘。然而，它的缺点是过度平滑均匀区域和产生阶梯伪影。</li>
+</ul>
+<h2 id="regularization-for-inverse-problems">Regularization for Inverse Problems</h2>
+<h3 id="problem-formulation-and-variational-recovery">problem formulation and variational recovery</h3>
+<p>  对于许多成像应用，采集是通过线性过程很好地描述的，可以用数学公式表示为: <span class="math display">\[
+\boldsymbol{v}(\boldsymbol{x}) \sim \mathcal{N}(\mathcal{A} \boldsymbol{u}(\boldsymbol{x}))
+\]</span>   其中，<span class="math inline">\(\boldsymbol{u}(\boldsymbol{x})=\left[u_{1}(\boldsymbol{x}) \ldots u_{M}(\boldsymbol{x})\right]: \mathbb{R}^{2} \mapsto \mathbb{R}^{M}\)</span>表示我们希望重建的具有M个通道的向量值的一般图像，A是一个线性算子，提供了从底层图像空间到测量空间的映射。符号N表示测量噪声，它包含了采集过程中所有可能的误差类型，包括随机噪声。<br />
+  从测量值v中恢复u属于线性逆问题的范畴。在大多数实际情况下，运算符A要么是病态的，要么是单数的。这种不适定性是在变分框架内处理的，其中u的重构是一个形式的目标函数的最小化问题: <span class="math display">\[
+\mathcal{E}(\boldsymbol{u})=\varphi(\mathcal{A} \boldsymbol{u})+\tau \psi(\boldsymbol{u})
+\]</span>   这个代价函数包括数据保真度项ϕ(Au)，它测量候选解对观测数据的解释程度，以及正则化ψ(u)，它编码关于底层图像的任何可用的先验信息。数据保真度项的确切形式取决于干扰测量的假定噪声模型。从贝叶斯的观点来看，整个重建方法对应于一个惩罚最大似然或最大后验估计问题。</p>
+<h3 id="tv-regularization">TV regularization</h3>
+<p>  TV适用于灰度图像u(M = 1)，对于平滑图像定义为: <span class="math display">\[
+\operatorname{TV}(u)=\int_{\mathbb{R}^{2}}\|\nabla u\|_{2} \mathrm{~d} \boldsymbol{x}
+\]</span>   TV的一个众所周知的缺点是，它支持分段常数解，它可以在图像的平滑区域创建强大的阶梯伪影。此外，TV和VTV的一个基本缺点是，用于惩罚图像在每个x点上变化的梯度大小作为图像描述符过于简单;它只依赖于x而不考虑其邻域的可用信息。</p>
+<h3 id="directional-derivatives-and-the-structure-tensor">directional derivatives and the structure tensor</h3>
+<p>  目标是开发邻域感知的矢量图像变化的措施。<br />
+  假设向量值图像u属于Sobolev空间<span class="math inline">\(W^{1,2}\left(\mathbb{R}^{2}, \mathbb{R}^{M}\right)\)</span>。设n为任意二维方向(<span class="math inline">\(\|\boldsymbol{n}\|_{2}=1\)</span>)。向量值图像u在n方向上以及任意特定图像点x处的矢量方向导数为： <span class="math display">\[
+\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{n}}(\boldsymbol{x})=(J \boldsymbol{u}(\boldsymbol{x})) \boldsymbol{n}
+\]</span>   u的Jacobian矩阵<span class="math inline">\(J \boldsymbol{u}\)</span>定义为： <span class="math display">\[
+J \boldsymbol{u}(\boldsymbol{x})=\left[\nabla u_{1}(\boldsymbol{x}) \quad \ldots \quad \nabla u_{M}(\boldsymbol{x})\right]^{T}
+\]</span>   方向导数<span class="math inline">\(\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\)</span>的大小衡量在n方向上任何一点x的图像变化量。这种方法的计算完全集中在x处。为了提高程序的鲁棒性和捕捉图像领域表现，用<span class="math inline">\(\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\)</span>的加权均方根代替，称之为方向变化： <span class="math display">\[
+\operatorname{RMS}_{K}\left\{\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\right\}=\sqrt{K *\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}^{2}}=\sqrt{\boldsymbol{n}^{T}\left(S_{k} \boldsymbol{u}\right) \boldsymbol{n}}
+\]</span>   在上面的方程中∗表示卷积运算，K(x)是一个非负的、旋转对称的卷积核，K(x) = K(|x|)，执行加权平均(例如，二维高斯分布)，<span class="math inline">\(S_{K} \boldsymbol{u}\)</span>是图像u在x点处的结构张量，定义为： <span class="math display">\[
+S_{K} \boldsymbol{u}(\boldsymbol{x})=K *\left[J \boldsymbol{u}^{T} J \boldsymbol{u}\right](\boldsymbol{x})
+\]</span></p>
+<p>  设<span class="math inline">\(\lambda^{+}=\lambda^{+}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right), \lambda^{-}=\lambda^{-}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right)\)</span>是<span class="math inline">\(S_{K} \boldsymbol{u}(\boldsymbol{x})\)</span>的特征值，<span class="math inline">\(\lambda^{+} \geq \lambda^{-}\)</span>， <span class="math inline">\(\boldsymbol{\theta}^{+}, \boldsymbol{\theta}^{-}\)</span>是对应的特征向量。<span class="math inline">\(\omega \in(-\pi, \pi]\)</span>定义为方向向量n与特征向量<span class="math inline">\({\theta}^{+}\)</span>之间的夹角。利用特征分解，方向变化可以被定义为角度<span class="math inline">\(\omega\)</span>的函数： <span class="math display">\[
+V(\omega) \triangleq \operatorname{RMS}_{K}\left\{\|\partial \boldsymbol{u} / \partial \boldsymbol{n}\|_{2}\right\}=\sqrt{\lambda^{+} \cos ^{2} \omega+\lambda^{-} \sin ^{2} \omega}
+\]</span></p>
+<p>  由上述参数得到椭圆： <span class="math display">\[
+\boldsymbol{P}(\omega)=\cos \omega \sqrt{\lambda^{+}} \boldsymbol{\theta}^{+}+\sin \omega \sqrt{\lambda^{-}} \boldsymbol{\theta}^{-}, \omega \in[0,2 \pi)
+\]</span></p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9144982f69f09bb5.png" width="600"/>
+</div>
+<center>
+结构张量椭圆可视化结果
+</center>
+<p>  椭圆的长半径和小半径分别为<span class="math inline">\(\sqrt{\lambda^{+}}\)</span>和<span class="math inline">\(\sqrt{\lambda^{-}}\)</span>，而长轴的方向分别为<span class="math inline">\({\theta}^{+}\)</span>和<span class="math inline">\({\theta}^{-}\)</span>。其特征向量 <span class="math inline">\({\theta}^{+}\)</span>和<span class="math inline">\({\theta}^{-}\)</span>描述了u的最大和最小矢量变化的方向, 特征值平方根<span class="math inline">\(\sqrt{\lambda^{+}}\)</span>和<span class="math inline">\(\sqrt{\lambda^{-}}\)</span> 描述了这些变化的大小。 更重要的是，观察到<span class="math inline">\(V(\omega)=\|\boldsymbol{P}(\omega)\|_{2}\)</span>，意味着方向变化V(ω)可以解释为任意点P(ω)到椭圆中心的距离。</p>
+<h3 id="the-structure-tensor-tv-functional">the structure tensor TV functional</h3>
+<p>  为了设计一个正则化器来整合每个图像点的局部图像变化的标量惩罚，我们需要考虑提供函数V (ω)的度量。这些测度也是从结构张量的特征值计算出来的，分以下几种:<br />
+  Case 1. RMS of <span class="math inline">\(V(\omega):\left((2 \pi)^{-1} \int_{0}^{2 \pi} V^{2}(\omega) \mathrm{d} \omega\right)^{1 / 2}=\sqrt{\lambda^{+}+\lambda^{-}} / \sqrt{2}\)</span><br />
+  Case 2. Maximum of <span class="math inline">\(V(\omega):\sqrt{\lambda^{+}}\)</span><br />
+  Case 3. Midrange of <span class="math inline">\(V(\omega):\sqrt{\lambda^{+}+\lambda^{-}} / 2\)</span><br />
+  对于每个图像点x，定义二维向量:<br />
+<span class="math display">\[
+\sqrt{\boldsymbol{\lambda}}=\sqrt{\boldsymbol{\lambda}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right)}=\left(\sqrt{\lambda^{+}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right)}, \sqrt{\lambda^{-}\left(S_{K} \boldsymbol{u}(\boldsymbol{x})\right)}\right)
+\]</span></p>
+<p>  上面三种情况对应的范数：<span class="math inline">\(\|\sqrt{\boldsymbol{\lambda}}\|_{2}(\)</span> Case 1<span class="math inline">\(),\|\sqrt{\boldsymbol{\lambda}}\|_{\infty}(\)</span> Case 2<span class="math inline">\(),\|\sqrt{\boldsymbol{\lambda}}\|_{1}(\)</span> Case 3<span class="math inline">\()\)</span>。进一步考虑大于等于1的P范数作为图像变化的度量。这些标准测量图像变化比在TV中使用的梯度幅度更连贯和稳健，因为它们考虑到其附近的变化。同时，由于它们同时依赖于方向变化的最大值和最小值，因此它们包含了更丰富的信息。通过这种方式，它们的响应通常更好地适应图像的几何形状。</p>
+<p>  定义以下全新正则项：<br />
+<span class="math display">\[
+\mathrm{STV}_{p}(\boldsymbol{u})=\int_{\mathbb{R}^{2}}\left\|\left(\sqrt{\lambda^{+}}, \sqrt{\lambda^{-}}\right)\right\|_{p} \mathrm{~d} \boldsymbol{x}
+\]</span>   以上结构张量正则化项是平移和旋转不变的、1阶齐次、凸的。</p>
+<h2 id="discrete-stv">Discrete STV</h2>
+<p>  需要处理离散数据<br />
+### notation and definitions   对图像使用镜像边界拓展。离散STV形式： <span class="math display">\[
+\operatorname{STV}_{p}(\boldsymbol{u})=\sum_{n=1}^{N}\left\|\left(\sqrt{\lambda_{n}^{+}}, \sqrt{\lambda_{n}^{-}}\right)\right\|_{p}
+\]</span></p>
+<h3 id="patch-based-jacobian-operator">patch-based Jacobian operator</h3>
+<p>  正则化依赖于结构张量的特征值。但是算子的非线性和卷积核的存在,使泛函的最小化变得困难。<br />
+  为解决以上问题，提出基于局部加权面片的图像雅可比算子。这种新的算子，称之为patch-based Jacobian，包含了由平滑核确定的加权移位版本的雅可比。<br />
+  patch-based Jacobian 定义： <span class="math display">\[
+\boldsymbol{J}_{K}: \mathbb{R}^{N M} \mapsto \mathcal{X}
+\]</span>   其中，<span class="math inline">\(\mathcal{X} \triangleq \mathbb{R}^{N \times(L M) \times 2}\)</span> and <span class="math inline">\(L=\left(2 L_{K}+1\right)^{2}\)</span></p>
+<p>  这个定义意味着，如果我们在u的第n个像素上应用patch-based Jacobian，那么结果是一个大小为LM*2的矩阵，用<span class="math inline">\(\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}\)</span>表示。 <span class="math display">\[
+\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}=\left(\left[\tilde{\nabla} \boldsymbol{u}_{1}\right]_{n}, \ldots,\left[\tilde{\nabla} \boldsymbol{u}_{M}\right]_{n}\right)^{T}
+\]</span>   其中， <span class="math display">\[
+\left[\tilde{\nabla} \boldsymbol{u}_{m}\right]_{n}=\left(\left[T_{s_{1}, \omega} \circ \nabla \boldsymbol{u}_{m}\right]_{n}, \ldots,\left[T_{s_{L}, \omega} \circ \nabla \boldsymbol{u}_{m}\right]_{n}\right)
+\]</span>   <span class="math inline">\(\nabla\)</span>是离散梯度，<span class="math inline">\((\cdot)^{T}\)</span>是转置算子，<span class="math inline">\(\circ\)</span>表示算子的组成，移位向量<span class="math inline">\(\boldsymbol{s}_{l}(l=1, \ldots, L)\)</span>是晶格<span class="math inline">\(\mathcal{P}\)</span>的元素，<span class="math inline">\(T_{s_{1}, \omega}\)</span>是加权平移算子，后者考虑了镜像边界条件，定义为： <span class="math display">\[
+\left[T_{s_{l}, \omega} \circ \nabla \boldsymbol{u}_{m}\right]_{n}=\boldsymbol{\omega}\left[\boldsymbol{s}_{l}\right] \nabla \boldsymbol{u}_{m}\left[\boldsymbol{x}_{n}-\boldsymbol{s}_{l}\right]
+\]</span></p>
+<p>  定义空间<span class="math inline">\(\mathcal{X}\)</span>的内积： <span class="math display">\[
+\langle\boldsymbol{X}, \boldsymbol{Y}\rangle_{\mathcal{X}}=\sum_{n=1}^{N} \operatorname{trace}\left(\boldsymbol{Y}_{n}^{T} \boldsymbol{X}_{n}\right)
+\]</span>   定义空间<span class="math inline">\(\mathcal{X}\)</span>的范数： <span class="math display">\[
+\|\boldsymbol{X}\|_{\mathcal{X}}=\sqrt{\langle\boldsymbol{X}, \boldsymbol{X}\rangle_{\mathcal{X}}}=\left(\sum_{n=1}^{N}\left\|\boldsymbol{X}_{n}\right\|_{F}^{2}\right)^{\frac{1}{2}}
+\]</span></p>
+<h3 id="equivalent-formulation-of-the-discrete-stv">equivalent formulation of the discrete STV</h3>
+<p>  在像素位置n处评估的u的离散结构张量可以根据patch-based Jacobian写成: <span class="math display">\[
+\left[\boldsymbol{S}_{K} \boldsymbol{u}\right]_{n}=\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}^{T}\left[\boldsymbol{J}_{K} \boldsymbol{u}\right]_{n}
+\]</span></p>
+<h2 id="discrete-stv-minimization">Discrete STV Minimization</h2>
+<h3 id="proximal-map-of-mathrmstv_p">proximal map of <span class="math inline">\(\mathrm{STV}_{p}\)</span></h3>
+<p>  函数ψ的最近邻映射或Moreau邻近算子表示为: <span class="math display">\[
+\operatorname{prox}_{\psi}(\mathbf{z})=\underset{\boldsymbol{u}}{\arg \min } \frac{1}{2}\|\boldsymbol{u}-\mathbf{z}\|_{2}^{2}+\psi(\boldsymbol{u})
+\]</span>   在本文中，<span class="math inline">\(\psi(\boldsymbol{u})=\tau \mathrm{STV}_{p}(\boldsymbol{u})+\iota_{\mathcal{C}}\)</span></p>
+<p>有： <span class="math display">\[
+\underset{\boldsymbol{u}}{\arg \min } \frac{1}{2}\|\boldsymbol{u}-\mathbf{z}\|_{2}^{2}+\tau \operatorname{STV}_{p}(\boldsymbol{u})+\iota_{\mathcal{C}}(\boldsymbol{u})
+\]</span></p>
+<h3 id="solving-the-dual-problem">solving the dual problem</h3>
+<p>  作为约束优化问题的解:</p>
+<p><span class="math display">\[
+\hat{\boldsymbol{\Omega}}=\underset{\boldsymbol{\Omega} \in \mathcal{B}_{\infty, q}}{\arg \max } \frac{1}{2}\left\|\boldsymbol{w}-\Pi_{C}(\boldsymbol{w})\right\|_{2}^{2}+\frac{1}{2}\left(\|\boldsymbol{z}\|_{2}^{2}-\|\boldsymbol{w}\|_{2}^{2}\right)
+\]</span></p>
+<p>  梯度</p>
+<p><span class="math display">\[
+\nabla d(\mathbf{\Omega})=\tau \boldsymbol{J}_{K} \Pi_{C}\left(\mathbf{z}-\tau \boldsymbol{J}_{K}^{*} \boldsymbol{\Omega}\right)
+\]</span></p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png" width="600"/>
+</div>
+<h3 id="numerical-algorithm">numerical algorithm</h3>
+<p>  调用一个基于梯度的方案来导出对偶问题的解。在这项工作中，对光滑函数采用内斯特罗夫迭代法。该方案显示出比标准梯度上升法高一个数量级的收敛速度。由于我们的双目标是光滑的，具有李普希茨连续梯度，使用了一个常数步长，等Lipschitz常数的倒数。 <span class="math display">\[
+L(d) \leq 8 \sqrt{2} \tau^{2}
+\]</span></p>
+<h3 id="solution-of-general-inverse-problems">solution of general inverse problems</h3>
+<p>  这个基本工具也可以用来解决更一般的反问题。</p>
+<h2 id="application-and-experiments">Application and Experiments</h2>
+<h3 id="experimental-setting">experimental setting</h3>
+<ul>
+<li><p>为验证所提出的STV正则化方法的有效性，我们在几个逆成像问题上将它们与其他相关方法进行了比较。特别考虑了图像恢复(去噪和去模糊)、图像放大和从有限数量的傅立叶测量进行图像重建的问题。</p></li>
+<li><p>在所有情况下，图像强度被归一化，使得它们位于范围[0，1]内。</p></li>
+<li><p>比较项：考虑TGV的二阶扩展 <span class="math display">\[
+\operatorname{TGV}_{\alpha}^{2}(\boldsymbol{u})=\min _{\boldsymbol{v} \in \mathbb{R}^{N \times 2}}\|\nabla \boldsymbol{u}-\boldsymbol{v}\|_{2}+\alpha\|\mathcal{E} \boldsymbol{v}\|_{F}
+\]</span></p></li>
+<li><p>算子<span class="math inline">\(\mathcal{E}\)</span>表示对称梯度，<span class="math inline">\(\mathcal{E} \boldsymbol{v}=0.5\left(\nabla \boldsymbol{v}+\nabla \boldsymbol{v}^{T}\right)\)</span> ,<span class="math inline">\(\alpha\)</span>是用于平衡一阶项和二阶项的权重值，在这里取2。</p></li>
+<li><p>对于结构张量定义中的卷积核K，定义其为标准差<span class="math inline">\(\sigma=0.5\)</span>高斯分布的像素块，窗口大小3*3。</p></li>
+<li><p>四种噪声水平下不同正则化方法的图像去噪比较。性能是以相对于噪声输入的平均信噪比改善(分贝)来衡量的。</p></li>
+</ul>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/ff3f005299007f17.png" width="600"/>
+</div>
+<h3 id="image-restoration">image restoration</h3>
+<ul>
+<li>对于图像去噪问题，考虑独立同分布高斯噪声和分别对应于标准偏差<span class="math inline">\(\sigma_{w}=\{0.1,0.15,0.2,0.25\}\)</span>的四种不同噪声水平。</li>
+<li>在灰度实验中，TV是所有噪声水平中表现最差的方法。TGV比TV有所改进，这反映了它更倾向于分段线性而不是分段常数解，从而避免了TV的阶梯伪影。我们两个版本的正则化器，STV1和STV1，系统地优于TV和TGV2。</li>
+</ul>
+<h3 id="image-magnification">image magnification</h3>
+<p>  图像放大是一个与图像去模糊密切相关的反问题。 再次验证了STV 1不仅提高了信噪比，还导致了增强视觉质量的重建。</p>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/541b752a2b586b34.png" width="600"/>
+</div>
+<center>
+三个峰值信噪比和四个噪声水平下不同正则化方法的图像去模糊比较。性能是以相对于降级输入的平均PSNR改善(单位为分贝)来衡量的。最上面一行的条形代表灰度结果，而最下面一行的条形代表彩色结果
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/6ad3d62fda3f5255.png
+" width="600"/>
+</div>
+<center>
+图像去模糊示例:输入和最佳结果的特写
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/9f2198c1e69053f0.png
+" width="600"/>
+</div>
+<center>
+两种变焦因子下不同正则化因子的图像放大比较
+</center>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/04/c387bba20c118634.png
+" width="600"/>
+</div>
+<center>
+图像放大示例:输入和最佳结果的特写镜头。输入通过简单的零阶保持放大。顶行:缩放因子d = 5时输入的灰度放大倍数。底行:缩放因子d = 5的输入的颜色放大倍数
+</center>
+<h3 id="reconstruction-from-sparse-fourier-measurements">reconstruction from sparse Fourier measurements</h3>
+<p>  考虑从有限数量的傅立叶测量中重建图像的问题。</p>
+<h3 id="implementation-details-and-computational-runtimes">implementation details and computational runtimes</h3>
+<p>  由于卷积核的存在，所提出的Stv2和Stv1函数在当前实现中大约慢3.5-4倍。</p>
+<h2 id="conclusions">Conclusions</h2>
+<ul>
+<li>引入了一个新的凸能量泛函族，它扩展和推广了全变分半范数及其向量扩展。</li>
+<li>我们的泛函的关键特征是，它们通过惩罚结构张量在这一点上的特征值，结合了图像域中每个点附近的信息。因此，它们提供了更丰富、更稳健的图像变化度量，从而提高了重建性能。</li>
+<li>在几个逆成像问题上与竞争方法进行了比较,验证提出的正则化可以代替TV或其矢量扩展。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/01/shuaji/" rel="prev" title="Nvidia TX2 & NX & AGX刷机">
+                  <i class="fa fa-chevron-left"></i> Nvidia TX2 & NX & AGX刷机
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/07/banjiu/" rel="next" title="春鸠">
+                  春鸠 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : ,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'all'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/04/05/STTV/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>
