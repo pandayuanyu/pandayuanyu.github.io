@@ -33,7 +33,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/40257827480f158c.jpg">
 <meta property="article:published_time" content="2021-05-25T06:32:11.000Z">
-<meta property="article:modified_time" content="2021-09-06T10:32:27.784Z">
+<meta property="article:modified_time" content="2021-09-06T10:58:46.824Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="好玩的">
 <meta name="twitter:card" content="summary">
@@ -163,7 +163,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libzmq-%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">libzmq 编译安装</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libzmq-%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">libzmq 编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91output%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">编译output脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rtsp%E5%8F%96%E6%B5%81"><span class="nav-number">4.</span> <span class="nav-text">RTSP取流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">端口配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81"><span class="nav-number">7.</span> <span class="nav-text">源代码</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -262,7 +262,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-06 18:32:27" itemprop="dateModified" datetime="2021-09-06T18:32:27+08:00">2021-09-06</time>
+        <time title="Modified: 2021-09-06 18:58:46" itemprop="dateModified" datetime="2021-09-06T18:58:46+08:00">2021-09-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -322,36 +322,41 @@
 </ul>
 <p> </p>
 <h2 id="libzmq-编译安装">libzmq 编译安装</h2>
-<ol type="1">
-<li><p><a target="_blank" rel="noopener" href="https://github.com/zeromq/libzmq">libzmq</a>下载4.3.4版本</p>
-<p> </p></li>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/zeromq/libzmq">libzmq</a>下载4.3.4版本</p></li>
 <li><p>解压libzmq <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build </span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;home&#x2F;***指定的文件夹路径 ..</span><br><span class="line">make</span><br><span class="line">make install -j4</span><br></pre></td></tr></table></figure> 注：-D***修改安装路径(cmake-gui也可以改)<br />
   两个点代表上级目录(CMakeLists.txt)<br />
   home后跟用户名才是任务管理器里的home(ctrl+L查看路径，文件管理器刷新ctrl+R)</p>
 <p> </p></li>
-<li><p>编译output脚本<br />
-解压 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1lJ_fhq45AMoapKU0-t_s8A">output.tar.gz</a><br />
-修改CMakeLists.txt 里ZeroMQ路径，改成/home/&lt;&gt;/lib/CMake/ZeroMQ<br />
-33行的OpenCV_DIR可以注释掉，如果后边自己编译了opencv库（就像这个libzmq一样），也可以指定路径<br />
-缺少<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Xu_y8Vck9Z8PTuyOpDKvQA">minunit.h(提取码6666)</a>头文件，将其放在3rd-party文件夹下面<br />
-将 CV_LOAD_IMAGE_COLOR 改成1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build </span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</ul>
+<h2 id="编译output脚本">编译output脚本</h2>
+<ul>
+<li>解压 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1lJ_fhq45AMoapKU0-t_s8A">output.tar.gz</a><br />
+</li>
+<li>修改CMakeLists.txt 里ZeroMQ路径，改成/home/&lt;&gt;/lib/CMake/ZeroMQ 33行的OpenCV_DIR可以注释掉，如果后边自己编译了opencv库（就像这个libzmq一样），也可以指定路径<br />
+</li>
+<li>缺少<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Xu_y8Vck9Z8PTuyOpDKvQA">minunit.h(提取码6666)</a>头文件，将其放在3rd-party文件夹下面<br />
+将 CV_LOAD_IMAGE_COLOR 改成1</li>
+</ul>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build </span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<p> </p>
+<h2 id="rtsp取流">RTSP取流</h2>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;opencv2\opencv.hpp&quot;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> VideoCapture capture;</span><br><span class="line"> capture.open(&quot;..&#x2F;..&#x2F;bin&#x2F;data&#x2F;1.mp4&quot;);</span><br><span class="line"> &#x2F;&#x2F;capture.open(&quot;rtsp:&#x2F;&#x2F;admin:admin123@192.168.1.164:554&#x2F;cam&#x2F;realmonitor?channel&#x3D;1&amp;subtype&#x3D;0&quot;);</span><br><span class="line"></span><br><span class="line">  int frameH &#x3D; capture.get(4);</span><br><span class="line">  int frameW &#x3D; capture.get(3);</span><br><span class="line">  std::cout &lt;&lt; &quot;frameH:&quot; &lt;&lt; frameH &lt;&lt; &quot;  frameW:&quot; &lt;&lt; frameW &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  while (1)</span><br><span class="line">  &#123;</span><br><span class="line">      Mat frame;</span><br><span class="line">      capture &gt;&gt; frame;</span><br><span class="line">  </span><br><span class="line">      if (frame.empty())</span><br><span class="line">      &#123;</span><br><span class="line">          break;</span><br><span class="line">      &#125;</span><br><span class="line">      imshow(&quot;test&quot;, frame);</span><br><span class="line">      waitKey(30);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> </p>
+<h2 id="端口配置">端口配置</h2>
+<ul>
+<li><p>配置发布订阅端的tcp地址，如： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;PUB&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;id&quot;: &quot;0xABA2&quot;,</span><br><span class="line">            &quot;length&quot;: 0,</span><br><span class="line">            &quot;port&quot;: &quot;tcp:&#x2F;&#x2F;192.168.137.88:5555&quot;</span><br><span class="line">       &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;SUB&quot;: [</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p></li>
+<li><p>tcp地址为设备ip地址加一个四位端口号（不重复即可）；同时注意一台设备可以同时充当发布订阅端（自发自收）</p>
 <p> </p></li>
-<li><p>RTSP取流<br />
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;opencv2\opencv.hpp&quot;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> VideoCapture capture;</span><br><span class="line"> capture.open(&quot;..&#x2F;..&#x2F;bin&#x2F;data&#x2F;1.mp4&quot;);</span><br><span class="line"> &#x2F;&#x2F;capture.open(&quot;rtsp:&#x2F;&#x2F;admin:admin123@192.168.1.164:554&#x2F;cam&#x2F;realmonitor?channel&#x3D;1&amp;subtype&#x3D;0&quot;);</span><br><span class="line"></span><br><span class="line">  int frameH &#x3D; capture.get(4);</span><br><span class="line">  int frameW &#x3D; capture.get(3);</span><br><span class="line">  std::cout &lt;&lt; &quot;frameH:&quot; &lt;&lt; frameH &lt;&lt; &quot;  frameW:&quot; &lt;&lt; frameW &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  while (1)</span><br><span class="line">  &#123;</span><br><span class="line">      Mat frame;</span><br><span class="line">      capture &gt;&gt; frame;</span><br><span class="line">   </span><br><span class="line">      if (frame.empty())</span><br><span class="line">      &#123;</span><br><span class="line">          break;</span><br><span class="line">      &#125;</span><br><span class="line">      imshow(&quot;test&quot;, frame);</span><br><span class="line">      waitKey(30);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> </p></li>
-<li><p>端口配置<br />
-配置发布订阅端的tcp地址，如： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;PUB&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;id&quot;: &quot;0xABA2&quot;,</span><br><span class="line">            &quot;length&quot;: 0,</span><br><span class="line">            &quot;port&quot;: &quot;tcp:&#x2F;&#x2F;192.168.137.88:5555&quot;</span><br><span class="line">       &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;SUB&quot;: [</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>   tcp地址为设备ip地址加一个四位端口号（不重复即可）；同时注意一台设备可以同时充当发布订阅端（自发自收）</p>
-<p> </p></li>
-<li><p>测试<br />
-  运行output下编译通过的demo，帧率通过waitkey等调节。</p>
+</ul>
+<h2 id="测试">测试</h2>
+  运行output下编译通过的demo，帧率通过waitkey等调节。
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/09/40257827480f158c.jpg" width="500"/>
 </div>
-<p> </p></li>
-<li><p>源代码<br />
-  <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1s8K3tLsEAQdYGR_pLrEsEg">工程代码,提取码：6666</a></p></li>
-</ol>
+<p> </p>
+<h2 id="源代码">源代码</h2>
+<p>  <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1s8K3tLsEAQdYGR_pLrEsEg">工程代码,提取码：6666</a></p>
 
     </div>
 
