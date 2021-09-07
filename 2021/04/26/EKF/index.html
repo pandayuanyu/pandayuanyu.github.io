@@ -1,167 +1,316 @@
-<!DOCTYPE html><html lang="en"><head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="preconnect" href="//www.googletagmanager.com">
-	<link rel="preconnect" href="//zz.bdstatic.com">
-	<link rel="preconnect" href="//sp0.baidu.com">
-	<link rel="preconnect" href="//www.google-analytics.com">
-	<link rel="preconnect" href="//cdn1.lncld.net">
-	<link rel="preconnect" href="//unpkg.com">
-	<link rel="preconnect" href="//app-router.leancloud.cn">
-	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
-	<link rel="preconnect" href="//gravatar.loli.net">
-
-	<title>Extended Kalman Filter (python) | Falcon's Space</title>
-
-	<meta name="HandheldFriendly" content="True">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-	<meta name="generator" content="hexo">
-	<meta name="author" content="Yu Yuan">
-	<meta name="description" content="">
-
-	
-	<meta name="keywords" content="">
-	
-
-	
-	<link rel="shortcut icon" href="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico">
-	<link rel="apple-touch-icon" href="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico">
-	
-
-	
-	<meta name="theme-color" content="#3c484e">
-	<meta name="msapplication-TileColor" content="#3c484e">
-	
-
-	
-
-	
-
-	<meta property="og:site_name" content="Falcon's Space">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="Extended Kalman Filter (python) | Falcon's Space">
-	<meta property="og:description" content="">
-	<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/26/EKF/">
-
-	
-	<meta property="article:published_time" content="2021-04-26T16:04:00+08:00"> 
-	<meta property="article:author" content="Yu Yuan">
-	<meta property="article:published_first" content="Falcon's Space, /2021/04/26/EKF/">
-	
-
-	
-	
-	
-<link rel="stylesheet" href="/css/allinonecss.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-	
-	
-	
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon1.ico">
+  <link rel="mask-icon" href="/images/favicon2.ico" color="#222">
+  <link rel="manifest" href="/images/favicon2.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="拓展卡尔曼滤波(python)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Extended Kalman Filter (python)">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/26/EKF/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="拓展卡尔曼滤波(python)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/1afc05ef08ab6c7d.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/1a8ca9648da54e25.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/ef6e4a97d40f744b.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/1f34a2def4cf4053.png">
+<meta property="article:published_time" content="2021-04-26T08:11:11.000Z">
+<meta property="article:modified_time" content="2021-04-26T06:42:41.522Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="卡尔曼滤波">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/1afc05ef08ab6c7d.png">
+
+
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/04/26/EKF/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Extended Kalman Filter (python) | Falcon's Space</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
 </head>
 
-<body class="post-template">
-	<div class="site-wrapper">
-		
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-
-
-
-<header class="site-header post-site-header outer">
-    <div class="inner">
-        
-<nav class="site-nav"> 
-    <div class="site-nav-left">
-        <ul class="nav">
-            <li>
-                
-                <a href="/" title="Home">HOME</a>
-                
-            </li>
-            
-            
-            <li>
-                <a href="/about" title="ABOUT">ABOUT</a>
-            </li>
-            
-            <li>
-                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
-            </li>
-            
-            
-        </ul> 
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
-    
-    <div class="search-button-area">
-        <a href="#search" class="search-button">Search ...</a>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Falcon's Space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-     
-    <div class="site-nav-right">
-        
-        <a href="#search" class="search-button">Search ...</a>
-         
-        
-<div class="social-links">
-    
-    <a class="social-link" title="weibo" href="https://weibo.com/xzhih" target="_blank" rel="noopener">
-        <svg viewBox="0 0 1141 1024" xmlns="http://www.w3.org/2000/svg"><path d="M916.48 518.144q27.648 21.504 38.912 51.712t9.216 62.976-14.336 65.536-31.744 59.392q-34.816 48.128-78.848 81.92t-91.136 56.32-94.72 35.328-89.6 18.944-75.264 7.68-51.712 1.536-49.152-2.56-68.096-10.24-78.336-21.504-79.872-36.352-74.24-55.296-59.904-78.848q-16.384-29.696-22.016-63.488t-5.632-86.016q0-22.528 7.68-51.2t27.136-63.488 53.248-75.776 86.016-90.112q51.2-48.128 105.984-85.504t117.248-57.856q28.672-10.24 63.488-11.264t57.344 11.264q10.24 11.264 19.456 23.04t12.288 29.184q3.072 14.336 0.512 27.648t-5.632 26.624-5.12 25.6 2.048 22.528q17.408 2.048 33.792-1.536t31.744-9.216 31.232-11.776 33.28-9.216q27.648-5.12 54.784-4.608t49.152 7.68 36.352 22.016 17.408 38.4q2.048 14.336-2.048 26.624t-8.704 23.04-7.168 22.016 1.536 23.552q3.072 7.168 14.848 13.312t27.136 12.288 32.256 13.312 29.184 16.384zM658.432 836.608q26.624-16.384 53.76-45.056t44.032-64 18.944-75.776-20.48-81.408q-19.456-33.792-47.616-57.344t-62.976-37.376-74.24-19.968-80.384-6.144q-78.848 0-139.776 16.384t-105.472 43.008-72.192 60.416-38.912 68.608q-11.264 33.792-6.656 67.072t20.992 62.976 42.496 53.248 57.856 37.888q58.368 25.6 119.296 32.256t116.224 0.512 100.864-21.504 74.24-33.792zM524.288 513.024q20.48 8.192 38.912 18.432t32.768 27.648q10.24 12.288 17.92 30.72t10.752 39.424 1.536 42.496-9.728 38.912q-8.192 18.432-19.968 37.376t-28.672 35.328-40.448 29.184-57.344 18.944q-61.44 11.264-117.76-11.264t-88.064-74.752q-12.288-39.936-13.312-70.656t16.384-66.56q13.312-27.648 40.448-51.712t62.464-38.912 75.264-17.408 78.848 12.8zM361.472 764.928q37.888 3.072 57.856-18.432t21.504-48.128-15.36-47.616-52.736-16.896q-27.648 3.072-43.008 23.552t-17.408 43.52 9.728 42.496 39.424 21.504zM780.288 6.144q74.752 0 139.776 19.968t113.664 57.856 76.288 92.16 27.648 122.88q0 33.792-16.384 50.688t-35.328 17.408-35.328-14.336-16.384-45.568q0-40.96-22.528-77.824t-59.392-64.512-84.48-43.52-96.768-15.872q-31.744 0-47.104-15.36t-14.336-34.304 18.944-34.304 51.712-15.36zM780.288 169.984q95.232 0 144.384 48.64t49.152 146.944q0 30.72-10.24 43.52t-22.528 11.264-22.528-14.848-10.24-35.84q0-60.416-34.816-96.256t-93.184-35.84q-19.456 0-28.672-10.752t-9.216-23.04 9.728-23.04 28.16-10.752z"></path></svg>
-    </a>
-    
-    
-    <a class="social-link" title="github" href="https://github.com/xzhih" target="_blank" rel="noopener">
-        <svg viewBox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"></path></svg>
-    </a>
-    
-    
-    <a class="social-link" title="facebook" href="https://facebook" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
-
-    </a>
-    
-    
-    <a class="social-link" title="twitter" href="https://twitter.com" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
-
-    </a>
-    
-    
-    
-    
+  </div>
 </div>
-    </div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">8</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">10</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
 </nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yu Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
     </div>
-</header>
+  </aside>
+  <div class="sidebar-dimmer"></div>
 
 
-<div id="site-main" class="site-main outer" role="main">
-    <div class="inner">
-        <header class="post-full-header">
-            <div class="post-full-meta">
-                <time class="post-full-meta-date" datetime="2021-04-26T08:11:11.000Z">
-                    2021-04-26
-                </time>
-                
-                <span class="date-divider">/</span>
-                
-                <a href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a>&nbsp;&nbsp;
-                
-                
-            </div>
-            <h1 class="post-full-title">Extended Kalman Filter (python)</h1>
-        </header>
-        <div class="post-full no-image">
-            
-            <div class="post-full-content">
-                <article id="photoswipe" class="markdown-body">
-                    <center>
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/04/26/EKF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Extended Kalman Filter (python)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-04-26 16:11:11 / Modified: 14:42:41" itemprop="dateCreated datePublished" datetime="2021-04-26T16:11:11+08:00">2021-04-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">一些算法</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>7.4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>20 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
 拓展卡尔曼滤波(python)
 </center>
 <span id="more"></span>
-<p>&nbsp;</p>
-<p>// 初值<span class="math inline">\(x_{0}=[120,4,25,0]^{T}\)</span>, 量测初值<span class="math inline">\(\hat{x}_{0}=[125,4.1,26,0.1]^{T}\)</span> // T为采样周期，q为过程噪声方差，r为量测噪声方差<br>
-// N为蒙特卡洛模拟次数<br>
-// 初始状态协方差矩阵<span class="math inline">\(P_{0}=0.2 I_{4 \times 4}\)</span><br>
+<p> </p>
+<p>// 初值<span class="math inline">\(x_{0}=[120,4,25,0]^{T}\)</span>, 量测初值<span class="math inline">\(\hat{x}_{0}=[125,4.1,26,0.1]^{T}\)</span> // T为采样周期，q为过程噪声方差，r为量测噪声方差<br />
+// N为蒙特卡洛模拟次数<br />
+// 初始状态协方差矩阵<span class="math inline">\(P_{0}=0.2 I_{4 \times 4}\)</span><br />
 // 定常速度模型 constant velocity <span class="math display">\[
 \begin{array}{l}
 x_{k+1} \triangleq\left[\begin{array}{l}
@@ -216,9 +365,9 @@ E\left[w_{k+1}\right]=\left[\begin{array}{l}
 \end{array}\right]
 \end{array}
 \]</span></p>
-<p>&nbsp;</p>
+<p> </p>
 <p>源代码：</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">T = <span class="number">0.1</span></span><br><span class="line">q = <span class="number">0.2</span></span><br><span class="line">r = <span class="number">1</span></span><br><span class="line">R = np.array([[<span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">              [<span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">Q = np.array([[q, <span class="number">0</span>],</span><br><span class="line">              [<span class="number">0</span>, q]])</span><br><span class="line">N = <span class="number">100</span>      <span class="comment"># Monte Carlo simulation times</span></span><br><span class="line"></span><br><span class="line">M_measTime = []</span><br><span class="line">M_measPos_x = []</span><br><span class="line">M_measPos_y = []</span><br><span class="line">M_estPos_x = []</span><br><span class="line">M_estPos_y = []</span><br><span class="line">M_reaPos_x = []</span><br><span class="line">M_reaPos_y = []</span><br><span class="line">M_reaVel_x = []</span><br><span class="line">M_reaVel_y = []</span><br><span class="line">M_estVel_x = []</span><br><span class="line">M_estVel_y = []</span><br><span class="line">RMS_p = []</span><br><span class="line">RMS_v = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    H = np.array([[np.sin(x)],</span><br><span class="line">                  [np.cos(y)]])</span><br><span class="line">    <span class="keyword">return</span> H</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hd</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    HD = np.array([[np.cos(x), <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                   [<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span> * np.sin(y), <span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">return</span> HD</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getMeasurement</span>(<span class="params">updateNumber</span>):</span></span><br><span class="line">        <span class="keyword">if</span> updateNumber == <span class="number">1</span>:</span><br><span class="line">          getMeasurement.currentPosition_x = <span class="number">120</span> </span><br><span class="line">          getMeasurement.currentVelocity_x = <span class="number">4</span> </span><br><span class="line">          getMeasurement.currentPosition_y = <span class="number">25</span> </span><br><span class="line">          getMeasurement.currentVelocity_y = <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">        w = np.random.normal(loc=<span class="number">0</span>,scale=np.sqrt(r),size=<span class="number">1</span>)</span><br><span class="line">        v = np.random.normal(loc=<span class="number">0</span>,scale=np.sqrt(q),size=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        xx = getMeasurement.currentPosition_x + getMeasurement.currentVelocity_x*T + v</span><br><span class="line">        yy = getMeasurement.currentPosition_y + getMeasurement.currentVelocity_y*T + v</span><br><span class="line">        getMeasurement.currentPosition_x = xx - v</span><br><span class="line">        getMeasurement.currentPosition_y = yy - v</span><br><span class="line">        getMeasurement.currentVelocity_x = <span class="number">4</span> + w</span><br><span class="line">        getMeasurement.currentVelocity_y = <span class="number">0</span> + w</span><br><span class="line">        <span class="keyword">return</span> [xx, yy, getMeasurement.currentPosition_x, getMeasurement.currentVelocity_x, getMeasurement.currentPosition_y, getMeasurement.currentVelocity_y] </span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">filter</span>(<span class="params">xx, yy, updateNumber</span>):</span></span><br><span class="line">        <span class="comment"># Initialize State</span></span><br><span class="line">        <span class="keyword">if</span> updateNumber == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">filter</span>.X = np.mat([[<span class="number">125</span>],</span><br><span class="line">                                 [<span class="number">4.1</span>],</span><br><span class="line">                                 [<span class="number">26</span>],</span><br><span class="line">                                 [<span class="number">0.1</span>]])</span><br><span class="line">            <span class="built_in">filter</span>.P = np.mat([[<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>]])</span><br><span class="line">            <span class="built_in">filter</span>.F = np.mat([[<span class="number">1</span>, T, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, T],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">filter</span>.Gamma = np.mat([[T**<span class="number">2</span>/<span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">                                     [T, <span class="number">0</span>],</span><br><span class="line">                                     [<span class="number">0</span>, T**<span class="number">2</span>/<span class="number">2</span>],</span><br><span class="line">                                     [<span class="number">0</span>, T]])  </span><br><span class="line">            <span class="built_in">filter</span>.R = R</span><br><span class="line">            <span class="built_in">filter</span>.Q = Q</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(xx)</span></span><br><span class="line">        <span class="comment"># J = np.array([[-0.1289, 0, 0, 0], [0, 0, -0.004, 0]])  </span></span><br><span class="line">        <span class="comment"># Predict State Forward</span></span><br><span class="line">        <span class="comment"># print('fx',filter.X)</span></span><br><span class="line">        <span class="comment"># print('p',filter.P)</span></span><br><span class="line">        X_prime = <span class="built_in">filter</span>.F.dot(<span class="built_in">filter</span>.X)</span><br><span class="line">        <span class="comment"># print('xp',X_prime)</span></span><br><span class="line">        <span class="comment"># Predict Covariance Forward</span></span><br><span class="line">        P_prime = <span class="built_in">filter</span>.F.dot(<span class="built_in">filter</span>.P).dot(<span class="built_in">filter</span>.F.T) + <span class="built_in">filter</span>.Gamma.dot(<span class="built_in">filter</span>.Q).dot(<span class="built_in">filter</span>.Gamma.T)</span><br><span class="line">        <span class="comment"># print('pp',P_prime)</span></span><br><span class="line">        <span class="comment"># Jacobian </span></span><br><span class="line">        J = [[np.cos(X_prime[<span class="number">0</span>,<span class="number">0</span>])  , <span class="number">0</span> ,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">                     [<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span> * np.sin(X_prime[<span class="number">2</span>,<span class="number">0</span>]), <span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># print('J',J)</span></span><br><span class="line">        <span class="comment"># Compute Kalman Gain</span></span><br><span class="line">        S = np.matmul(np.matmul(J ,P_prime), np.transpose(J).tolist()) +  <span class="built_in">filter</span>.R</span><br><span class="line">        <span class="comment">#S = J.dot(P_prime).dot(J.T) + filter.R</span></span><br><span class="line">        S = S.astype(np.<span class="built_in">float</span>)</span><br><span class="line">        <span class="comment"># print('s',S)</span></span><br><span class="line">        K = np.matmul(np.matmul(P_prime,np.transpose(J).tolist()),np.linalg.inv(S))</span><br><span class="line">        <span class="comment"># K = P_prime.dot(J.T).dot(np.linalg.inv(S))</span></span><br><span class="line">        <span class="comment"># print('K',K)</span></span><br><span class="line">        <span class="comment"># Estimate State</span></span><br><span class="line">        </span><br><span class="line">        real = np.array([[np.sin(xx)],</span><br><span class="line">                         [np.cos(yy)]])</span><br><span class="line">        real = np.array(real).flatten()</span><br><span class="line">        real = np.array([[real[<span class="number">0</span>]],[real[<span class="number">1</span>]]])</span><br><span class="line">        <span class="comment"># print('real',real)</span></span><br><span class="line">        D = np.array([[np.sin(X_prime[<span class="number">0</span>])],</span><br><span class="line">                     [np.cos(X_prime[<span class="number">2</span>])]])</span><br><span class="line"></span><br><span class="line">        D = np.array(D).flatten()</span><br><span class="line">        D = np.array([[D[<span class="number">0</span>]],[D[<span class="number">1</span>]]])</span><br><span class="line"></span><br><span class="line">        residual = real - D</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print('D',D)</span></span><br><span class="line">        <span class="comment"># print('res',residual)</span></span><br><span class="line">        <span class="built_in">filter</span>.X = X_prime + K.dot(residual)</span><br><span class="line">        <span class="comment"># Estimate Covariance</span></span><br><span class="line">        <span class="built_in">filter</span>.P = P_prime - K.dot(J).dot(P_prime)</span><br><span class="line">        <span class="keyword">return</span> [<span class="built_in">filter</span>.X[<span class="number">0</span>], <span class="built_in">filter</span>.X[<span class="number">1</span>], <span class="built_in">filter</span>.X[<span class="number">2</span>], <span class="built_in">filter</span>.X[<span class="number">3</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testFilter</span>():</span></span><br><span class="line">        t = np.linspace(<span class="number">0</span>, <span class="number">1</span>, num=<span class="number">100</span>)</span><br><span class="line">        numOfMeasurements = <span class="built_in">len</span>(t)</span><br><span class="line"></span><br><span class="line">        measTime = []</span><br><span class="line">        measPos_x = []</span><br><span class="line">        measPos_y = []</span><br><span class="line">        estPos_x = []</span><br><span class="line">        estPos_y = []</span><br><span class="line">        reaPos_x = []</span><br><span class="line">        reaPos_y = []</span><br><span class="line">        reaVel_x = []</span><br><span class="line">        reaVel_y = []</span><br><span class="line">        estVel_x = []</span><br><span class="line">        estVel_y = []</span><br><span class="line">        rms_p = []</span><br><span class="line">        rms_v = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,numOfMeasurements):</span><br><span class="line">            r = getMeasurement(k)</span><br><span class="line">            <span class="comment"># Call Filter and return new State</span></span><br><span class="line">            f = <span class="built_in">filter</span>(r[<span class="number">2</span>], r[<span class="number">3</span>], k)</span><br><span class="line">            </span><br><span class="line">            f = np.array(f).flatten()</span><br><span class="line">            f = np.array([f[<span class="number">0</span>],f[<span class="number">1</span>],f[<span class="number">2</span>],f[<span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line">            <span class="comment"># print('f',f)</span></span><br><span class="line">            <span class="comment"># Save off that state so that it could be plotted</span></span><br><span class="line">            measTime.append(k)</span><br><span class="line">            measPos_x.append(r[<span class="number">0</span>])</span><br><span class="line">            measPos_y.append(r[<span class="number">1</span>])</span><br><span class="line">            estPos_x.append(f[<span class="number">0</span>])</span><br><span class="line">            estPos_y.append(f[<span class="number">2</span>])</span><br><span class="line">            reaPos_x.append(r[<span class="number">2</span>])</span><br><span class="line">            reaPos_y.append(r[<span class="number">4</span>])</span><br><span class="line">            reaVel_x.append(r[<span class="number">3</span>])</span><br><span class="line">            reaVel_y.append(r[<span class="number">5</span>])</span><br><span class="line">            estVel_x.append(f[<span class="number">1</span>])</span><br><span class="line">            estVel_y.append(f[<span class="number">3</span>])</span><br><span class="line">            rms_p.append((r[<span class="number">2</span>]-f[<span class="number">0</span>])**<span class="number">2</span> + (r[<span class="number">4</span>]-f[<span class="number">2</span>])**<span class="number">2</span>)</span><br><span class="line">            rms_v.append((r[<span class="number">3</span>]-f[<span class="number">1</span>])**<span class="number">2</span> + (r[<span class="number">5</span>]-f[<span class="number">3</span>])**<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> [measTime, measPos_x, measPos_y, estPos_x, estPos_y, reaPos_x, reaPos_y,reaVel_x,reaVel_y,estVel_x,estVel_y,rms_p,rms_v]</span><br><span class="line"></span><br><span class="line">    t = testFilter()</span><br><span class="line"></span><br><span class="line">    M_measTime.append(t[<span class="number">0</span>])</span><br><span class="line">    M_measPos_x.append(t[<span class="number">1</span>])  </span><br><span class="line">    M_measPos_y.append(t[<span class="number">2</span>])</span><br><span class="line">    M_estPos_x.append(t[<span class="number">3</span>])</span><br><span class="line">    M_estPos_y.append(t[<span class="number">4</span>])</span><br><span class="line">    M_reaPos_x.append(t[<span class="number">5</span>])</span><br><span class="line">    M_reaPos_y.append(t[<span class="number">6</span>])</span><br><span class="line">    M_reaVel_x.append(t[<span class="number">7</span>])</span><br><span class="line">    M_reaVel_y.append(t[<span class="number">8</span>])</span><br><span class="line">    M_estVel_x.append(t[<span class="number">9</span>])</span><br><span class="line">    M_estVel_y.append(t[<span class="number">10</span>])</span><br><span class="line">    RMS_p.append(t[<span class="number">11</span>])</span><br><span class="line">    RMS_v.append(t[<span class="number">12</span>])</span><br><span class="line"> </span><br><span class="line"><span class="comment">##################### plot ######################</span></span><br><span class="line"><span class="comment">###### one simulation results #####</span></span><br><span class="line">plot1 = plt.figure(<span class="number">1</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">1</span>], color=<span class="string">'green'</span>,label=<span class="string">'measurementPos_x'</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">5</span>], color=<span class="string">'red'</span>,label=<span class="string">'truePos_x'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'position of x'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">'Position Measurement On one Measurement Update \n'</span>, fontweight=<span class="string">"bold"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot2 = plt.figure(<span class="number">2</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">2</span>], color=<span class="string">'green'</span>,label=<span class="string">'measurementPos_y'</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">6</span>], color=<span class="string">'red'</span>,label=<span class="string">'truePos_y'</span>)</span><br><span class="line">plt.ylabel(<span class="string">' position of y'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>)</span><br><span class="line">plt.title(<span class="string">'Position Measurement On one Measurement Update \n'</span>, fontweight=<span class="string">"bold"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot3 = plt.figure(<span class="number">3</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">3</span>], color=<span class="string">'green'</span>,label=<span class="string">'estimatePos_x'</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">5</span>], color=<span class="string">'red'</span>,label=<span class="string">'truePos_x'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'position of x'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>)</span><br><span class="line">plt.title(<span class="string">'Position estimate On one Measurement Update \n'</span>, fontweight=<span class="string">"bold"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot4 = plt.figure(<span class="number">4</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">4</span>], color=<span class="string">'green'</span>,label=<span class="string">'estimatePos_y'</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">6</span>], color=<span class="string">'red'</span>,label=<span class="string">'truePos_y'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'position of y'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Time'</span>)</span><br><span class="line">plt.title(<span class="string">'Position estimate On one Measurement Update \n'</span>, fontweight=<span class="string">"bold"</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">RMS_P = np.mean(RMS_p, axis=<span class="number">0</span>)             </span><br><span class="line">print(<span class="string">'RMS_P_q0.2'</span>,np.mean(RMS_P))</span><br><span class="line">RMS_V = np.mean(RMS_v, axis=<span class="number">0</span>)           </span><br><span class="line">print(<span class="string">'RMS_V_q0.2'</span>,np.mean(RMS_V))</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">T = <span class="number">0.1</span></span><br><span class="line">q = <span class="number">0.2</span></span><br><span class="line">r = <span class="number">1</span></span><br><span class="line">R = np.array([[<span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">              [<span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">Q = np.array([[q, <span class="number">0</span>],</span><br><span class="line">              [<span class="number">0</span>, q]])</span><br><span class="line">N = <span class="number">100</span>      <span class="comment"># Monte Carlo simulation times</span></span><br><span class="line"></span><br><span class="line">M_measTime = []</span><br><span class="line">M_measPos_x = []</span><br><span class="line">M_measPos_y = []</span><br><span class="line">M_estPos_x = []</span><br><span class="line">M_estPos_y = []</span><br><span class="line">M_reaPos_x = []</span><br><span class="line">M_reaPos_y = []</span><br><span class="line">M_reaVel_x = []</span><br><span class="line">M_reaVel_y = []</span><br><span class="line">M_estVel_x = []</span><br><span class="line">M_estVel_y = []</span><br><span class="line">RMS_p = []</span><br><span class="line">RMS_v = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    H = np.array([[np.sin(x)],</span><br><span class="line">                  [np.cos(y)]])</span><br><span class="line">    <span class="keyword">return</span> H</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hd</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    HD = np.array([[np.cos(x), <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                   [<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span> * np.sin(y), <span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">return</span> HD</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getMeasurement</span>(<span class="params">updateNumber</span>):</span></span><br><span class="line">        <span class="keyword">if</span> updateNumber == <span class="number">1</span>:</span><br><span class="line">          getMeasurement.currentPosition_x = <span class="number">120</span> </span><br><span class="line">          getMeasurement.currentVelocity_x = <span class="number">4</span> </span><br><span class="line">          getMeasurement.currentPosition_y = <span class="number">25</span> </span><br><span class="line">          getMeasurement.currentVelocity_y = <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">        w = np.random.normal(loc=<span class="number">0</span>,scale=np.sqrt(r),size=<span class="number">1</span>)</span><br><span class="line">        v = np.random.normal(loc=<span class="number">0</span>,scale=np.sqrt(q),size=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        xx = getMeasurement.currentPosition_x + getMeasurement.currentVelocity_x*T + v</span><br><span class="line">        yy = getMeasurement.currentPosition_y + getMeasurement.currentVelocity_y*T + v</span><br><span class="line">        getMeasurement.currentPosition_x = xx - v</span><br><span class="line">        getMeasurement.currentPosition_y = yy - v</span><br><span class="line">        getMeasurement.currentVelocity_x = <span class="number">4</span> + w</span><br><span class="line">        getMeasurement.currentVelocity_y = <span class="number">0</span> + w</span><br><span class="line">        <span class="keyword">return</span> [xx, yy, getMeasurement.currentPosition_x, getMeasurement.currentVelocity_x, getMeasurement.currentPosition_y, getMeasurement.currentVelocity_y] </span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">filter</span>(<span class="params">xx, yy, updateNumber</span>):</span></span><br><span class="line">        <span class="comment"># Initialize State</span></span><br><span class="line">        <span class="keyword">if</span> updateNumber == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">filter</span>.X = np.mat([[<span class="number">125</span>],</span><br><span class="line">                                 [<span class="number">4.1</span>],</span><br><span class="line">                                 [<span class="number">26</span>],</span><br><span class="line">                                 [<span class="number">0.1</span>]])</span><br><span class="line">            <span class="built_in">filter</span>.P = np.mat([[<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.2</span>]])</span><br><span class="line">            <span class="built_in">filter</span>.F = np.mat([[<span class="number">1</span>, T, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, T],</span><br><span class="line">                                 [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">filter</span>.Gamma = np.mat([[T**<span class="number">2</span>/<span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">                                     [T, <span class="number">0</span>],</span><br><span class="line">                                     [<span class="number">0</span>, T**<span class="number">2</span>/<span class="number">2</span>],</span><br><span class="line">                                     [<span class="number">0</span>, T]])  </span><br><span class="line">            <span class="built_in">filter</span>.R = R</span><br><span class="line">            <span class="built_in">filter</span>.Q = Q</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(xx)</span></span><br><span class="line">        <span class="comment"># J = np.array([[-0.1289, 0, 0, 0], [0, 0, -0.004, 0]])  </span></span><br><span class="line">        <span class="comment"># Predict State Forward</span></span><br><span class="line">        <span class="comment"># print(&#x27;fx&#x27;,filter.X)</span></span><br><span class="line">        <span class="comment"># print(&#x27;p&#x27;,filter.P)</span></span><br><span class="line">        X_prime = <span class="built_in">filter</span>.F.dot(<span class="built_in">filter</span>.X)</span><br><span class="line">        <span class="comment"># print(&#x27;xp&#x27;,X_prime)</span></span><br><span class="line">        <span class="comment"># Predict Covariance Forward</span></span><br><span class="line">        P_prime = <span class="built_in">filter</span>.F.dot(<span class="built_in">filter</span>.P).dot(<span class="built_in">filter</span>.F.T) + <span class="built_in">filter</span>.Gamma.dot(<span class="built_in">filter</span>.Q).dot(<span class="built_in">filter</span>.Gamma.T)</span><br><span class="line">        <span class="comment"># print(&#x27;pp&#x27;,P_prime)</span></span><br><span class="line">        <span class="comment"># Jacobian </span></span><br><span class="line">        J = [[np.cos(X_prime[<span class="number">0</span>,<span class="number">0</span>])  , <span class="number">0</span> ,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">                     [<span class="number">0</span>, <span class="number">0</span>, -<span class="number">1</span> * np.sin(X_prime[<span class="number">2</span>,<span class="number">0</span>]), <span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># print(&#x27;J&#x27;,J)</span></span><br><span class="line">        <span class="comment"># Compute Kalman Gain</span></span><br><span class="line">        S = np.matmul(np.matmul(J ,P_prime), np.transpose(J).tolist()) +  <span class="built_in">filter</span>.R</span><br><span class="line">        <span class="comment">#S = J.dot(P_prime).dot(J.T) + filter.R</span></span><br><span class="line">        S = S.astype(np.<span class="built_in">float</span>)</span><br><span class="line">        <span class="comment"># print(&#x27;s&#x27;,S)</span></span><br><span class="line">        K = np.matmul(np.matmul(P_prime,np.transpose(J).tolist()),np.linalg.inv(S))</span><br><span class="line">        <span class="comment"># K = P_prime.dot(J.T).dot(np.linalg.inv(S))</span></span><br><span class="line">        <span class="comment"># print(&#x27;K&#x27;,K)</span></span><br><span class="line">        <span class="comment"># Estimate State</span></span><br><span class="line">        </span><br><span class="line">        real = np.array([[np.sin(xx)],</span><br><span class="line">                         [np.cos(yy)]])</span><br><span class="line">        real = np.array(real).flatten()</span><br><span class="line">        real = np.array([[real[<span class="number">0</span>]],[real[<span class="number">1</span>]]])</span><br><span class="line">        <span class="comment"># print(&#x27;real&#x27;,real)</span></span><br><span class="line">        D = np.array([[np.sin(X_prime[<span class="number">0</span>])],</span><br><span class="line">                     [np.cos(X_prime[<span class="number">2</span>])]])</span><br><span class="line"></span><br><span class="line">        D = np.array(D).flatten()</span><br><span class="line">        D = np.array([[D[<span class="number">0</span>]],[D[<span class="number">1</span>]]])</span><br><span class="line"></span><br><span class="line">        residual = real - D</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(&#x27;D&#x27;,D)</span></span><br><span class="line">        <span class="comment"># print(&#x27;res&#x27;,residual)</span></span><br><span class="line">        <span class="built_in">filter</span>.X = X_prime + K.dot(residual)</span><br><span class="line">        <span class="comment"># Estimate Covariance</span></span><br><span class="line">        <span class="built_in">filter</span>.P = P_prime - K.dot(J).dot(P_prime)</span><br><span class="line">        <span class="keyword">return</span> [<span class="built_in">filter</span>.X[<span class="number">0</span>], <span class="built_in">filter</span>.X[<span class="number">1</span>], <span class="built_in">filter</span>.X[<span class="number">2</span>], <span class="built_in">filter</span>.X[<span class="number">3</span>]]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testFilter</span>():</span></span><br><span class="line">        t = np.linspace(<span class="number">0</span>, <span class="number">1</span>, num=<span class="number">100</span>)</span><br><span class="line">        numOfMeasurements = <span class="built_in">len</span>(t)</span><br><span class="line"></span><br><span class="line">        measTime = []</span><br><span class="line">        measPos_x = []</span><br><span class="line">        measPos_y = []</span><br><span class="line">        estPos_x = []</span><br><span class="line">        estPos_y = []</span><br><span class="line">        reaPos_x = []</span><br><span class="line">        reaPos_y = []</span><br><span class="line">        reaVel_x = []</span><br><span class="line">        reaVel_y = []</span><br><span class="line">        estVel_x = []</span><br><span class="line">        estVel_y = []</span><br><span class="line">        rms_p = []</span><br><span class="line">        rms_v = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,numOfMeasurements):</span><br><span class="line">            r = getMeasurement(k)</span><br><span class="line">            <span class="comment"># Call Filter and return new State</span></span><br><span class="line">            f = <span class="built_in">filter</span>(r[<span class="number">2</span>], r[<span class="number">3</span>], k)</span><br><span class="line">            </span><br><span class="line">            f = np.array(f).flatten()</span><br><span class="line">            f = np.array([f[<span class="number">0</span>],f[<span class="number">1</span>],f[<span class="number">2</span>],f[<span class="number">3</span>]])</span><br><span class="line"></span><br><span class="line">            <span class="comment"># print(&#x27;f&#x27;,f)</span></span><br><span class="line">            <span class="comment"># Save off that state so that it could be plotted</span></span><br><span class="line">            measTime.append(k)</span><br><span class="line">            measPos_x.append(r[<span class="number">0</span>])</span><br><span class="line">            measPos_y.append(r[<span class="number">1</span>])</span><br><span class="line">            estPos_x.append(f[<span class="number">0</span>])</span><br><span class="line">            estPos_y.append(f[<span class="number">2</span>])</span><br><span class="line">            reaPos_x.append(r[<span class="number">2</span>])</span><br><span class="line">            reaPos_y.append(r[<span class="number">4</span>])</span><br><span class="line">            reaVel_x.append(r[<span class="number">3</span>])</span><br><span class="line">            reaVel_y.append(r[<span class="number">5</span>])</span><br><span class="line">            estVel_x.append(f[<span class="number">1</span>])</span><br><span class="line">            estVel_y.append(f[<span class="number">3</span>])</span><br><span class="line">            rms_p.append((r[<span class="number">2</span>]-f[<span class="number">0</span>])**<span class="number">2</span> + (r[<span class="number">4</span>]-f[<span class="number">2</span>])**<span class="number">2</span>)</span><br><span class="line">            rms_v.append((r[<span class="number">3</span>]-f[<span class="number">1</span>])**<span class="number">2</span> + (r[<span class="number">5</span>]-f[<span class="number">3</span>])**<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> [measTime, measPos_x, measPos_y, estPos_x, estPos_y, reaPos_x, reaPos_y,reaVel_x,reaVel_y,estVel_x,estVel_y,rms_p,rms_v]</span><br><span class="line"></span><br><span class="line">    t = testFilter()</span><br><span class="line"></span><br><span class="line">    M_measTime.append(t[<span class="number">0</span>])</span><br><span class="line">    M_measPos_x.append(t[<span class="number">1</span>])  </span><br><span class="line">    M_measPos_y.append(t[<span class="number">2</span>])</span><br><span class="line">    M_estPos_x.append(t[<span class="number">3</span>])</span><br><span class="line">    M_estPos_y.append(t[<span class="number">4</span>])</span><br><span class="line">    M_reaPos_x.append(t[<span class="number">5</span>])</span><br><span class="line">    M_reaPos_y.append(t[<span class="number">6</span>])</span><br><span class="line">    M_reaVel_x.append(t[<span class="number">7</span>])</span><br><span class="line">    M_reaVel_y.append(t[<span class="number">8</span>])</span><br><span class="line">    M_estVel_x.append(t[<span class="number">9</span>])</span><br><span class="line">    M_estVel_y.append(t[<span class="number">10</span>])</span><br><span class="line">    RMS_p.append(t[<span class="number">11</span>])</span><br><span class="line">    RMS_v.append(t[<span class="number">12</span>])</span><br><span class="line"> </span><br><span class="line"><span class="comment">##################### plot ######################</span></span><br><span class="line"><span class="comment">###### one simulation results #####</span></span><br><span class="line">plot1 = plt.figure(<span class="number">1</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">1</span>], color=<span class="string">&#x27;green&#x27;</span>,label=<span class="string">&#x27;measurementPos_x&#x27;</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">5</span>], color=<span class="string">&#x27;red&#x27;</span>,label=<span class="string">&#x27;truePos_x&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;position of x&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Time&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">&#x27;Position Measurement On one Measurement Update \n&#x27;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot2 = plt.figure(<span class="number">2</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">2</span>], color=<span class="string">&#x27;green&#x27;</span>,label=<span class="string">&#x27;measurementPos_y&#x27;</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">6</span>], color=<span class="string">&#x27;red&#x27;</span>,label=<span class="string">&#x27;truePos_y&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27; position of y&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Time&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Position Measurement On one Measurement Update \n&#x27;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot3 = plt.figure(<span class="number">3</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">3</span>], color=<span class="string">&#x27;green&#x27;</span>,label=<span class="string">&#x27;estimatePos_x&#x27;</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">5</span>], color=<span class="string">&#x27;red&#x27;</span>,label=<span class="string">&#x27;truePos_x&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;position of x&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Time&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Position estimate On one Measurement Update \n&#x27;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">plot4 = plt.figure(<span class="number">4</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">4</span>], color=<span class="string">&#x27;green&#x27;</span>,label=<span class="string">&#x27;estimatePos_y&#x27;</span>)</span><br><span class="line">plt.plot(t[<span class="number">0</span>], t[<span class="number">6</span>], color=<span class="string">&#x27;red&#x27;</span>,label=<span class="string">&#x27;truePos_y&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;position of y&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Time&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Position estimate On one Measurement Update \n&#x27;</span>, fontweight=<span class="string">&quot;bold&quot;</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">RMS_P = np.mean(RMS_p, axis=<span class="number">0</span>)             </span><br><span class="line">print(<span class="string">&#x27;RMS_P_q0.2&#x27;</span>,np.mean(RMS_P))</span><br><span class="line">RMS_V = np.mean(RMS_v, axis=<span class="number">0</span>)           </span><br><span class="line">print(<span class="string">&#x27;RMS_V_q0.2&#x27;</span>,np.mean(RMS_V))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>注意 np.array 与 np.mat</li>
 <li>注意 .dot 和 * 和 np.matmul区别</li>
@@ -226,365 +375,214 @@ E\left[w_{k+1}\right]=\left[\begin{array}{l}
 <li>real = np.array(real).flatten() 是为了去除real中多余的array</li>
 <li>一些结果：(T=0.01 Q=0.2) ,有点发散。。。
 <div data-align="center">
-<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/1afc05ef08ab6c7d.png" data-index="0" data-src="https://i.bmp.ovh/imgs/2021/04/1afc05ef08ab6c7d.png">
+<img src="https://i.bmp.ovh/imgs/2021/04/1afc05ef08ab6c7d.png" width="600"/>
 </div>
 <div data-align="center">
-<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/1a8ca9648da54e25.png" data-index="1" data-src="https://i.bmp.ovh/imgs/2021/04/1a8ca9648da54e25.png">
+<img src="https://i.bmp.ovh/imgs/2021/04/1a8ca9648da54e25.png" width="600"/>
 </div>
 <div data-align="center">
-<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/ef6e4a97d40f744b.png" data-index="2" data-src="https://i.bmp.ovh/imgs/2021/04/ef6e4a97d40f744b.png">
+<img src="https://i.bmp.ovh/imgs/2021/04/ef6e4a97d40f744b.png" width="600"/>
 </div>
 <div data-align="center">
-<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/1f34a2def4cf4053.png" data-index="3" data-src="https://i.bmp.ovh/imgs/2021/04/1f34a2def4cf4053.png">
+<img src="https://i.bmp.ovh/imgs/2021/04/1f34a2def4cf4053.png" width="600"/>
 </div></li>
 </ul>
 
-                </article>
-                <ul class="tags-postTags">
-                    
-                    <li>
-                        <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag"># 卡尔曼滤波</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
     </div>
 
     
-    <nav id="gobottom" class="pagination">
-        
-        <a class="prev-post" title="基于 ZeroMQ 的数据（图像）传输系统" href="/2021/05/25/datatrans/">
-            ← 基于 ZeroMQ 的数据（图像）传输系统
-        </a>
-        
-        <span class="prev-next-post">·</span>
-        
-        <a class="next-post" title="Docker 容器技术" href="/2021/04/19/docker/">
-            Docker 容器技术 →
-        </a>
-        
-    </nav>
-
     
-    <div class="inner">
-        <div id="comment"></div>
-    </div>
     
-</div>
 
-<div class="toc-bar">
-    <div class="toc-btn-bar">
-        <a href="#site-main" class="toc-btn">
-            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"></path></svg>
-        </a>
-        <div class="toc-btn toc-switch">
-            <svg class="toc-open" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"></path></svg>
-            <svg class="toc-close hide" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"></path><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"></path></svg>
-        </div>
-        <a href="#gobottom" class="toc-btn">
-            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"></path></svg>
-        </a>
-    </div>
-    <div class="toc-main">
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag"># 卡尔曼滤波</a>
+          </div>
+
         
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
-</div>
-
-
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-
-	</div>
-	
-
-
-<aside class="read-next outer">
-    <div class="inner">
-        <div class="read-next-feed">
-            
-            
-
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-  <header class="read-next-card-header">
-    <small class="read-next-card-header-sitetitle">— Falcon's Space —</small>
-    <h3 class="read-next-card-header-title">Recent Posts</h3>
-  </header>
-  <div class="read-next-divider">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"></path>
-    </svg>
   </div>
-  <div class="read-next-card-content">
-    <ul>
-      
-      
-      
-      <li>
-        <a href="/2021/09/03/sample/">语法样本</a>
-      </li>
-      
-      
-      
-      <li>
-        <a href="/2021/08/22/8266light/">ESP8266+电灯科技+天猫精灵</a>
-      </li>
-      
-      
-      
-      <li>
-        <a href="/2021/08/18/haikangcam/">自组双目测距定位系统</a>
-      </li>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    </ul>
-  </div>
-  <footer class="read-next-card-footer">
-    <a href="/archives">  MORE  → </a>
-  </footer>
-</article>
 
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-    <header class="read-next-card-header tagcloud-card">
-        <h3 class="read-next-card-header-title">Categories</h3>
-    </header>
-    <div class="read-next-card-content">
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E6%8A%80%E8%83%BD/">一些技能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/">一些面试</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/">一些比赛</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
-    </div>
-</article>
-
-
-            
-            
-            
-
-<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
-	<header class="read-next-card-header tagcloud-card">
-		<h3 class="read-next-card-header-title">Tag Cloud</h3>
-	</header>
-	<div class="read-next-card-content-ext">
-		<a href="/tags/AI/" style="font-size: 14px;">AI</a> <a href="/tags/CV/" style="font-size: 20.67px;">CV</a> <a href="/tags/%E5%86%99%E7%BB%99CC/" style="font-size: 14px;">写给CC</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 17.33px;">卡尔曼滤波</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" style="font-size: 14px;">图像融合</a> <a href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" style="font-size: 24px;">好玩的</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/" style="font-size: 14px;">目标跟踪</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" style="font-size: 17.33px;">自动驾驶</a>
-	</div>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-	
-
-
-
-
-<div id="search" class="search-overlay">
-    <div class="search-form">
-        
-        <div class="search-overlay-logo">
-        	<img src="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico" alt="Falcon's Space">
-        </div>
-        
-        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="Search ...">
-        <a class="search-overlay-close" href="#"></a>
-    </div>
-    <div id="local-search-result"></div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/04/19/docker/" rel="prev" title="Docker 容器技术">
+                  <i class="fa fa-chevron-left"></i> Docker 容器技术
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/25/datatrans/" rel="next" title="基于 ZeroMQ 的数据（图像）传输系统">
+                  基于 ZeroMQ 的数据（图像）传输系统 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-<footer class="site-footer outer">
-	<div class="site-footer-content inner">
-		<div class="copyright">
-			<a href="/" title="Falcon's Space">Falcon's Space © 2021</a>
-			
-				
-			        <span hidden="true" id="/2021/04/26/EKF/" class="leancloud-visitors" data-flag-title="Extended Kalman Filter (python)">
-			            <span>阅读量 </span>
-			            <span class="leancloud-visitors-count">0</span>
-			        </span>
-	    		
-    		
-		</div>
-		<nav class="site-footer-nav">
-			
-			<a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
-			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
-		</nav>
-	</div>
-</footer>
-	
 
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
 
 <script>
-    if(window.navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for(let registration of registrations) {
-                registration.unregister()
-            }
-        })
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
-</script>
-
-
-<script id="scriptLoad" src="/js/allinone.min.js" async=""></script>
-
-
-<script>
-    document.getElementById('scriptLoad').addEventListener('load', function () {
-        
-        
-            var bLazy = new Blazy();
-        
-
-        
-        
-
-        
-        
-        
-            searchFunc("/");
-        
-        
-    })
-</script>
-
-
-
-
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-
-
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-
-
-<script src="/photoswipe/photoswipe.min.js"></script>
-
-
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-
-
-
-
-<script id="valineScript" src="//unpkg.com/valine/dist/Valine.min.js" async=""></script>
-<script>
-    document.getElementById('valineScript').addEventListener("load", function() {
-        new Valine({
-            el: '#comment' ,
-            verify: false,
-            notify: false,
-            appId: '',
-            appKey: '',
-            placeholder: 'Just go go',
-            pageSize: 10,
-            avatar: 'mm',
-            visitor: true
-        })
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
     });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : ,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'all'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
 
 
 
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/04/26/EKF/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
 
 
-
-
-</body></html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>
