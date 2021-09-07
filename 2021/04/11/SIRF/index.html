@@ -1,359 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<!DOCTYPE html><html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="preconnect" href="//www.googletagmanager.com">
+	<link rel="preconnect" href="//zz.bdstatic.com">
+	<link rel="preconnect" href="//sp0.baidu.com">
+	<link rel="preconnect" href="//www.google-analytics.com">
+	<link rel="preconnect" href="//cdn1.lncld.net">
+	<link rel="preconnect" href="//unpkg.com">
+	<link rel="preconnect" href="//app-router.leancloud.cn">
+	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
+	<link rel="preconnect" href="//gravatar.loli.net">
+
+	<title>Simultaneous Image Registration and Fusion in a Unified Framework | Falcon's Space</title>
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+	<meta name="generator" content="hexo">
+	<meta name="author" content="Yu Yuan">
+	<meta name="description" content="">
+
+	
+	<meta name="keywords" content="">
+	
+
+	
+	<link rel="shortcut icon" href="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico">
+	<link rel="apple-touch-icon" href="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico">
+	
+
+	
+	<meta name="theme-color" content="#3c484e">
+	<meta name="msapplication-TileColor" content="#3c484e">
+	
+
+	
+
+	
+
+	<meta property="og:site_name" content="Falcon's Space">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Simultaneous Image Registration and Fusion in a Unified Framework | Falcon's Space">
+	<meta property="og:description" content="">
+	<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/11/SIRF/">
+
+	
+	<meta property="article:published_time" content="2021-04-11T23:04:00+08:00"> 
+	<meta property="article:author" content="Yu Yuan">
+	<meta property="article:published_first" content="Falcon's Space, /2021/04/11/SIRF/">
+	
+
+	
+	
+	
+<link rel="stylesheet" href="/css/allinonecss.min.css">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon64.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon64.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon32.ico">
-  <link rel="mask-icon" href="/images/favicon64.ico" color="#222">
-  <link rel="manifest" href="/images/favicon64.ico">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
-  </script>
-<meta name="description" content="图像融合">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Simultaneous Image Registration and Fusion in a Unified Framework">
-<meta property="og:url" content="https://pandayuanyu.github.io/2021/04/11/SIRF/index.html">
-<meta property="og:site_name" content="Falcon&#39;s Space">
-<meta property="og:description" content="图像融合">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png">
-<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
-">
-<meta property="og:image" content="
-https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
-">
-<meta property="article:published_time" content="2021-04-11T15:11:11.000Z">
-<meta property="article:modified_time" content="2021-05-05T06:29:00.130Z">
-<meta property="article:author" content="Yu Yuan">
-<meta property="article:tag" content="CV">
-<meta property="article:tag" content="图像融合">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png">
-
-
-<link rel="canonical" href="https://pandayuanyu.github.io/2021/04/11/SIRF/">
-
-
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
-<title>Simultaneous Image Registration and Fusion in a Unified Framework | Falcon's Space</title>
-  
-
-
-
-
-  <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+	
+	
+	
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
+<body class="post-template">
+	<div class="site-wrapper">
+		
 
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
+
+
+
+<header class="site-header post-site-header outer">
+    <div class="inner">
+        
+<nav class="site-nav"> 
+    <div class="site-nav-left">
+        <ul class="nav">
+            <li>
+                
+                <a href="/" title="Home">HOME</a>
+                
+            </li>
+            
+            
+            <li>
+                <a href="/about" title="ABOUT">ABOUT</a>
+            </li>
+            
+            <li>
+                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
+            </li>
+            
+            
+        </ul> 
     </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">Falcon's Space</h1>
-      <i class="logo-line"></i>
+    
+    <div class="search-button-area">
+        <a href="#search" class="search-button">Search ...</a>
+    </div>
+     
+    <div class="site-nav-right">
+        
+        <a href="#search" class="search-button">Search ...</a>
+         
+        
+<div class="social-links">
+    
+    <a class="social-link" title="weibo" href="https://weibo.com/xzhih" target="_blank" rel="noopener">
+        <svg viewBox="0 0 1141 1024" xmlns="http://www.w3.org/2000/svg"><path d="M916.48 518.144q27.648 21.504 38.912 51.712t9.216 62.976-14.336 65.536-31.744 59.392q-34.816 48.128-78.848 81.92t-91.136 56.32-94.72 35.328-89.6 18.944-75.264 7.68-51.712 1.536-49.152-2.56-68.096-10.24-78.336-21.504-79.872-36.352-74.24-55.296-59.904-78.848q-16.384-29.696-22.016-63.488t-5.632-86.016q0-22.528 7.68-51.2t27.136-63.488 53.248-75.776 86.016-90.112q51.2-48.128 105.984-85.504t117.248-57.856q28.672-10.24 63.488-11.264t57.344 11.264q10.24 11.264 19.456 23.04t12.288 29.184q3.072 14.336 0.512 27.648t-5.632 26.624-5.12 25.6 2.048 22.528q17.408 2.048 33.792-1.536t31.744-9.216 31.232-11.776 33.28-9.216q27.648-5.12 54.784-4.608t49.152 7.68 36.352 22.016 17.408 38.4q2.048 14.336-2.048 26.624t-8.704 23.04-7.168 22.016 1.536 23.552q3.072 7.168 14.848 13.312t27.136 12.288 32.256 13.312 29.184 16.384zM658.432 836.608q26.624-16.384 53.76-45.056t44.032-64 18.944-75.776-20.48-81.408q-19.456-33.792-47.616-57.344t-62.976-37.376-74.24-19.968-80.384-6.144q-78.848 0-139.776 16.384t-105.472 43.008-72.192 60.416-38.912 68.608q-11.264 33.792-6.656 67.072t20.992 62.976 42.496 53.248 57.856 37.888q58.368 25.6 119.296 32.256t116.224 0.512 100.864-21.504 74.24-33.792zM524.288 513.024q20.48 8.192 38.912 18.432t32.768 27.648q10.24 12.288 17.92 30.72t10.752 39.424 1.536 42.496-9.728 38.912q-8.192 18.432-19.968 37.376t-28.672 35.328-40.448 29.184-57.344 18.944q-61.44 11.264-117.76-11.264t-88.064-74.752q-12.288-39.936-13.312-70.656t16.384-66.56q13.312-27.648 40.448-51.712t62.464-38.912 75.264-17.408 78.848 12.8zM361.472 764.928q37.888 3.072 57.856-18.432t21.504-48.128-15.36-47.616-52.736-16.896q-27.648 3.072-43.008 23.552t-17.408 43.52 9.728 42.496 39.424 21.504zM780.288 6.144q74.752 0 139.776 19.968t113.664 57.856 76.288 92.16 27.648 122.88q0 33.792-16.384 50.688t-35.328 17.408-35.328-14.336-16.384-45.568q0-40.96-22.528-77.824t-59.392-64.512-84.48-43.52-96.768-15.872q-31.744 0-47.104-15.36t-14.336-34.304 18.944-34.304 51.712-15.36zM780.288 169.984q95.232 0 144.384 48.64t49.152 146.944q0 30.72-10.24 43.52t-22.528 11.264-22.528-14.848-10.24-35.84q0-60.416-34.816-96.256t-93.184-35.84q-19.456 0-28.672-10.752t-9.216-23.04 9.728-23.04 28.16-10.752z"></path></svg>
     </a>
-  </div>
+    
+    
+    <a class="social-link" title="github" href="https://github.com/xzhih" target="_blank" rel="noopener">
+        <svg viewBox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"></path></svg>
+    </a>
+    
+    
+    <a class="social-link" title="facebook" href="https://facebook" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+    </a>
+    
+    
+    <a class="social-link" title="twitter" href="https://twitter.com" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+
+    </a>
+    
+    
+    
+    
 </div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">8</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">10</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-  </ul>
+    </div>
 </nav>
-
-
-
-
-</div>
-        
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual-understanding"><span class="nav-number">2.</span> <span class="nav-text">Conceptual Understanding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">3.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">4.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modeling"><span class="nav-number">5.</span> <span class="nav-text">Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#notations"><span class="nav-number">5.1.</span> <span class="nav-text">notations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#local-spectral-consistency"><span class="nav-number">5.2.</span> <span class="nav-text">local spectral consistency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dynamic-gradient-sparsity"><span class="nav-number">5.3.</span> <span class="nav-text">dynamic gradient sparsity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#simultaneous-image-registration"><span class="nav-number">5.4.</span> <span class="nav-text">simultaneous image registration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm"><span class="nav-number">6.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experiments"><span class="nav-number">7.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simulation"><span class="nav-number">7.1.</span> <span class="nav-text">simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-comparison"><span class="nav-number">7.2.</span> <span class="nav-text">visual comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quantitative-analysis"><span class="nav-number">7.3.</span> <span class="nav-text">quantitative analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#efficiency-comparison"><span class="nav-number">7.4.</span> <span class="nav-text">efficiency comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#translation"><span class="nav-number">7.5.</span> <span class="nav-text">translation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#real-world-datasets"><span class="nav-number">7.6.</span> <span class="nav-text">real-world datasets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion-and-discussion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion and Discussion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">9.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#background-knowledge"><span class="nav-number">9.1.</span> <span class="nav-text">background knowledge</span></a></li></ol></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Yu Yuan</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">17</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
+</header>
 
 
-    </header>
-
-    
-  <div class="back-to-top" role="button">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/04/11/SIRF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yu Yuan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Falcon's Space">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Simultaneous Image Registration and Fusion in a Unified Framework
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-04-11 23:11:11" itemprop="dateCreated datePublished" datetime="2021-04-11T23:11:11+08:00">2021-04-11</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-05-05 14:29:00" itemprop="dateModified" datetime="2021-05-05T14:29:00+08:00">2021-05-05</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">Views: </span>
-      <span id="busuanzi_value_page_pv"></span>
-    </span>
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>7.4k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>21 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <center>
+<div id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+            <div class="post-full-meta">
+                <time class="post-full-meta-date" datetime="2021-04-11T15:11:11.000Z">
+                    2021-04-11
+                </time>
+                
+                <span class="date-divider">/</span>
+                
+                <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>&nbsp;&nbsp;
+                
+                
+            </div>
+            <h1 class="post-full-title">Simultaneous Image Registration and Fusion in a Unified Framework</h1>
+        </header>
+        <div class="post-full no-image">
+            
+            <div class="post-full-content">
+                <article id="photoswipe" class="markdown-body">
+                    <center>
 图像融合
 </center>
 <span id="more"></span>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="foreword">Foreword</h2>
 <ul>
 <li>2015年录用于IEEE Transactions Image Processing(TIP)</li>
 <li>第一作者<a target="_blank" rel="noopener" href="https://cchen156.github.io/">chen chen</a>, specially on low level image to image processing.</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="conceptual-understanding">Conceptual Understanding</h2>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Chaolei3/article/details/79404806">全色、多光谱、高光谱</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Dandelion_2/article/details/96999903">强度色调饱和度(IHS)</a>：强度表示光谱的整体亮度大小，对应于图像的空间分辨率，色调描述纯色的属性，决定与光谱的主波长，是光谱在质的方面的区别，饱和度表征光谱的主波长在强度中的比例，色调和饱和度代表图像的光谱分辨率。</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/139018146">变分</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/iverson_49/article/details/38354961?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-5.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-5.control">快速迭代收缩阈值算法(FISTA)</a></p></li>
-<li><p>Frobenius 范数:<br />
+<li><p>Frobenius 范数:<br>
 设 <span class="math inline">\(A=\left[a_{i j}\right]_{m \times n}\)</span> 是一个 <span class="math inline">\(m \times n\)</span> 矩阵, 称 <span class="math inline">\(\|A\|_{F}=\sqrt{\operatorname{tr}\left(A^{T} A\right)}=\sqrt{\sum_{i=1}^{m} \sum_{j=1}^{n} a_{i j}^{2}}\)</span> 是这个 矩阵的 Frobenius 范数。</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fd9e2166cfcc">转置卷积</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouxinxin0202/article/details/78620898">L2,1范数</a><br />
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouxinxin0202/article/details/78620898">L2,1范数</a><br>
 L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都稀疏）</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38701868/article/details/89215881">图像直方图 Image Histogram</a>：是用以表示数字图像中亮度分布的直方图，标绘了图像中每个亮度值的像素数。</p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/macunshi/article/details/79819263">直方图规定化</a>与<a target="_blank" rel="noopener" href="https://blog.csdn.net/macunshi/article/details/79815870">均衡化</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42746999/article/details/104039091">SML映射</a></p></li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="abstract">Abstract</h2>
 <ul>
 <li>本文提出在同一地理位置上融合高分辨率全色图像(high-resolution panchromatic image)和低分辨率多光谱图像(low- resolution multispectral image)的新方法。</li>
@@ -361,13 +188,13 @@ L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都�
 <li>提出在融合过程中同时配准两幅图像，这是通过动态梯度稀疏特性自然实现的。</li>
 <li>大量的实验结果表明，所提出的方法在空间和光谱质量方面明显优于其他方法。</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="introduction">Introduction</h2>
 <ul>
 <li>多光谱(MS)图像在遥感领域应用广泛，高分辨率质谱传感器的设计受到机载存储和带宽传输基础设施限制。具有高空间分辨率的全色(Pan)灰度图像可以更方便地获得，因为它们由数量少得多的像素组成。我们期望通过图像融合获得高空间分辨率和高光谱分辨率的图像，这在文献中也被称为泛锐化。</li>
 </ul>
 <div data-align="center">
-<img src="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png" data-index="0" data-src="https://i.bmp.ovh/imgs/2021/04/b58b04cdf26a47bb.png">
 </div>
 <ul>
 <li><p>图像融合是一个典型的逆问题。第一个问题是如何从MS和Pan中保留准确的信息。</p></li>
@@ -380,7 +207,7 @@ L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都�
 <li><p>此外，方法结合了不同波段的内在相关性，这是以前很少考虑的。为了优化整个能量函数，设计了一种基于最近梯度技术的新算法。具体来说，通过分别应用快速迭代收缩阈值算法(FISTA和带回溯的梯度下降法)来有效地解决子问题。整个算法在每次迭代中保持线性计算复杂度，因此可扩展到大规模数据集。该算法可直接应用于真实数据集，无需预过滤、特征提取、训练等。</p></li>
 <li><p>最后，SIRF只有一个非敏感参数，这是与现有变分方法相比的另一个优点。大量实验结果表明，我们的方法可以显著减少光谱失真，同时保留融合图像中清晰的物体边界。</p></li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="modeling">Modeling</h2>
 <h3 id="notations">notations</h3>
 <ul>
@@ -390,7 +217,7 @@ L1范数只要求列稀疏，L2,1范数还要求行稀疏（实现了行列都�
 <li><p><span class="math inline">\(\|\cdot\|_{F}\)</span>是Frobenius范数</p></li>
 <li><p><span class="math inline">\(\mathbf{X}_{i, j, d}\)</span>表示X的第i行、第j列和第d带中的元素</p></li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="local-spectral-consistency">local spectral consistency</h3>
 <ul>
 <li>许多现有方法对MS图像进行上采样，并从该上采样的MS图像中提取光谱信息。然而，向上采样的图像模糊且不准确。因此，我们只假设下采样后的融合图像接近原始的MS图像。最小二乘拟合用于模拟这种关系: <span class="math display">\[
@@ -398,7 +225,7 @@ E_{1}=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}
 \]</span></li>
 <li>其中ψ表示下采样运算符。局部光谱信息被强制与MS每个像素一致。这个函数是物理激励的，因此可以避免结果中的频谱失真。由于极低的下采样率(例如，当c = 4时为1/16)，最小化E1将是一个严重不适定的问题。没有强先验信息，X几乎不可能被准确估计</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="dynamic-gradient-sparsity">dynamic gradient sparsity</h3>
 <ul>
 <li><p>Pan图像提供了这样的先验信息。</p></li>
@@ -414,7 +241,7 @@ E_{2} &amp;=\|\nabla \mathbf{X}-\nabla D(\mathbf{P})\|_{2,1} \\
 <li><p>情形(a)-(d)分别具有组稀疏数8、4、4、2。</p></li>
 </ul>
 <div data-align="center">
-<img src="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png" data-index="1" data-src="https://i.bmp.ovh/imgs/2021/04/0aae580bd4f1a87f.png">
 </div>
 <ul>
 <li>结合这两个能量函数，图像融合问题可以表述为:</li>
@@ -428,7 +255,7 @@ E_{2} &amp;=\|\nabla \mathbf{X}-\nabla D(\mathbf{P})\|_{2,1} \\
 <ul>
 <li>所提出的动态梯度稀疏性仅迫使支持集相同，而梯度的符号以及信号的幅度不需要相同。这些属性使其在对比度反转下不变，并且对光照条件不敏感。它可以应用于不同来源或不同采集时间的图像融合。方法还可以同时联合融合多个波段，这提供了对噪声的鲁棒性。</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="simultaneous-image-registration">simultaneous image registration</h3>
 <ul>
 <li>提出在融合过程中同时配准图像。一方面，多光谱图像被锐化到更高的分辨率。这使我们能够更准确地记录图像。另一方面，未对准被逐渐消除，并且图像可以被更精确地融合。我们反复运行这两个过程，直到收敛。</li>
@@ -440,9 +267,9 @@ E(\mathbf{X}, \mathcal{T})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\la
 <li>将提出的相似性度量与现有的方法进行了比较。图中的蓝色曲线显示了不同测量的响应，所有这些测量都可以在零平移时找到最佳对准。在增加强度失真和重新缩放之后，图(b)中所示的源图像的外观与原始Lena图像的外观不一致。红色曲线表示的结果表明，只有RC和所提出的方法可以处理这种强度失真。</li>
 </ul>
 <div data-align="center">
-<img src="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png" data-index="2" data-src="https://i.bmp.ovh/imgs/2021/04/8aaf465c345a64a2.png">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="algorithm">Algorithm</h2>
 <ul>
 <li><p>目标是最小化能量函数(a)。先通过固定T来解决关于X的问题，然后通过固定X来解决关于T的问题，对于X子问题: <span class="math display">\[
@@ -455,7 +282,7 @@ E(\mathbf{X})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla 
 <li><p>下图总结了提出的同时进行图像配准和融合(SIRF)的泛锐化(pan-sharpening)算法：.</p></li>
 </ul>
 <div data-align="center">
-<img src="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png" data-index="3" data-src="https://i.bmp.ovh/imgs/2021/04/c9c9a8a35e3f64bd.png">
 </div>
 <ul>
 <li><p>这里ψ表示ψ的逆算子。L是<span class="math inline">\(\psi^{T}(\psi \mathbf{X}-\mathbf{M})\)</span>的李普希茨常数。</p></li>
@@ -470,8 +297,9 @@ E(\mathbf{X})=\frac{1}{2}\|\psi \mathbf{X}-\mathbf{M}\|_{F}^{2}+\lambda\|\nabla 
 <li><p>线性算子定义: <span class="math inline">\(\mathcal{L}(\mathbf{R}, \mathbf{S})_{i, j, d}=\)</span> <span class="math inline">\(\mathbf{R}_{i, j, d}-\mathbf{R}_{i-1, j, d}+\mathbf{S}_{i, j, d}-\mathbf{S}_{i, j-1, d}\)</span> ，对应的逆算子： <span class="math inline">\(\mathcal{L}^{T}(\mathbf{X})=(\mathbf{R}, \mathbf{S})\)</span> with <span class="math inline">\(\mathbf{R}_{i, j, d}=\mathbf{X}_{i, j, d}-\mathbf{X}_{i+1, j, d}\)</span> and <span class="math inline">\(\mathbf{S}_{i, j, d}=\mathbf{X}_{i, j, d}-\mathbf{X}_{i, j+1, d} \cdot \mathbb{P}\)</span> 是投射算子确保： <span class="math inline">\(\sum_{d=1}^{s}\left(\mathbf{R}_{i, j, d}^{2}+\right.\)</span> <span class="math inline">\(\left.\mathbf{S}_{i, j, d}^{2}\right) \leq 1,\left|\mathbf{R}_{i, n, d}\right| \leq 1\)</span>, and $|_{m, j, d}|  $</p></li>
 </ul>
 <div data-align="center">
-<img src="
-https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="
+https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png" data-index="4" data-src="
+https://i.bmp.ovh/imgs/2021/04/d559cefdc20504b7.png">
 </div>
 <ul>
 <li>用带回溯的梯度下降法(gradient descent method with backtracking))来解决第二个子问题(c)，好处是在最小化时没有引入新参数变量</li>
@@ -485,68 +313,76 @@ E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{
 <li><span class="math inline">\(\partial \mathcal{T} / \partial \theta\)</span>是基于一阶泰勒近似计算的。我们设置初始步长t0= 1，η = 0.8。所有的运算都是线性的。函数值是在两幅图像的重叠区域上计算的。为了避免平凡解，如放大黑暗区域，在这里使用归一化函数值(除以重叠的像素M)。当没有重叠时，函数值将是无穷大。</li>
 </ul>
 <div data-align="center">
-<img src="
-https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="
+https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png" data-index="5" data-src="
+https://i.bmp.ovh/imgs/2021/04/395a99c42d43dfda.png">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="experiments">Experiments</h2>
 <h3 id="simulation">simulation</h3>
 <ul>
 <li>该方法在Quickbird、Geoeye、SPOT和IKONOS卫星的多光谱数据集上进行了验证。Pan图像的分辨率范围为0.41米至1.5米,所对应的MS图像都具有较低的分辨率，c = 4，并且包含蓝、绿、红和近红外波段。为方便起见，仅显示RGB波段。由于缺乏同一场景的多分辨率图像，原始图像被视为 Ground truth，低分辨率图像从 Ground truth下采样得到。</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="visual-comparison">visual comparison</h3>
 <ul>
 <li>结果
 <div data-align="center">
-<img src="
-https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="
+https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png" data-index="6" data-src="
+https://i.bmp.ovh/imgs/2021/04/89486867d01d6ee8.png">
 </div></li>
 <li>为了更好地可视化，图6和图7以相同的比例显示了与地面真实情况相比的误差图像。从这些误差图像中，可以清楚地观察到光谱失真、块状伪影和模糊。</li>
 </ul>
 <div data-align="center">
-<img src="
-https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="
+https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png" data-index="7" data-src="
+https://i.bmp.ovh/imgs/2021/04/05379ee6ec654dd6.png">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="quantitative-analysis">quantitative analysis</h3>
 <ul>
 <li>为了评估不同方法的融合质量，使用四个度量来衡量光谱质量，一个度量来衡量空间质量。光谱度量包括合成中的相对无量纲全局误差(ERGAS) 、光谱角度映射器(SAM) 、通用图像质量指数(Q-average) 和相对平均光谱误差(RASE) 。过滤后的相关系数(FCC) 被用作空间质量度量。此外，峰值信噪比(PSNR)、均方根误差(RMSE)和平均结构相似度(MSSIM) 用于评估与地面真实值相比的融合精度。</li>
 </ul>
 <div data-align="center">
-<img src="
-https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png" width="600"/>
+<img width="600" class="post-img b-lazy" data-img="
+https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png" data-index="8" data-src="
+https://i.bmp.ovh/imgs/2021/04/3180a298ca123bf2.png">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="efficiency-comparison">efficiency comparison</h3>
 <div data-align="center">
-<img src="
+<img width="600" class="post-img b-lazy" data-img="
 https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
-" width="600"/>
+" data-index="9" data-src="
+https://i.bmp.ovh/imgs/2021/04/655df08137355dfc.png
+">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="translation">translation</h3>
 <ul>
 <li>在图1所示的平移图像中添加了3个像素的人工水平平移。SIRF的估计翻译如图10 (a)所示。通过大约100次迭代，可以非常准确地恢复真实的translation。</li>
 </ul>
 <div data-align="center">
-<img src="
+<img width="600" class="post-img b-lazy" data-img="
 https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
-" width="600"/>
+" data-index="10" data-src="
+https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
+">
 </div>
-<p> </p>
+<p>&nbsp;</p>
 <h3 id="real-world-datasets">real-world datasets</h3>
 <ul>
 <li>图像是由IKONOS多光谱成像卫星获取，其中包含预配准的以其捕获分辨率拍摄的Pan和MS图像。</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="conclusion-and-discussion">Conclusion and Discussion</h2>
 <ul>
 <li>基于动态梯度稀疏性的特性，提出了一种新的变分模型，用于在统一的框架下同时进行图像配准和融合。该模型自然地结合了来自高分辨率全色图像的梯度先验信息和来自低分辨率多光谱图像的光谱信息。</li>
 <li>比现有的方法有几个优点:首先，所提出的动态梯度稀疏性可以直接利用来自Pan图像的尖锐边缘;第二，通过合并不同波段的内部相关性来联合锐化图像，而大多数现有的方法是基于波段间的融合；最后，尽管由于空间分辨率的不同，Pan和MS图像之间的配准相当困难，但我们的方法可以在融合过程中同时配准两个输入图像，直接作用于输入图像，而无需任何预滤波和特征提取。</li>
 <li>方法被证实在空间和光谱质量方面始终优于现有技术。</li>
 </ul>
-<p> </p>
+<p>&nbsp;</p>
 <h2 id="code">Code</h2>
 <h3 id="background-knowledge">background knowledge</h3>
 <ul>
@@ -556,202 +392,356 @@ https://i.bmp.ovh/imgs/2021/04/fb08e91c889d6c60.png
 <li><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/find.html">find()</a>:查找非零元素的索引和值</li>
 </ul>
 
+                </article>
+                <ul class="tags-postTags">
+                    
+                    <li>
+                        <a href="/tags/CV/" rel="tag"># CV</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag"># 图像融合</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
     </div>
 
     
-    
-    
+    <nav id="gobottom" class="pagination">
+        
+        <a class="prev-post" title="Dell AI/ADS 比赛" href="/2021/04/15/dellbisai/">
+            ← Dell AI/ADS 比赛
+        </a>
+        
+        <span class="prev-next-post">·</span>
+        
+        <a class="next-post" title="Dell ADAS 公开课" href="/2021/04/10/delladas/">
+            Dell ADAS 公开课 →
+        </a>
+        
+    </nav>
 
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/CV/" rel="tag"># CV</a>
-              <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" rel="tag"># 图像融合</a>
-          </div>
+    
+    <div class="inner">
+        <div id="comment"></div>
+    </div>
+    
+</div>
+
+<div class="toc-bar">
+    <div class="toc-btn-bar">
+        <a href="#site-main" class="toc-btn">
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"></path></svg>
+        </a>
+        <div class="toc-btn toc-switch">
+            <svg class="toc-open" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"></path></svg>
+            <svg class="toc-close hide" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"></path><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"></path></svg>
+        </div>
+        <a href="#gobottom" class="toc-btn">
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"></path></svg>
+        </a>
+    </div>
+    <div class="toc-main">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#foreword"><span class="toc-text">Foreword</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conceptual-understanding"><span class="toc-text">Conceptual Understanding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#modeling"><span class="toc-text">Modeling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#notations"><span class="toc-text">notations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#local-spectral-consistency"><span class="toc-text">local spectral consistency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dynamic-gradient-sparsity"><span class="toc-text">dynamic gradient sparsity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#simultaneous-image-registration"><span class="toc-text">simultaneous image registration</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#algorithm"><span class="toc-text">Algorithm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#experiments"><span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#simulation"><span class="toc-text">simulation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#visual-comparison"><span class="toc-text">visual comparison</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#quantitative-analysis"><span class="toc-text">quantitative analysis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#efficiency-comparison"><span class="toc-text">efficiency comparison</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#translation"><span class="toc-text">translation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#real-world-datasets"><span class="toc-text">real-world datasets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion-and-discussion"><span class="toc-text">Conclusion and Discussion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#code"><span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#background-knowledge"><span class="toc-text">background knowledge</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+	</div>
+	
+
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+  <header class="read-next-card-header">
+    <small class="read-next-card-header-sitetitle">— Falcon's Space —</small>
+    <h3 class="read-next-card-header-title">Recent Posts</h3>
+  </header>
+  <div class="read-next-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"></path>
+    </svg>
+  </div>
+  <div class="read-next-card-content">
+    <ul>
+      
+      
+      
+      <li>
+        <a href="/2021/09/03/sample/">语法样本</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2021/08/22/8266light/">ESP8266+电灯科技+天猫精灵</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2021/08/18/haikangcam/">自组双目测距定位系统</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+  <footer class="read-next-card-footer">
+    <a href="/archives">  MORE  → </a>
+  </footer>
+</article>
+
+            
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+    <header class="read-next-card-header tagcloud-card">
+        <h3 class="read-next-card-header-title">Categories</h3>
+    </header>
+    <div class="read-next-card-content">
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E6%8A%80%E8%83%BD/">一些技能</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/">一些面试</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%9D%A2%E8%AF%95/%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/">一些比赛</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/">一些项目</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E4%BA%9B%E9%A1%B9%E7%9B%AE/%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">一些算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/">人生的经验</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%AB%99%E5%BB%BA%E8%AE%BE/">网站建设</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a></li></ul>
+    </div>
+</article>
+
+
+            
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+	<header class="read-next-card-header tagcloud-card">
+		<h3 class="read-next-card-header-title">Tag Cloud</h3>
+	</header>
+	<div class="read-next-card-content-ext">
+		<a href="/tags/AI/" style="font-size: 14px;">AI</a> <a href="/tags/CV/" style="font-size: 20.67px;">CV</a> <a href="/tags/%E5%86%99%E7%BB%99CC/" style="font-size: 14px;">写给CC</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 17.33px;">卡尔曼滤波</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E8%9E%8D%E5%90%88/" style="font-size: 14px;">图像融合</a> <a href="/tags/%E5%A5%BD%E7%8E%A9%E7%9A%84/" style="font-size: 24px;">好玩的</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E8%B7%9F%E8%B8%AA/" style="font-size: 14px;">目标跟踪</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6/" style="font-size: 17.33px;">自动驾驶</a>
+	</div>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+	
+
+
+
+
+<div id="search" class="search-overlay">
+    <div class="search-form">
+        
+        <div class="search-overlay-logo">
+        	<img src="D://blog/panda/themes/hexo-casper/source/images/favicon1.ico" alt="Falcon's Space">
+        </div>
+        
+        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="Search ...">
+        <a class="search-overlay-close" href="#"></a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+<footer class="site-footer outer">
+	<div class="site-footer-content inner">
+		<div class="copyright">
+			<a href="/" title="Falcon's Space">Falcon's Space © 2021</a>
+			
+				
+			        <span hidden="true" id="/2021/04/11/SIRF/" class="leancloud-visitors" data-flag-title="Simultaneous Image Registration and Fusion in a Unified Framework">
+			            <span>阅读量 </span>
+			            <span class="leancloud-visitors-count">0</span>
+			        </span>
+	    		
+    		
+		</div>
+		<nav class="site-footer-nav">
+			
+			<a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+			<a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
+		</nav>
+	</div>
+</footer>
+	
+
+
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+</script>
+
+
+<script id="scriptLoad" src="/js/allinone.min.js" async=""></script>
+
+
+<script>
+    document.getElementById('scriptLoad').addEventListener('load', function () {
+        
+        
+            var bLazy = new Blazy();
+        
 
         
-  <div class="post-widgets">
-    <div class="wp_rating">
-      <div id="wpac-rating"></div>
-    </div>
-  </div>
+        
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2021/04/10/delladas/" rel="prev" title="Dell ADAS 公开课">
-                  <i class="fa fa-chevron-left"></i> Dell ADAS 公开课
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2021/04/15/dellbisai/" rel="next" title="Dell AI/ADS 比赛">
-                  Dell AI/ADS 比赛 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
+        
+        
+        
+            searchFunc("/");
+        
+        
+    })
+</script>
 
 
 
 
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
 
 
-    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
 
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+
+
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+
+
+
+<script id="valineScript" src="//unpkg.com/valine/dist/Valine.min.js" async=""></script>
 <script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
+    document.getElementById('valineScript').addEventListener("load", function() {
+        new Valine({
+            el: '#comment' ,
+            verify: false,
+            notify: false,
+            appId: '',
+            appKey: '',
+            placeholder: 'Just go go',
+            pageSize: 10,
+            avatar: 'mm',
+            visitor: true
+        })
     });
-  }
-</script>
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
-</div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="Total Visitors">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="Total Views">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
-
-
-    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
-
-
-    </div>
-  </footer>
-
-  
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
-
-  
-  <script>
-  if (CONFIG.page.isPost) {
-    wpac_init = window.wpac_init || [];
-    wpac_init.push({
-      widget: 'Rating',
-      id    : ,
-      el    : 'wpac-rating',
-      color : '#fc6423'
-    });
-    (function() {
-      if ('WIDGETPACK_LOADED' in window) return;
-      WIDGETPACK_LOADED = true;
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = '//embed.widgetpack.com/widget.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-    })();
-  }
-  </script>
-
-
-
-
-
-
-  
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'all'
-      },
-      options: {
-        renderActions: {
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
 </script>
 
 
 
-<script>
-NexT.utils.loadComments('#lv-container', () => {
-  window.livereOptions = {
-    refer: "2021/04/11/SIRF/"
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
-
-</body>
-</html>
 
 
-<!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/boom.js"></script>
+
+
+</body></html>
