@@ -26,16 +26,25 @@
   </script>
 <meta name="description" content="物联网智能家居?">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ESP8266+电灯科技+天猫精灵">
+<meta property="og:title" content="ESP8266+点灯科技+天猫精灵+舵机 实现语音控制灯光开关">
 <meta property="og:url" content="https://pandayuanyu.github.io/2021/08/22/8266light/index.html">
 <meta property="og:site_name" content="Falcon&#39;s Space">
 <meta property="og:description" content="物联网智能家居?">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/92cf7a2bf8a738ad.jpg">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/e4b0402e4fc018d9.jpg">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/a3aac69b62133404.jpg">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/670dd29d5725851b.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/f336be32f59e4383.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/ac71331558c129e1.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/ebd426e2e78782bc.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/09/afe3f5d435395206.jpg">
 <meta property="article:published_time" content="2021-08-22T02:32:11.000Z">
-<meta property="article:modified_time" content="2021-09-02T16:25:26.388Z">
+<meta property="article:modified_time" content="2021-09-08T15:09:52.235Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="好玩的">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/09/92cf7a2bf8a738ad.jpg">
 
 
 <link rel="canonical" href="https://pandayuanyu.github.io/2021/08/22/8266light/">
@@ -50,7 +59,7 @@
     lang   : 'en'
   };
 </script>
-<title>ESP8266+电灯科技+天猫精灵 | Falcon's Space</title>
+<title>ESP8266+点灯科技+天猫精灵+舵机 实现语音控制灯光开关 | Falcon's Space</title>
   
 
 
@@ -161,7 +170,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#esp8266%E7%83%A7%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">esp8266烧录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#esp8266-%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">esp8266 驱动安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blinker%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">blinker设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A9%E7%8C%AB%E7%B2%BE%E7%81%B5%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">天猫精灵设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#esp8266%E7%83%A7%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">esp8266烧录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#esp8266-%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85"><span class="nav-number">5.1.</span> <span class="nav-text">esp8266 驱动安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ardunio%E6%B7%BB%E5%8A%A0%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AE%A1%E7%90%86%E7%BD%91%E5%9D%80"><span class="nav-number">5.2.</span> <span class="nav-text">Ardunio添加开发板管理网址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ardunio%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AE%A1%E7%90%86%E5%99%A8%E6%B7%BB%E5%8A%A0esp8266"><span class="nav-number">5.3.</span> <span class="nav-text">Ardunio开发板管理器添加esp8266</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ardunio%E5%AE%89%E8%A3%85blinker%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">Ardunio安装blinker库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ardunio%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="nav-number">5.5.</span> <span class="nav-text">Ardunio代码编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ardunio%E4%BB%A3%E7%A0%81%E7%83%A7%E5%BD%95"><span class="nav-number">5.6.</span> <span class="nav-text">Ardunio代码烧录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#esp8266%E8%BF%9E%E6%8E%A5%E8%88%B5%E6%9C%BA%E4%B8%8E%E6%9C%80%E5%90%8E%E5%AE%89%E8%A3%85%E8%B0%83%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">esp8266连接舵机与最后安装调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%88%B5%E6%9C%BA%E6%8E%A5%E7%BA%BF"><span class="nav-number">6.1.</span> <span class="nav-text">舵机接线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%9B%BA%E5%AE%9A%E8%88%B5%E6%9C%BA"><span class="nav-number">6.2.</span> <span class="nav-text">安装固定舵机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E9%9F%B3%E6%8E%A7%E5%88%B6"><span class="nav-number">6.3.</span> <span class="nav-text">语音控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E6%B5%8B%E8%AF%95"><span class="nav-number">6.4.</span> <span class="nav-text">改进测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99%E6%9D%A5%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">资料来源</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -242,7 +251,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ESP8266+电灯科技+天猫精灵
+          ESP8266+点灯科技+天猫精灵+舵机 实现语音控制灯光开关
         </h1>
 
         <div class="post-meta-container">
@@ -260,7 +269,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-03 00:25:26" itemprop="dateModified" datetime="2021-09-03T00:25:26+08:00">2021-09-03</time>
+        <time title="Modified: 2021-09-08 23:09:52" itemprop="dateModified" datetime="2021-09-08T23:09:52+08:00">2021-09-08</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,14 +296,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.2k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>6 mins.</span>
+      <span>9 mins.</span>
     </span>
 </div>
 
@@ -319,11 +328,101 @@
 <li>充电宝（给芯片供电）</li>
 <li>热熔胶（固定舵机等）</li>
 </ul>
+<p> </p>
+<h2 id="软件">软件</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.arduino.cc/">Arduino</a></li>
+<li>blinker(手机App)</li>
+<li>天猫精灵(手机App)</li>
+</ul>
+<p> </p>
+<h2 id="blinker设置">blinker设置</h2>
+<ul>
+<li>打开blinker--&gt;添加设备--&gt;独立设备--&gt;网络接入--&gt;阿里云--&gt;复制key
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/92cf7a2bf8a738ad.jpg" width="200"/>
+</div></li>
+<li>返回我的设备--&gt;新的设备--&gt;设置--&gt;修改设备名和图标
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/e4b0402e4fc018d9.jpg" width="200"/>
+</div></li>
+</ul>
+<p> </p>
+<h2 id="天猫精灵设置">天猫精灵设置</h2>
+  绑定点灯科技账号：我的--&gt;智能家居管理--&gt;搜索绑定blinker
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/a3aac69b62133404.jpg" width="200"/>
+</div>
+<p> </p>
 <h2 id="esp8266烧录">esp8266烧录</h2>
 <h3 id="esp8266-驱动安装">esp8266 驱动安装</h3>
-<p><a target="_blank" rel="noopener" href="https://www.onlinedown.net/soft/1164748.htm">CH340驱动安装</a>, 不然显示不出端口 ###</p>
-<h2 id="section"></h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#define BLINKER_WIFI</span></span><br><span class="line"><span class="comment">#define BLINKER_ALIGENIE_OUTLET</span></span><br><span class="line"><span class="comment">#include &lt;Servo.h&gt;</span></span><br><span class="line"> </span><br><span class="line">// <span class="comment">#define PIN_SERVO D0  //舵机信号线</span></span><br><span class="line"></span><br><span class="line">Servo myservo1;</span><br><span class="line">Servo myservo2;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#include &lt;Blinker.h&gt;</span></span><br><span class="line"></span><br><span class="line">char auth[] = <span class="string">&quot;c71c4d5b26c8&quot;</span>;</span><br><span class="line">char ssid[] = <span class="string">&quot;ChinaNet-b7Xx&quot;</span>;</span><br><span class="line">char pswd[] = <span class="string">&quot;essxbfbw&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> oState = false;</span><br><span class="line"></span><br><span class="line">void aligeniePowerState(const String &amp; state)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;need set power state: &quot;</span>, state);</span><br><span class="line"></span><br><span class="line">    myservo1.attach(D0);</span><br><span class="line">    myservo2.attach(D1);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (state == BLINKER_CMD_ON) &#123;</span><br><span class="line">        myservo1.write(<span class="number">48</span>);//舵机正转度数</span><br><span class="line">        myservo2.write(<span class="number">60</span>);</span><br><span class="line">        delay(<span class="number">1000</span>); </span><br><span class="line"></span><br><span class="line">        BlinkerAliGenie.powerState(<span class="string">&quot;on&quot;</span>);</span><br><span class="line">        BlinkerAliGenie.print();</span><br><span class="line"></span><br><span class="line">        oState = true;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (state == BLINKER_CMD_OFF) &#123;</span><br><span class="line"></span><br><span class="line">        myservo1.write(-<span class="number">48</span>);//舵机反转度数</span><br><span class="line">        myservo2.write(-<span class="number">60</span>);</span><br><span class="line">        delay(<span class="number">1000</span>); </span><br><span class="line">       </span><br><span class="line">        BlinkerAliGenie.powerState(<span class="string">&quot;off&quot;</span>);</span><br><span class="line">        BlinkerAliGenie.print();</span><br><span class="line"></span><br><span class="line">        oState = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void aligenieQuery(int32_t queryCode)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;AliGenie Query codes: &quot;</span>, queryCode);</span><br><span class="line"></span><br><span class="line">    switch (queryCode)</span><br><span class="line">    &#123;</span><br><span class="line">        case BLINKER_CMD_QUERY_ALL_NUMBER :</span><br><span class="line">            BLINKER_LOG(<span class="string">&quot;AliGenie Query All&quot;</span>);</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        case BLINKER_CMD_QUERY_POWERSTATE_NUMBER :</span><br><span class="line">            BLINKER_LOG(<span class="string">&quot;AliGenie Query Power State&quot;</span>);</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        default :</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dataRead(const String &amp; data)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;Blinker readString: &quot;</span>, data);</span><br><span class="line"></span><br><span class="line">    Blinker.vibrate();</span><br><span class="line">    </span><br><span class="line">    uint32_t BlinkerTime = millis();</span><br><span class="line">    </span><br><span class="line">    Blinker.print(<span class="string">&quot;millis&quot;</span>, BlinkerTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void setup()</span><br><span class="line">&#123;</span><br><span class="line">    Serial.begin(<span class="number">115200</span>);</span><br><span class="line">    BLINKER_DEBUG.stream(Serial);</span><br><span class="line"></span><br><span class="line">    pinMode(LED_BUILTIN, OUTPUT);</span><br><span class="line">    digitalWrite(LED_BUILTIN, LOW);</span><br><span class="line"></span><br><span class="line">    Blinker.begin(auth, ssid, pswd);</span><br><span class="line">    Blinker.attachData(dataRead);</span><br><span class="line">    </span><br><span class="line">    BlinkerAliGenie.attachPowerState(aligeniePowerState);</span><br><span class="line">    BlinkerAliGenie.attachQuery(aligenieQuery);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop()</span><br><span class="line">&#123;</span><br><span class="line">    Blinker.run();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>  <a target="_blank" rel="noopener" href="https://www.onlinedown.net/soft/1164748.htm">CH340驱动安装</a>, 不然显示不出端口，在设备管理器里能看到端口</p>
+<p> </p>
+<h3 id="ardunio添加开发板管理网址">Ardunio添加开发板管理网址</h3>
+  文件--&gt;首选项--&gt;设置--&gt;附件开发板管理器网址 添加https://www.arduino.cn/package_esp8266com_index.json
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/670dd29d5725851b.png" width="400"/>
+</div>
+<p> </p>
+<h3 id="ardunio开发板管理器添加esp8266">Ardunio开发板管理器添加esp8266</h3>
+  工具--&gt;开发板--&gt;开发板管理器--&gt;搜索安装esp8266
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/f336be32f59e4383.png" width="400"/>
+</div>
+<p> </p>
+<h3 id="ardunio安装blinker库文件">Ardunio安装blinker库文件</h3>
+  工具--&gt;库管理--&gt;搜索安装blinker
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/ac71331558c129e1.png" width="400"/>
+</div>
+<p> </p>
+<h3 id="ardunio代码编写">Ardunio代码编写</h3>
+<ul>
+<li>同时使用两个舵机来控制开关</li>
+<li>char auth[] = "548fbd17b6d7" 填入blinker里复制的key</li>
+<li>myservo1.attach(D0) 意思是用D0作为舵机1的控制信号线; myservo2.attach(D1) 意思是用D1作为舵机2的控制信号线</li>
+<li>舵机旋转角度需要根据安装舵机位置自己调节</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define BLINKER_WIFI</span></span><br><span class="line"><span class="comment">#define BLINKER_ALIGENIE_OUTLET</span></span><br><span class="line"><span class="comment">#include &lt;Servo.h&gt;</span></span><br><span class="line"> </span><br><span class="line">// <span class="comment">#define PIN_SERVO D0  //舵机信号线</span></span><br><span class="line"></span><br><span class="line">Servo myservo1;</span><br><span class="line">Servo myservo2;</span><br><span class="line"> </span><br><span class="line"><span class="comment">#include &lt;Blinker.h&gt;</span></span><br><span class="line"></span><br><span class="line">char auth[] = <span class="string">&quot;548fbd17b6d7&quot;</span>;     // key</span><br><span class="line">char ssid[] = <span class="string">&quot;ChinaNet-xxXx&quot;</span>;    // wifi name</span><br><span class="line">char pswd[] = <span class="string">&quot;xxxxxxxx&quot;</span>;         // wifi passpord </span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> oState = false;</span><br><span class="line"></span><br><span class="line">void aligeniePowerState(const String &amp; state)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;need set power state: &quot;</span>, state);</span><br><span class="line"></span><br><span class="line">    myservo1.attach(D0);</span><br><span class="line">    myservo2.attach(D1);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (state == BLINKER_CMD_ON) &#123;</span><br><span class="line">        myservo1.write(<span class="number">48</span>);//舵机正转度数</span><br><span class="line">        myservo2.write(<span class="number">60</span>);</span><br><span class="line">        delay(<span class="number">1000</span>); </span><br><span class="line"></span><br><span class="line">        BlinkerAliGenie.powerState(<span class="string">&quot;on&quot;</span>);</span><br><span class="line">        BlinkerAliGenie.print();</span><br><span class="line"></span><br><span class="line">        oState = true;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (state == BLINKER_CMD_OFF) &#123;</span><br><span class="line"></span><br><span class="line">        myservo1.write(-<span class="number">48</span>);//舵机反转度数</span><br><span class="line">        myservo2.write(-<span class="number">60</span>);</span><br><span class="line">        delay(<span class="number">1000</span>); </span><br><span class="line">       </span><br><span class="line">        BlinkerAliGenie.powerState(<span class="string">&quot;off&quot;</span>);</span><br><span class="line">        BlinkerAliGenie.print();</span><br><span class="line"></span><br><span class="line">        oState = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void aligenieQuery(int32_t queryCode)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;AliGenie Query codes: &quot;</span>, queryCode);</span><br><span class="line"></span><br><span class="line">    switch (queryCode)</span><br><span class="line">    &#123;</span><br><span class="line">        case BLINKER_CMD_QUERY_ALL_NUMBER :</span><br><span class="line">            BLINKER_LOG(<span class="string">&quot;AliGenie Query All&quot;</span>);</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        case BLINKER_CMD_QUERY_POWERSTATE_NUMBER :</span><br><span class="line">            BLINKER_LOG(<span class="string">&quot;AliGenie Query Power State&quot;</span>);</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        default :</span><br><span class="line">            BlinkerAliGenie.powerState(oState ? &quot;on&quot; : &quot;off&quot;);</span><br><span class="line">            BlinkerAliGenie.print();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dataRead(const String &amp; data)</span><br><span class="line">&#123;</span><br><span class="line">    BLINKER_LOG(<span class="string">&quot;Blinker readString: &quot;</span>, data);</span><br><span class="line"></span><br><span class="line">    Blinker.vibrate();</span><br><span class="line">    </span><br><span class="line">    uint32_t BlinkerTime = millis();</span><br><span class="line">    </span><br><span class="line">    Blinker.print(<span class="string">&quot;millis&quot;</span>, BlinkerTime);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void setup()</span><br><span class="line">&#123;</span><br><span class="line">    Serial.begin(<span class="number">115200</span>);</span><br><span class="line">    BLINKER_DEBUG.stream(Serial);</span><br><span class="line"></span><br><span class="line">    pinMode(LED_BUILTIN, OUTPUT);</span><br><span class="line">    digitalWrite(LED_BUILTIN, LOW);</span><br><span class="line"></span><br><span class="line">    Blinker.begin(auth, ssid, pswd);</span><br><span class="line">    Blinker.attachData(dataRead);</span><br><span class="line">    </span><br><span class="line">    BlinkerAliGenie.attachPowerState(aligeniePowerState);</span><br><span class="line">    BlinkerAliGenie.attachQuery(aligenieQuery);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop()</span><br><span class="line">&#123;</span><br><span class="line">    Blinker.run();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> </p>
+<h3 id="ardunio代码烧录">Ardunio代码烧录</h3>
+<ul>
+<li>将esp8266用micri usb 数据线连接电脑</li>
+<li>工具--&gt;开发板--&gt;选 NodeMcu 0.9
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/ebd426e2e78782bc.png" width="400"/>
+</div></li>
+<li>工具--&gt;端口--&gt;根据8266端口号码选择</li>
+<li>点击Ardunio左上角箭头图标，编译上传到esp8266芯片</li>
+<li>上传成功后，芯片蓝色led转为常亮状态</li>
+</ul>
+<p> </p>
+<h2 id="esp8266连接舵机与最后安装调试">esp8266连接舵机与最后安装调试</h2>
+<h3 id="舵机接线">舵机接线</h3>
+  两舵机橙色分别接D0和1，红色接VV或者3V，棕色接G
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/09/afe3f5d435395206.jpg" width="300"/>
+</div>
+<p> </p>
+<h3 id="安装固定舵机">安装固定舵机</h3>
+<p>  <a target="_blank" rel="noopener" href="https://i.bmp.ovh/imgs/2021/09/4da94f9b2196184c.jpg">示例</a></p>
+<p> </p>
+<h3 id="语音控制">语音控制</h3>
+<p>  <a target="_blank" rel="noopener" href="https://weibo.com/u/6575846623?tabtype=newVideo&amp;layerid=4674211471951981">语音"天猫精灵，开灯"</a></p>
+<p> </p>
+<h3 id="改进测试">改进测试</h3>
+<ul>
+<li>可支持多台设备</li>
+<li>网络有延迟：blinker同步到天猫精灵要时间</li>
+<li>其他语音助手也可以</li>
+</ul>
+<p> </p>
+<h2 id="资料来源">资料来源</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_47749454/article/details/117638828">ESP8266 WIFI+舵机+小爱同学+blinker___宿舍关灯神器</a></li>
+<li><a target="_blank" rel="noopener" href="https://diandeng.tech/doc/voice-assistant">点灯科技接入语音助手</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Me411s7oV?spm_id_from=333.999.0.0">esp8266接入语音助手bilibili教程</a></li>
+</ul>
 
     </div>
 
