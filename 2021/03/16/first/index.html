@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="Long long ago, a boy want to build his own website...">
 <meta property="og:type" content="article">
@@ -32,7 +32,7 @@
 <meta property="og:description" content="Long long ago, a boy want to build his own website...">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-16T10:36:49.107Z">
-<meta property="article:modified_time" content="2021-04-01T12:55:02.669Z">
+<meta property="article:modified_time" content="2021-09-11T12:07:25.459Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="好玩的">
 <meta name="twitter:card" content="summary">
@@ -118,6 +118,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -131,11 +132,37 @@
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">10</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">17</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -161,7 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">公式插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">网站图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">评论插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%A7%88%E6%97%B6%E9%97%B4%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">字数统计与阅览时间插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%8E%E9%98%85%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1%E6%8F%92%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">访问与阅览次数统计插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%BA%8A"><span class="nav-number">8.</span> <span class="nav-text">图床</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%89%B9%E6%95%88"><span class="nav-number">9.</span> <span class="nav-text">鼠标点击特效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blogroll"><span class="nav-number">10.</span> <span class="nav-text">Blogroll</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">网站架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">公式插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">网站图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%84%E8%AE%BA%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">评论插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%A7%88%E6%97%B6%E9%97%B4%E6%8F%92%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">字数统计与阅览时间插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%B8%8E%E9%98%85%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1%E6%8F%92%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">访问与阅览次数统计插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%BA%8A"><span class="nav-number">8.</span> <span class="nav-text">图床</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%89%B9%E6%95%88"><span class="nav-number">9.</span> <span class="nav-text">鼠标点击特效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E5%86%85%E5%B5%8Cb%E7%AB%99"><span class="nav-number">10.</span> <span class="nav-text">网页内嵌B站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blogroll"><span class="nav-number">11.</span> <span class="nav-text">Blogroll</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,7 +287,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-01 20:55:02" itemprop="dateModified" datetime="2021-04-01T20:55:02+08:00">2021-04-01</time>
+        <time title="Modified: 2021-09-11 20:07:25" itemprop="dateModified" datetime="2021-09-11T20:07:25+08:00">2021-09-11</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,7 +314,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>246</span>
+      <span>262</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -327,6 +354,8 @@ Long long ago, a boy want to build his own website...
 <p><a target="_blank" rel="noopener" href="https://imgurl.org/">图床</a></p>
 <h2 id="鼠标点击特效">鼠标点击特效</h2>
 <p><a target="_blank" rel="noopener" href="https://yuanyuspace.cn/2021/04/01/clickeffect/#more">鼠标点击特效</a></p>
+<h2 id="网页内嵌b站">网页内嵌B站</h2>
+<p><a target="_blank" rel="noopener" href="https://hongcyu.cn/posts/hexo-bilibili.html">网页内嵌B站,方法二</a></p>
 <p> </p>
 <h2 id="blogroll">Blogroll</h2>
 <p>Thanks to Mr.Wang, who helps me a lot to finish this website's construcion.<br />
@@ -459,6 +488,7 @@ Long long ago, a boy want to build his own website...
     })();
   }
   </script>
+<script src="/js/local-search.js"></script>
 
 
 
