@@ -4,11 +4,115 @@
   
     
     <entry>
+      <title>网页视频下载方法</title>
+      <link href="/2021/09/28/Unxiazai/"/>
+      <url>/2021/09/28/Unxiazai/</url>
+      
+        <content type="html"><![CDATA[<center>实用下载方法</center><span id="more"></span><h2 id="week-3">week 3</h2><ul><li></li><li></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 好玩的 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CS </tag>
+            
+            <tag> CV </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>智能信息处理</title>
+      <link href="/2021/09/28/zhinengxinxi/"/>
+      <url>/2021/09/28/zhinengxinxi/</url>
+      
+        <content type="html"><![CDATA[<center>智能信息处理</center><span id="more"></span><h2 id="week-3">week 3</h2><ul><li></li><li></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 提高姿势水平 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CS </tag>
+            
+            <tag> CV </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>darknet 源码学习</title>
+      <link href="/2021/09/15/learndarknet/"/>
+      <url>/2021/09/15/learndarknet/</url>
+      
+        <content type="html"><![CDATA[<center>darknet</center><span id="more"></span><h2 id="box.c">box.c</h2><ul><li><p><a href="https://www.cnblogs.com/qijunhui/p/8284188.html">x=x+1，x+=1，x++的区别</a></p></li><li><p>(a&gt;b)?y:n 如果A大于B，那么选择Y的结果，如果A小于B，那么选择N的结果。</p></li><li><p>计算两个矩形框相交部分矩形的某一边的边长（视调用情况，可能是相交部分矩形的高，也可能是宽）。<br />x1  第一个矩形框的x坐标（或者y坐标，视调用情况，如果计算的是相交部分矩形的宽，则输入的是x坐标)<br />w1  第一个矩形框的宽（而如果要计算相交部分矩形的高，则为y坐标，下面凡是说x坐标的，都可能为y坐标，当然，对应宽变为高)<br />x2  第二个矩形框的x坐标<br />w2  第二个矩形框的宽<br />  首先计算两个框左边的x坐标，比较大小，取其大者，记为left；而后计算两个框右边的x坐标，取其小者，记为right，right-left即得相交部分矩形的宽。两个矩形框相交部分矩形的宽或者高。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">float overlap(float x1, float w1, float x2, float w2)</span><br><span class="line">&#123;</span><br><span class="line">    float l1 &#x3D; x1 - w1&#x2F;2;</span><br><span class="line">    float l2 &#x3D; x2 - w2&#x2F;2;</span><br><span class="line">    float left &#x3D; l1 &gt; l2 ? l1 : l2;</span><br><span class="line">    float r1 &#x3D; x1 + w1&#x2F;2;</span><br><span class="line">    float r2 &#x3D; x2 + w2&#x2F;2;</span><br><span class="line">    float right &#x3D; r1 &lt; r2 ? r1 : r2;</span><br><span class="line">    return right - left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li><li><p>计算IoU值,是目标检测精确度的一个评判指标，全称是intersection over union，翻译成中文就是交比并值，字面上的意思很直接，就是两个矩形相交部分的面积比两个矩形求并之后的总面积，用来做检测评判指标时，含义为模型检测到的矩形框与GroundTruth标记的矩形框之间的交比并值（即可反映检测到的矩形框与GroundTruth之间的重叠度），当两个矩形框完全重叠时，值为1；完全不相交时，值为0。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">float box_intersection(box a, box b)</span><br><span class="line">&#123;</span><br><span class="line">    float w &#x3D; overlap(a.x, a.w, b.x, b.w);</span><br><span class="line">    float h &#x3D; overlap(a.y, a.h, b.y, b.h);</span><br><span class="line">    if(w &lt; 0 || h &lt; 0) return 0;</span><br><span class="line">    float area &#x3D; w*h;</span><br><span class="line">    return area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li><li><p>pow(float x, float y)函数：计算x的y次幂</p></li></ul><h2 id="blas.c">blas.c</h2><ul><li>方差的无偏估计 （样本方差） <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\)</span>，你会发现样本均值这一项都包含在内。考虑到方差是衡量数据偏差程度的统计量，计算一下样本均值作为中间步骤的中间量，也不失其合理性。于是，为计算样本方差，样本里原有的 n个自由度，有一个自由度被分配给计算样本均值，剩下自由度即为n-1 。</li><li>axpy是线性代数中一种基本操作，完成y= alpha*x + y操作，其中x,y为矢量，alpha为实数系数</li><li>计算预测数组与真实标签数组中每对元素的l2范数值，或者说是计算squared error，注意此函数，并没有求和，没有将所有误差加起来，而是对网络输出的每个元素计算误差的平方值。<br />n  输出元素个数，也即pred中的元素个数，也是truth中的元素个数; pred   网络最终的输出值，或者说网络的预测值，其中输出元素个数为n（也即最后一层网络神经元个数为n）<br />truth   真实标签值，其中元素个数为n（也即最后一层网络神经元个数为n） delta   相当于本函数的输出，为网络的敏感度图（一般为cost_layer.c的敏感度图）<br />error   相当于本函数的输出，包含每个输出元素的squared error</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void l2_cpu(int n, float *pred, float *truth, float *delta, float *error)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        float diff &#x3D; truth[i] - pred[i];</span><br><span class="line">        error[i] &#x3D; diff * diff;</span><br><span class="line">        delta[i] &#x3D; diff;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>softmax<br />input   一组输入图片数据（含义见下面softmax_cpu()注释，下同）<br />n   一组输入数据中含有的元素个数n=l.inputs/l.groups<br />temp   温度参数，关于softmax的温度参数，<a href="https://blog.csdn.net/qq_36560894/article/details/114874268">softmax with temperature</a><br />stride   跨度<br />output   这一组输入图片数据对应的输出（也即l.output中与这一组输入对应的某一部分）<br />  本函数实现的就是标准的softmax函数处理，唯一有点变化的就是在做指数运算之前，将每个输入元素减去了该组输入元素中的最大值，以增加数值稳定性， <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">void softmax(float *input, int n, float temp, int stride, float *output)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    float sum &#x3D; 0;</span><br><span class="line">    &#x2F;&#x2F; 赋初始最大值为float中的最小值-FLT_MAX（定义在float.h中）</span><br><span class="line">    float largest &#x3D; -FLT_MAX;</span><br><span class="line">    &#x2F;&#x2F; 寻找输入中的最大值，至于为什么要找出最大值，是为了数值计算上的稳定，详细请戳：http:&#x2F;&#x2F;freemind.pluskid.org&#x2F;machine-learning&#x2F;softmax-vs-softmax-loss-numerical-stability&#x2F;</span><br><span class="line">    &#x2F;&#x2F; 这篇博客写的不错，博客在接近尾声的时候，提到了为什么要减去输入中的最大值。</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        if(input[i*stride] &gt; largest) largest &#x3D; input[i*stride];</span><br><span class="line">    &#125;</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        &#x2F;&#x2F; 在进行指数运算之间，如上面博客所说，首先减去最大值（当然温度参数也要除）</span><br><span class="line">        float e &#x3D; exp(input[i*stride]&#x2F;temp - largest&#x2F;temp);</span><br><span class="line">        sum +&#x3D; e;                       &#x2F;&#x2F; 求和</span><br><span class="line">        output[i*stride] &#x3D; e;           &#x2F;&#x2F; 并将每一个输入的结果保存在相应的输出中</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 最后一步：归一化转换为概率（就是softmax函数的原型～），最后的输出结果保存在output中</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        output[i*stride] &#x2F;&#x3D; sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li><li><p><a href="https://cloud.tencent.com/developer/section/1009009">赋值运算符</a></p></li><li><p><a href="https://www.zhihu.com/question/23765351">softmax</a></p></li></ul><h2 id="参考">参考</h2><ul><li><a href="https://blog.csdn.net/u012927281/article/details/86064511">linux codeblocks darknet Debug极简教程</a></li><li><a href="https://blog.csdn.net/u010122972/article/details/83541978?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link">Darknet 概述</a></li><li><a href="https://github.com/hgpvision/darknet">Darknet 框架源码分析</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 提高姿势水平 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CV </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>类脑智能</title>
+      <link href="/2021/09/15/leinaozhineng/"/>
+      <url>/2021/09/15/leinaozhineng/</url>
+      
+        <content type="html"><![CDATA[<center>类脑</center><span id="more"></span><h2 id="week-1">week 1</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/64382065">图灵机可计算性</a></li><li><a href="https://zhuanlan.zhihu.com/p/136748306">冯诺伊曼架构</a></li><li><a href="https://blog.csdn.net/weixin_37097614/article/details/102405917?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-1.no_search_link&amp;spm=1001.2101.3001.4242">Nyquist-Shannon sampling theorem</a></li><li></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 提高姿势水平 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>语法样本</title>
       <link href="/2021/09/03/sample/"/>
       <url>/2021/09/03/sample/</url>
       
-        <content type="html"><![CDATA[<center>语法样本</center><span id="more"></span><h2 id="插入图片">插入图片</h2><div data-align="center"><img src="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png" width="300"/></div><h2 id="公式">公式</h2><p><span class="math display">\[E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}\]</span></p><h2 id="代码">代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure><h2 id="超链接">超链接</h2><p><a href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a></p><h2 id="缩进与空行">缩进与空行</h2><p>  缩进</p><p>  换行</p><h2 id="列举">列举</h2><ul><li>一二三四五</li><li>上山打老虎</li><li>老虎打不到</li><li>打到小松鼠</li></ul><h2 id="排序">排序</h2><ol type="1"><li>窗前明月光</li><li>疑是地上霜</li><li>举头望明月</li><li>低头思故乡</li></ol><h2 id="注释">注释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#x2F;&#x2F;]: &lt;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<center>语法样本</center><span id="more"></span><h2 id="插入图片">插入图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;i.bmp.ovh&#x2F;imgs&#x2F;2021&#x2F;04&#x2F;b9dddd6c69cdbbba.png&quot; width&#x3D;&quot;300&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure><div data-align="center"><img src="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png" width="300"/></div><h2 id="公式">公式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">E(\mathcal&#123;T&#125;) \approx \sum_&#123;i&#125; \sum_&#123;j&#125; \sqrt&#123;\sum_&#123;d&#125;\left(\nabla_&#123;1&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\left(\nabla_&#123;2&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\epsilon&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure><p><span class="math display">\[E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}\]</span></p><h2 id="代码">代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure><h2 id="超链接">超链接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SDK Manager](https:&#x2F;&#x2F;developer.nvidia.com&#x2F;nvidia-sdk-manager)</span><br></pre></td></tr></table></figure><p><a href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a></p><h2 id="缩进与空行">缩进与空行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;缩进</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;换行</span><br></pre></td></tr></table></figure><p>  缩进</p><p>  换行</p><h2 id="列举">列举</h2><ul><li>一二三四五</li><li>上山打老虎</li><li>老虎打不到</li><li>打到小松鼠</li></ul><h2 id="排序">排序</h2><ol type="1"><li>窗前明月光</li><li>疑是地上霜</li><li>举头望明月</li><li>低头思故乡</li></ol><h2 id="注释">注释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#x2F;&#x2F;]: &lt;&gt;</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -90,7 +194,7 @@
       
       <categories>
           
-          <category> 人生的经验 </category>
+          <category> 一些技能 </category>
           
       </categories>
       
@@ -140,7 +244,7 @@
       
       <categories>
           
-          <category> 一些技能 </category>
+          <category> 提高姿势水平 </category>
           
       </categories>
       
@@ -174,9 +278,9 @@
       
         <tags>
             
-            <tag> 目标跟踪 </tag>
-            
             <tag> CV </tag>
+            
+            <tag> 目标跟踪 </tag>
             
         </tags>
       
@@ -203,9 +307,9 @@
       
         <tags>
             
-            <tag> 自动驾驶 </tag>
-            
             <tag> CV </tag>
+            
+            <tag> 自动驾驶 </tag>
             
         </tags>
       

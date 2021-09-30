@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon1.ico">
+  <link rel="mask-icon" href="/images/favicon2.ico" color="#222">
+  <link rel="manifest" href="/images/favicon2.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="darknet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="darknet 源码学习">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/09/15/learndarknet/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="darknet">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-15T10:00:11.000Z">
+<meta property="article:modified_time" content="2021-09-28T11:18:21.091Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/09/15/learndarknet/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>darknet 源码学习 | Falcon's Space</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Falcon's Space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">21</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#box.c"><span class="nav-number">1.</span> <span class="nav-text">box.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blas.c"><span class="nav-number">2.</span> <span class="nav-text">blas.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yu Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/09/15/learndarknet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          darknet 源码学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-15 18:00:11" itemprop="dateCreated datePublished" datetime="2021-09-15T18:00:11+08:00">2021-09-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-09-28 19:18:21" itemprop="dateModified" datetime="2021-09-28T19:18:21+08:00">2021-09-28</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8F%90%E9%AB%98%E5%A7%BF%E5%8A%BF%E6%B0%B4%E5%B9%B3/" itemprop="url" rel="index"><span itemprop="name">提高姿势水平</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
+darknet
+</center>
+<span id="more"></span>
+<h2 id="box.c">box.c</h2>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qijunhui/p/8284188.html">x=x+1，x+=1，x++的区别</a></p></li>
+<li><p>(a&gt;b)?y:n 如果A大于B，那么选择Y的结果，如果A小于B，那么选择N的结果。</p></li>
+<li><p>计算两个矩形框相交部分矩形的某一边的边长（视调用情况，可能是相交部分矩形的高，也可能是宽）。<br />
+x1  第一个矩形框的x坐标（或者y坐标，视调用情况，如果计算的是相交部分矩形的宽，则输入的是x坐标)<br />
+w1  第一个矩形框的宽（而如果要计算相交部分矩形的高，则为y坐标，下面凡是说x坐标的，都可能为y坐标，当然，对应宽变为高)<br />
+x2  第二个矩形框的x坐标<br />
+w2  第二个矩形框的宽<br />
+  首先计算两个框左边的x坐标，比较大小，取其大者，记为left；而后计算两个框右边的x坐标，取其小者，记为right，right-left即得相交部分矩形的宽。两个矩形框相交部分矩形的宽或者高。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">float overlap(float x1, float w1, float x2, float w2)</span><br><span class="line">&#123;</span><br><span class="line">    float l1 &#x3D; x1 - w1&#x2F;2;</span><br><span class="line">    float l2 &#x3D; x2 - w2&#x2F;2;</span><br><span class="line">    float left &#x3D; l1 &gt; l2 ? l1 : l2;</span><br><span class="line">    float r1 &#x3D; x1 + w1&#x2F;2;</span><br><span class="line">    float r2 &#x3D; x2 + w2&#x2F;2;</span><br><span class="line">    float right &#x3D; r1 &lt; r2 ? r1 : r2;</span><br><span class="line">    return right - left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>计算IoU值,是目标检测精确度的一个评判指标，全称是intersection over union，翻译成中文就是交比并值，字面上的意思很直接，就是两个矩形相交部分的面积比两个矩形求并之后的总面积，用来做检测评判指标时，含义为模型检测到的矩形框与GroundTruth标记的矩形框之间的交比并值（即可反映检测到的矩形框与GroundTruth之间的重叠度），当两个矩形框完全重叠时，值为1；完全不相交时，值为0。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">float box_intersection(box a, box b)</span><br><span class="line">&#123;</span><br><span class="line">    float w &#x3D; overlap(a.x, a.w, b.x, b.w);</span><br><span class="line">    float h &#x3D; overlap(a.y, a.h, b.y, b.h);</span><br><span class="line">    if(w &lt; 0 || h &lt; 0) return 0;</span><br><span class="line">    float area &#x3D; w*h;</span><br><span class="line">    return area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>pow(float x, float y)函数：计算x的y次幂</p></li>
+</ul>
+<h2 id="blas.c">blas.c</h2>
+<ul>
+<li>方差的无偏估计 （样本方差） <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\)</span>，你会发现样本均值这一项都包含在内。考虑到方差是衡量数据偏差程度的统计量，计算一下样本均值作为中间步骤的中间量，也不失其合理性。于是，为计算样本方差，样本里原有的 n个自由度，有一个自由度被分配给计算样本均值，剩下自由度即为n-1 。</li>
+<li>axpy是线性代数中一种基本操作，完成y= alpha*x + y操作，其中x,y为矢量，alpha为实数系数</li>
+<li>计算预测数组与真实标签数组中每对元素的l2范数值，或者说是计算squared error，注意此函数，并没有求和，没有将所有误差加起来，而是对网络输出的每个元素计算误差的平方值。<br />
+n  输出元素个数，也即pred中的元素个数，也是truth中的元素个数; pred   网络最终的输出值，或者说网络的预测值，其中输出元素个数为n（也即最后一层网络神经元个数为n）<br />
+truth   真实标签值，其中元素个数为n（也即最后一层网络神经元个数为n） delta   相当于本函数的输出，为网络的敏感度图（一般为cost_layer.c的敏感度图）<br />
+error   相当于本函数的输出，包含每个输出元素的squared error</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void l2_cpu(int n, float *pred, float *truth, float *delta, float *error)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        float diff &#x3D; truth[i] - pred[i];</span><br><span class="line">        error[i] &#x3D; diff * diff;</span><br><span class="line">        delta[i] &#x3D; diff;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>softmax<br />
+input   一组输入图片数据（含义见下面softmax_cpu()注释，下同）<br />
+n   一组输入数据中含有的元素个数n=l.inputs/l.groups<br />
+temp   温度参数，关于softmax的温度参数，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36560894/article/details/114874268">softmax with temperature</a><br />
+stride   跨度<br />
+output   这一组输入图片数据对应的输出（也即l.output中与这一组输入对应的某一部分）<br />
+  本函数实现的就是标准的softmax函数处理，唯一有点变化的就是在做指数运算之前，将每个输入元素减去了该组输入元素中的最大值，以增加数值稳定性， <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">void softmax(float *input, int n, float temp, int stride, float *output)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    float sum &#x3D; 0;</span><br><span class="line">    &#x2F;&#x2F; 赋初始最大值为float中的最小值-FLT_MAX（定义在float.h中）</span><br><span class="line">    float largest &#x3D; -FLT_MAX;</span><br><span class="line">    &#x2F;&#x2F; 寻找输入中的最大值，至于为什么要找出最大值，是为了数值计算上的稳定，详细请戳：http:&#x2F;&#x2F;freemind.pluskid.org&#x2F;machine-learning&#x2F;softmax-vs-softmax-loss-numerical-stability&#x2F;</span><br><span class="line">    &#x2F;&#x2F; 这篇博客写的不错，博客在接近尾声的时候，提到了为什么要减去输入中的最大值。</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        if(input[i*stride] &gt; largest) largest &#x3D; input[i*stride];</span><br><span class="line">    &#125;</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        &#x2F;&#x2F; 在进行指数运算之间，如上面博客所说，首先减去最大值（当然温度参数也要除）</span><br><span class="line">        float e &#x3D; exp(input[i*stride]&#x2F;temp - largest&#x2F;temp);</span><br><span class="line">        sum +&#x3D; e;                       &#x2F;&#x2F; 求和</span><br><span class="line">        output[i*stride] &#x3D; e;           &#x2F;&#x2F; 并将每一个输入的结果保存在相应的输出中</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 最后一步：归一化转换为概率（就是softmax函数的原型～），最后的输出结果保存在output中</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; ++i)&#123;</span><br><span class="line">        output[i*stride] &#x2F;&#x3D; sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1009009">赋值运算符</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351">softmax</a></p></li>
+</ul>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012927281/article/details/86064511">linux codeblocks darknet Debug极简教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010122972/article/details/83541978?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link">Darknet 概述</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hgpvision/darknet">Darknet 框架源码分析</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/15/leinaozhineng/" rel="prev" title="类脑智能">
+                  <i class="fa fa-chevron-left"></i> 类脑智能
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/28/zhinengxinxi/" rel="next" title="智能信息处理">
+                  智能信息处理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : ,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'all'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/09/15/learndarknet/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>
