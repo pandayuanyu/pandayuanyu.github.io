@@ -5,24 +5,22 @@
     
     <entry>
       <title>网页视频下载方法</title>
-      <link href="/2021/09/28/Unxiazai/"/>
-      <url>/2021/09/28/Unxiazai/</url>
+      <link href="/2021/09/30/download/"/>
+      <url>/2021/09/30/download/</url>
       
-        <content type="html"><![CDATA[<center>实用下载方法</center><span id="more"></span><h2 id="week-3">week 3</h2><ul><li></li><li></li></ul>]]></content>
+        <content type="html"><![CDATA[<center>实用下载方法</center><span id="more"></span><h2 id="前言idm">前言：IDM</h2><p>  一直使用<a href="https://www.internetdownloadmanager.com/">IDM</a>作为下载器，但不知从何时起，IDM无法再直接抓取B站视频</p><p> </p><h2 id="annie-下载器">annie 下载器</h2><p>  偶然看到<a href="https://github.com/iawia002/annie">annie下载器</a>，效果似乎不错 ### annie安装 * 安装<a href="https://github.com/BtbN/FFmpeg-Builds/releases">FFmpeg</a> * 下载annie对应的release版本 * 解压FFmpeg 和 annie,将annie.exe复制到ffmpeg下bin文件夹内 * 新建ffmpeg和annie的系统环境变量</p><h2 id="annie-下载命令">annie 下载命令</h2><p>  下载 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annie url</span><br></pre></td></tr></table></figure>   下载并查看视频质量 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">annie -i url</span><br></pre></td></tr></table></figure>   注意cmd 目录在哪，下载保存的位置就在哪。</p>]]></content>
       
       
       <categories>
           
-          <category> 好玩的 </category>
+          <category> 人生的经验 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CS </tag>
-            
-            <tag> CV </tag>
+            <tag> 好玩的 </tag>
             
         </tags>
       
@@ -47,9 +45,9 @@
       
         <tags>
             
-            <tag> CS </tag>
-            
             <tag> CV </tag>
+            
+            <tag> CS </tag>
             
         </tags>
       
@@ -276,9 +274,9 @@
       
         <tags>
             
-            <tag> CV </tag>
-            
             <tag> 目标跟踪 </tag>
+            
+            <tag> CV </tag>
             
         </tags>
       
@@ -296,8 +294,6 @@
       
       <categories>
           
-          <category> 一些面试 </category>
-          
           <category> 一些比赛 </category>
           
       </categories>
@@ -305,9 +301,9 @@
       
         <tags>
             
-            <tag> CV </tag>
-            
             <tag> 自动驾驶 </tag>
+            
+            <tag> CV </tag>
             
         </tags>
       
