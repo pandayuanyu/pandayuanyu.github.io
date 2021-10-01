@@ -32,7 +32,7 @@
 <meta property="og:description" content="学习正则表达式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-01T08:00:11.000Z">
-<meta property="article:modified_time" content="2021-10-01T09:20:52.153Z">
+<meta property="article:modified_time" content="2021-10-01T09:50:46.831Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="正则化表达式">
 <meta name="twitter:card" content="summary">
@@ -281,7 +281,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-10-01 16:00:11 / Modified: 17:20:52" itemprop="dateCreated datePublished" datetime="2021-10-01T16:00:11+08:00">2021-10-01</time>
+      <time title="Created: 2021-10-01 16:00:11 / Modified: 17:50:46" itemprop="dateCreated datePublished" datetime="2021-10-01T16:00:11+08:00">2021-10-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -308,7 +308,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>888</span>
+      <span>883</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -418,56 +418,55 @@
 <td>除换行符外的所有字符.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\w</code></td>
 <td>匹配所有字母数字，等同于 <code>[a-zA-Z0-9_]</code>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\W</code></td>
 <td>匹配所有非字母数字，即符号，等同于： <code>[^\w]</code>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">"</td>
+<td style="text-align: center;"><code>\d</code></td>
 <td>匹配数字： <code>[0-9]</code>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\D</code></td>
 <td>匹配非数字： <code>[^\d]</code>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\s</code></td>
 <td>匹配所有空格字符，等同于： <code>[\t\n\f\r\p&#123;Z&#125;]</code>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\S</code></td>
 <td>匹配所有非空格字符： <code>[^\s]</code>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">"</td>
+<td style="text-align: center;"><code>\f</code></td>
 <td>匹配一个换页符.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\n</code></td>
 <td>匹配一个换行符.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">"</td>
+<td style="text-align: center;"><code>\r</code></td>
 <td>匹配一个回车符.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">"</td>
+<td style="text-align: center;"><code>\t</code></td>
 <td>匹配一个制表符.</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">"</td>
+<td style="text-align: center;"><code>\v</code></td>
 <td>匹配一个垂直制表符.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">""</td>
+<td style="text-align: center;"><code>\p</code></td>
 <td>匹配 CR/LF（等同于 <code>\r\n</code>），用来匹配 DOS 行终止符</td>
 </tr>
 </tbody>
 </table>
-<p>注：""代表防止转义</p>
 <p> </p>
 <h2 id="标志">标志</h2>
 <p>  标志也叫模式修正符，因为它可以用来修改表达式的搜索结果。 这些标志可以任意的组合使用，它也是整个正则表达式的一部分。</p>
