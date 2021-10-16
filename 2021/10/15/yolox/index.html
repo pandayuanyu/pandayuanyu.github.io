@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon1.ico">
+  <link rel="mask-icon" href="/images/favicon2.ico" color="#222">
+  <link rel="manifest" href="/images/favicon2.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="yolox, funny">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Train custom coco dataset using Yolox">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/10/15/yolox/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="yolox, funny">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/a214d6d77c4f95bf.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/4d7d71415a5a5387.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/35847d431a8f2664.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/3a0fc2cdbb238754.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/ef79c5e9b1121334.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/a301b899c486ae84.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/10/e92a3825e9d13e0b.png">
+<meta property="article:published_time" content="2021-10-15T04:00:11.000Z">
+<meta property="article:modified_time" content="2021-10-16T12:31:38.007Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="-- CV -- Yolox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/10/a214d6d77c4f95bf.png">
+
+
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/10/15/yolox/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Train custom coco dataset using Yolox | Falcon's Space</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Falcon's Space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">13</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">24</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-environment"><span class="nav-number">1.</span> <span class="nav-text">Pre-environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-a-virtual-environment"><span class="nav-number">2.</span> <span class="nav-text">Create a virtual environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#create-the-project-in-pycharm"><span class="nav-number">3.</span> <span class="nav-text">Create the project in Pycharm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-pytorch"><span class="nav-number">4.</span> <span class="nav-text">Install Pytorch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-yolox"><span class="nav-number">5.</span> <span class="nav-text">Install Yolox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-pycocotools"><span class="nav-number">6.</span> <span class="nav-text">Install pycocotools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-apex"><span class="nav-number">7.</span> <span class="nav-text">Install apex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#validate"><span class="nav-number">8.</span> <span class="nav-text">validate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#train-custom-coco-dataset-using-yolox"><span class="nav-number">9.</span> <span class="nav-text">Train custom coco dataset using Yolox</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#build-dataset"><span class="nav-number">9.1.</span> <span class="nav-text">Build dataset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-the-classes-name"><span class="nav-number">9.2.</span> <span class="nav-text">Modify the classes name</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-yolox_base.py"><span class="nav-number">9.3.</span> <span class="nav-text">Modify yolox_base.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-yolox_base.py-1"><span class="nav-number">9.4.</span> <span class="nav-text">Modify yolox_base.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-train.py"><span class="nav-number">9.5.</span> <span class="nav-text">Modify train.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#train"><span class="nav-number">10.</span> <span class="nav-text">Train</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#test"><span class="nav-number">11.</span> <span class="nav-text">Test</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yu Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/10/15/yolox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Train custom coco dataset using Yolox
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-10-15 12:00:11" itemprop="dateCreated datePublished" datetime="2021-10-15T12:00:11+08:00">2021-10-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-10-16 20:31:38" itemprop="dateModified" datetime="2021-10-16T20:31:38+08:00">2021-10-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8F%90%E9%AB%98%E5%A7%BF%E5%8A%BF%E6%B0%B4%E5%B9%B3/" itemprop="url" rel="index"><span itemprop="name">提高姿势水平</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>6.4k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>18 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
+yolox, funny
+</center>
+<span id="more"></span>
+<h2 id="pre-environment">Pre-environment</h2>
+<ul>
+<li>windows 10</li>
+<li>GPU: Nvidia 3090</li>
+<li>Anaconda3</li>
+<li>pycharm</li>
+</ul>
+<p> </p>
+<h2 id="create-a-virtual-environment">Create a virtual environment</h2>
+<ul>
+<li>Launch Anaconda Prompt <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n yolox python=3.8</span><br><span class="line">conda activate yolox</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> </p>
+<h2 id="create-the-project-in-pycharm">Create the project in Pycharm</h2>
+<ul>
+<li>Launch Pycharm<br />
+Create a new project, and choose the interpreter we established in anaconda
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/a214d6d77c4f95bf.png" width="600"/>
+</div></li>
+<li>Create the project<br />
+open the directory of Yolox which is downloaded from <a target="_blank" rel="noopener" href="https://github.com/Megvii-BaseDetection/YOLOX">Github</a></li>
+</ul>
+<p> </p>
+<h2 id="install-pytorch">Install Pytorch</h2>
+<ul>
+<li>In Pycharm's Terminal <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge</span><br></pre></td></tr></table></figure>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/4d7d71415a5a5387.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h2 id="install-yolox">Install Yolox</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd YOLOX</span><br><span class="line">pip install -U pip &amp;&amp; pip install -r requirements.txt</span><br><span class="line">pip install -v -e .  # or  python setup.py develop</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2 id="install-pycocotools">Install pycocotools</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install cython</span><br><span class="line">pip install pycocotools</span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2 id="install-apex">Install apex</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NVIDIA/apex</span><br><span class="line">cd apex</span><br><span class="line">python setup.py install </span><br></pre></td></tr></table></figure>
+<p> </p>
+<h2 id="validate">validate</h2>
+<ul>
+<li>download model from <a href="https://link.csdn.net/?target=https%3A%2F%2Fgithub.com%2FMegvii-BaseDetection%2FYOLOX">Github</a>, and save the model in the folder named weights</li>
+<li>validate <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo.py image -n yolox-s -c weights/yolox_s.pth --path assets/dog.jpg --conf 0.25 --nms 0.45 --tsize 640 --save_result --device gpu</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/35847d431a8f2664.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h2 id="train-custom-coco-dataset-using-yolox">Train custom coco dataset using Yolox</h2>
+<h3 id="build-dataset">Build dataset</h3>
+<ul>
+<li><p>Using labelImg to label your own images, export the labels information in YOLO format(txt)</p></li>
+<li><p>convert txt format to COCO dataset format <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">coco_format_save_path=<span class="string">&#x27;C:\\Users\\11734\\Desktop\\YOLOX-main\\mydata\\val\\&#x27;</span>                      <span class="comment">#要生成的标准coco格式标签所在文件夹</span></span><br><span class="line">yolo_format_classes_path=<span class="string">&#x27;C:\\Users\\11734\\Desktop\\YOLOX-main\\mydata\\yy.names&#x27;</span>                   <span class="comment">#类别文件，一行一个类</span></span><br><span class="line">yolo_format_annotation_path=<span class="string">&#x27;C:\\Users\\11734\\Desktop\\YOLOX-main\\mydata\\val\\labels\\&#x27;</span>        <span class="comment">#yolo格式标签所在文件夹</span></span><br><span class="line">img_pathDir=<span class="string">&#x27;C:\\Users\\11734\\Desktop\\YOLOX-main\\mydata\\val\\images\\&#x27;</span>                        <span class="comment">#图片所在文件夹</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(yolo_format_classes_path,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fr:                                                      <span class="comment">#打开并读取类别文件</span></span><br><span class="line">    lines1=fr.readlines()</span><br><span class="line"><span class="comment"># print(lines1)</span></span><br><span class="line">categories=[]                                                                 <span class="comment">#存储类别的列表</span></span><br><span class="line"><span class="keyword">for</span> j,label <span class="keyword">in</span> <span class="built_in">enumerate</span>(lines1):</span><br><span class="line">    label=label.strip()</span><br><span class="line">    categories.append(&#123;<span class="string">&#x27;id&#x27;</span>:j+<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>:label,<span class="string">&#x27;supercategory&#x27;</span>:<span class="string">&#x27;None&#x27;</span>&#125;)         <span class="comment">#将类别信息添加到categories中</span></span><br><span class="line"><span class="comment"># print(categories)</span></span><br><span class="line"></span><br><span class="line">write_json_context=<span class="built_in">dict</span>()                                                      <span class="comment">#写入.json文件的大字典</span></span><br><span class="line">write_json_context[<span class="string">&#x27;info&#x27;</span>]= &#123;<span class="string">&#x27;description&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;url&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;year&#x27;</span>: <span class="number">2021</span>, <span class="string">&#x27;contributor&#x27;</span>: <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;date_created&#x27;</span>: <span class="string">&#x27;2021-10-13&#x27;</span>&#125;</span><br><span class="line">write_json_context[<span class="string">&#x27;licenses&#x27;</span>]=[&#123;<span class="string">&#x27;id&#x27;</span>:<span class="number">1</span>,<span class="string">&#x27;name&#x27;</span>:<span class="literal">None</span>,<span class="string">&#x27;url&#x27;</span>:<span class="literal">None</span>&#125;]</span><br><span class="line">write_json_context[<span class="string">&#x27;categories&#x27;</span>]=categories</span><br><span class="line">write_json_context[<span class="string">&#x27;images&#x27;</span>]=[]</span><br><span class="line">write_json_context[<span class="string">&#x27;annotations&#x27;</span>]=[]</span><br><span class="line"></span><br><span class="line"><span class="comment">#接下来的代码主要添加&#x27;images&#x27;和&#x27;annotations&#x27;的key值</span></span><br><span class="line">imageFileList=os.listdir(img_pathDir)                                           <span class="comment">#遍历该文件夹下的所有文件，并将所有文件名添加到列表中</span></span><br><span class="line"><span class="keyword">for</span> i,imageFile <span class="keyword">in</span> <span class="built_in">enumerate</span>(imageFileList):</span><br><span class="line">    imagePath = os.path.join(img_pathDir,imageFile)                             <span class="comment">#获取图片的绝对路径</span></span><br><span class="line">    image = Image.<span class="built_in">open</span>(imagePath)                                               <span class="comment">#读取图片，然后获取图片的宽和高</span></span><br><span class="line">    W, H = image.size</span><br><span class="line"></span><br><span class="line">    img_context=&#123;&#125;                                                              <span class="comment">#使用一个字典存储该图片信息</span></span><br><span class="line">    <span class="comment">#img_name=os.path.basename(imagePath)                                       #返回path最后的文件名。如果path以/或\结尾，那么就会返回空值</span></span><br><span class="line">    img_context[<span class="string">&#x27;file_name&#x27;</span>]=imageFile</span><br><span class="line">    img_context[<span class="string">&#x27;height&#x27;</span>]=H</span><br><span class="line">    img_context[<span class="string">&#x27;width&#x27;</span>]=W</span><br><span class="line">    img_context[<span class="string">&#x27;date_captured&#x27;</span>]=<span class="string">&#x27;2021-07-25&#x27;</span></span><br><span class="line">    img_context[<span class="string">&#x27;id&#x27;</span>]=i                                                         <span class="comment">#该图片的id</span></span><br><span class="line">    img_context[<span class="string">&#x27;license&#x27;</span>]=<span class="number">1</span></span><br><span class="line">    img_context[<span class="string">&#x27;color_url&#x27;</span>]=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    img_context[<span class="string">&#x27;flickr_url&#x27;</span>]=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    write_json_context[<span class="string">&#x27;images&#x27;</span>].append(img_context)                            <span class="comment">#将该图片信息添加到&#x27;image&#x27;列表中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    txtFile=imageFile[:<span class="number">21</span>]+<span class="string">&#x27;.txt&#x27;</span>                                               <span class="comment">#获取该图片获取的txt文件,注意位数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(yolo_format_annotation_path,txtFile),<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> fr:</span><br><span class="line">        lines=fr.readlines()                                                   <span class="comment">#读取txt文件的每一行数据，lines2是一个列表，包含了一个图片的所有标注信息</span></span><br><span class="line">    <span class="keyword">for</span> j,line <span class="keyword">in</span> <span class="built_in">enumerate</span>(lines):</span><br><span class="line"></span><br><span class="line">        bbox_dict = &#123;&#125;                                                          <span class="comment">#将每一个bounding box信息存储在该字典中</span></span><br><span class="line">        <span class="comment"># line = line.strip().split()</span></span><br><span class="line">        <span class="comment"># print(line.strip().split(&#x27; &#x27;))</span></span><br><span class="line"></span><br><span class="line">        class_id,x,y,w,h=line.strip().split(<span class="string">&#x27; &#x27;</span>)                                          <span class="comment">#获取每一个标注框的详细信息</span></span><br><span class="line">        class_id,x, y, w, h = <span class="built_in">int</span>(class_id), <span class="built_in">float</span>(x), <span class="built_in">float</span>(y), <span class="built_in">float</span>(w), <span class="built_in">float</span>(h)       <span class="comment">#将字符串类型转为可计算的int和float类型</span></span><br><span class="line"></span><br><span class="line">        xmin=(x-w/<span class="number">2</span>)*W                                                                    <span class="comment">#坐标转换</span></span><br><span class="line">        ymin=(y-h/<span class="number">2</span>)*H</span><br><span class="line">        xmax=(x+w/<span class="number">2</span>)*W</span><br><span class="line">        ymax=(y+h/<span class="number">2</span>)*H</span><br><span class="line">        w=w*W</span><br><span class="line">        h=h*H</span><br><span class="line"></span><br><span class="line">        bbox_dict[<span class="string">&#x27;id&#x27;</span>]=i*<span class="number">10000</span>+j                                                         <span class="comment">#bounding box的坐标信息</span></span><br><span class="line">        bbox_dict[<span class="string">&#x27;image_id&#x27;</span>]=i</span><br><span class="line">        bbox_dict[<span class="string">&#x27;category_id&#x27;</span>]=class_id+<span class="number">1</span>                                               <span class="comment">#注意目标类别要加一</span></span><br><span class="line">        bbox_dict[<span class="string">&#x27;iscrowd&#x27;</span>]=<span class="number">0</span></span><br><span class="line">        height,width=<span class="built_in">abs</span>(ymax-ymin),<span class="built_in">abs</span>(xmax-xmin)</span><br><span class="line">        bbox_dict[<span class="string">&#x27;area&#x27;</span>]=height*width</span><br><span class="line">        bbox_dict[<span class="string">&#x27;bbox&#x27;</span>]=[xmin,ymin,w,h]</span><br><span class="line">        bbox_dict[<span class="string">&#x27;segmentation&#x27;</span>]=[[xmin,ymin,xmax,ymin,xmax,ymax,xmin,ymax]]</span><br><span class="line">        write_json_context[<span class="string">&#x27;annotations&#x27;</span>].append(bbox_dict)                               <span class="comment">#将每一个由字典存储的bounding box信息添加到&#x27;annotations&#x27;列表中</span></span><br><span class="line"></span><br><span class="line">name = os.path.join(coco_format_save_path,<span class="string">&quot;train&quot;</span>+ <span class="string">&#x27;.json&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(name,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fw:                                                                <span class="comment">#将字典信息写入.json文件中</span></span><br><span class="line">    json.dump(write_json_context,fw,indent=<span class="number">2</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p></li>
+<li><p>get instances_train2017.json and instances_val2017.json, which contain the information of images and labels in coco dataset format</p></li>
+<li><p>Build custom coco dataset at yolox directory, obey the rules of nomenclature, where instances_train2017.json is <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Animals_Coco</span><br><span class="line">   ├─annotations</span><br><span class="line">     --instances_train2017.json</span><br><span class="line">     --instances_val2017.json</span><br><span class="line">   ├─train2017</span><br><span class="line">   └─val2017</span><br><span class="line"></span><br></pre></td></tr></table></figure></p></li>
+<li><p>put images of training set into train2017, put images of validating into val2017</p></li>
+</ul>
+<p> </p>
+<h3 id="modify-the-classes-name">Modify the classes name</h3>
+<ul>
+<li>In yolox/data/datasets/coco_classes.py
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/3a0fc2cdbb238754.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h3 id="modify-yolox_base.py">Modify yolox_base.py</h3>
+<ul>
+<li>In yolox/exp/yolox_base.py
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/ef79c5e9b1121334.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h3 id="modify-yolox_base.py-1">Modify yolox_base.py</h3>
+<ul>
+<li>In exps/example/custom/yolox_s.py
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/a301b899c486ae84.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h3 id="modify-train.py">Modify train.py</h3>
+<ul>
+<li>In tools/train.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_parser</span>():</span></span><br><span class="line">    parser = argparse.ArgumentParser(<span class="string">&quot;YOLOX train parser&quot;</span>)</span><br><span class="line">    parser.add_argument(<span class="string">&quot;-expn&quot;</span>, <span class="string">&quot;--experiment-name&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>)</span><br><span class="line">    <span class="comment"># set default=&quot;Animals_Coco&quot;)#</span></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-n&quot;</span>, <span class="string">&quot;--name&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>, <span class="built_in">help</span>=<span class="string">&quot;model name&quot;</span>)</span><br><span class="line">    <span class="comment"># set default=&quot;yolox-s&quot;)#</span></span><br><span class="line"></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-b&quot;</span>, <span class="string">&quot;--batch-size&quot;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">64</span>, <span class="built_in">help</span>=<span class="string">&quot;batch size&quot;</span>)</span><br><span class="line">    <span class="comment"># modify batch size as 8</span></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-d&quot;</span>, <span class="string">&quot;--devices&quot;</span>, default=<span class="number">0</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, <span class="built_in">help</span>=<span class="string">&quot;device for training&quot;</span>)</span><br><span class="line">    <span class="comment"># set dafault as 0 since there is only one gpu</span></span><br><span class="line"></span><br><span class="line">    parser.add_argument(</span><br><span class="line">        <span class="string">&quot;-f&quot;</span>,</span><br><span class="line">        <span class="string">&quot;--exp_file&quot;</span>,</span><br><span class="line">        default=<span class="string">&quot;C:\\Users\\11734\\Desktop\\YOLOX\\exps\\example\\custom\\yolox_s.py&quot;</span>,</span><br><span class="line">    <span class="comment"># set path of yolox_s.py</span></span><br><span class="line"></span><br><span class="line">    parser.add_argument(<span class="string">&quot;-c&quot;</span>, <span class="string">&quot;--ckpt&quot;</span>, default=<span class="string">&quot;C:\\Users\\11734\\Desktop\\YOLOX\\weights\\yolox_s.pth&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, <span class="built_in">help</span>=<span class="string">&quot;checkpoint file&quot;</span>)</span><br><span class="line">    <span class="comment"># set pre-training weights</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h2 id="train">Train</h2>
+<ul>
+<li>start train, pay attention to the batch size , not exceed the memory of gpu
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/10/e92a3825e9d13e0b.png" width="600"/>
+</div></li>
+</ul>
+<p> </p>
+<h2 id="test">Test</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python tools/demo.py video -n yolox-s -c  tools/YOLOX_outputs/Animals_Coco/last_epoch_ckpt.pth    --path    qq.avi  --conf 0.25 --nm</span><br><span class="line">s 0.45 --tsize 640 --save_result --device gpu</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>well done !</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV-Yolox/" rel="tag"># -- CV -- Yolox</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/02/docker/" rel="prev" title="Docker 容器技术">
+                  <i class="fa fa-chevron-left"></i> Docker 容器技术
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : ,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'all'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/10/15/yolox/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>
