@@ -32,7 +32,7 @@
 <meta property="og:description" content="darknet">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-15T10:00:11.000Z">
-<meta property="article:modified_time" content="2021-10-01T10:55:11.678Z">
+<meta property="article:modified_time" content="2021-11-03T15:36:02.021Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
@@ -130,7 +130,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">21</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">22</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -188,7 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#box.c"><span class="nav-number">1.</span> <span class="nav-text">box.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blas.c"><span class="nav-number">2.</span> <span class="nav-text">blas.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#box.c"><span class="nav-number">1.</span> <span class="nav-text">box.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blas.c"><span class="nav-number">2.</span> <span class="nav-text">blas.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -287,7 +287,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-10-01 18:55:11" itemprop="dateModified" datetime="2021-10-01T18:55:11+08:00">2021-10-01</time>
+        <time title="Modified: 2021-11-03 23:36:02" itemprop="dateModified" datetime="2021-11-03T23:36:02+08:00">2021-11-03</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -349,6 +349,7 @@ w2  第二个矩形框的宽<br />
 <li><p>计算IoU值,是目标检测精确度的一个评判指标，全称是intersection over union，翻译成中文就是交比并值，字面上的意思很直接，就是两个矩形相交部分的面积比两个矩形求并之后的总面积，用来做检测评判指标时，含义为模型检测到的矩形框与GroundTruth标记的矩形框之间的交比并值（即可反映检测到的矩形框与GroundTruth之间的重叠度），当两个矩形框完全重叠时，值为1；完全不相交时，值为0。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">box_intersection</span><span class="params">(box a, box b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> w = overlap(a.x, a.w, b.x, b.w);</span><br><span class="line">    <span class="keyword">float</span> h = overlap(a.y, a.h, b.y, b.h);</span><br><span class="line">    <span class="keyword">if</span>(w &lt; <span class="number">0</span> || h &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> area = w*h;</span><br><span class="line">    <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
 <li><p>pow(float x, float y)函数：计算x的y次幂</p></li>
 </ul>
+<p> </p>
 <h2 id="blas.c">blas.c</h2>
 <ul>
 <li>方差的无偏估计 （样本方差） <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\)</span>，你会发现样本均值这一项都包含在内。考虑到方差是衡量数据偏差程度的统计量，计算一下样本均值作为中间步骤的中间量，也不失其合理性。于是，为计算样本方差，样本里原有的 n个自由度，有一个自由度被分配给计算样本均值，剩下自由度即为n-1 。</li>
@@ -370,6 +371,9 @@ output   这一组输入图片数据对应的输出（也即l.output中与这�
 <li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1009009">赋值运算符</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351">softmax</a></p></li>
 </ul>
+<p> </p>
+<h2 id="section"></h2>
+<p> </p>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012927281/article/details/86064511">linux codeblocks darknet Debug极简教程</a></li>

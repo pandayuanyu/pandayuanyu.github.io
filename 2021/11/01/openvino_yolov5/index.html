@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon1.ico">
+  <link rel="mask-icon" href="/images/favicon2.ico" color="#222">
+  <link rel="manifest" href="/images/favicon2.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploy yolov5 with OpenVINO">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/11/01/openvino_yolov5/index.html">
+<meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/11/9959cabd2f68851a.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/11/95b88eba8e80d997.png">
+<meta property="og:image" content="https://img13.360buyimg.com/ddimg/jfs/t1/155333/35/23205/21882/6177f9f3E94d549fd/dbd1feffebf58691.png">
+<meta property="og:image" content="https://i.bmp.ovh/imgs/2021/11/577920450a64e35d.png">
+<meta property="og:image" content="https://img10.360buyimg.com/ddimg/jfs/t1/169132/19/21631/3241202/6178088dE688c2bed/4d00f7979d98e73d.png">
+<meta property="article:published_time" content="2021-11-01T10:00:11.000Z">
+<meta property="article:modified_time" content="2021-11-05T14:07:24.466Z">
+<meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="CV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.bmp.ovh/imgs/2021/11/9959cabd2f68851a.png">
+
+
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/11/01/openvino_yolov5/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Deploy yolov5 with OpenVINO | Falcon's Space</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Falcon's Space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">22</span></a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#environment"><span class="nav-number">1.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-openvino"><span class="nav-number">2.</span> <span class="nav-text">Install OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#download-openvino"><span class="nav-number">2.1.</span> <span class="nav-text">Download OpenVINO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setting-environment-variables"><span class="nav-number">2.2.</span> <span class="nav-text">Setting environment variables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-pytorch-weights-to-onnx-weights"><span class="nav-number">3.</span> <span class="nav-text">Convert Pytorch Weights to ONNX Weights</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelscommon.py"><span class="nav-number">3.1.</span> <span class="nav-text">Modify models&#x2F;common.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelsexport.py"><span class="nav-number">3.2.</span> <span class="nav-text">Modify models&#x2F;export.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-onnx-weight"><span class="nav-number">3.3.</span> <span class="nav-text">Export onnx weight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-export-errors"><span class="nav-number">3.4.</span> <span class="nav-text">Solutions with export errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-onnx-weight-to-ir-file"><span class="nav-number">4.</span> <span class="nav-text">Convert ONNX weight to IR File</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-the-output-nodes"><span class="nav-number">4.1.</span> <span class="nav-text">Find the output nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transfer-onnx-weight-to-ir"><span class="nav-number">4.2.</span> <span class="nav-text">Transfer ONNX weight to IR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-with-openvino"><span class="nav-number">5.</span> <span class="nav-text">Inference with OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#establish-python-file"><span class="nav-number">5.1.</span> <span class="nav-text">Establish python file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-ir-files"><span class="nav-number">5.2.</span> <span class="nav-text">Get IR files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-some-errors"><span class="nav-number">5.3.</span> <span class="nav-text">Solutions with some errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yu Yuan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/11/01/openvino_yolov5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Deploy yolov5 with OpenVINO
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-01 18:00:11" itemprop="dateCreated datePublished" datetime="2021-11-01T18:00:11+08:00">2021-11-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-11-05 22:07:24" itemprop="dateModified" datetime="2021-11-05T22:07:24+08:00">2021-11-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8F%90%E9%AB%98%E5%A7%BF%E5%8A%BF%E6%B0%B4%E5%B9%B3/" itemprop="url" rel="index"><span itemprop="name">提高姿势水平</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>21k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>57 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
+deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved
+</center>
+<span id="more"></span>
+<h2 id="environment">Environment</h2>
+<ul>
+<li>Windows 10</li>
+<li>CPU Intel i9-10900k</li>
+<li>OpenVINO 2021.4</li>
+<li>Python 3.6.9</li>
+<li>ONNX 1.8.1</li>
+<li>Pytorch 1.10.0</li>
+<li>Netron 5.3.1</li>
+<li>Yolov5 5.0</li>
+</ul>
+<p> </p>
+<h2 id="install-openvino">Install OpenVINO</h2>
+<h3 id="download-openvino">Download OpenVINO</h3>
+<p>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91882515">What is OpenVINO</a><br />
+  <a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/developer/tools/openvino-toolkit-download.html?operatingsystem=window&amp;distributions=webdownload&amp;version=2021.4.1%20LTS%20(latest)&amp;options=offline">Download OpenVINO 2021.4</a></p>
+<p> </p>
+<h3 id="setting-environment-variables">Setting environment variables</h3>
+<p>  Before OpenVINO can be compiled and run, several environment variables must be updated. Open the command prompt and run the following batch file to temporarily set the environment variables: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files(x86)\IntelSWTools\openvino\bin\setupvars.bat</span><br></pre></td></tr></table></figure>   Add system environment variables as well <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\ngraph\lib</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\bin\intel64\Release</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\external\tbb\bin</span><br><span class="line">F:\openvino\openvino_2021.4.689\opencv\bin</span><br></pre></td></tr></table></figure></p>
+<p>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/cc77_2019/article/details/108112228#:~:text=ModuleNotFoundError%3A%20No%20module,named%20%E2%80%98openvino%E2%80%99%20%E5%8E%9F%E5%9B%A0%3A%E6%B2%A1%E6%9C%89%E5%90%A7openvino%E4%B8%8B%E7%9A%84python3.7%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%8D%E5%88%B6%E5%88%B0anoconda%E7%9A%84%E5%AF%B9%E5%BA%94%E7%9B%AE%E5%BD%95%20%E8%A7%A3%E5%86%B3%EF%BC%9AC%3AIntelopenvino_2020.1.033pythonpython3.7%EF%BC%88%E6%98%AF%E4%BD%A0%E5%AE%89%E8%A3%85openvino%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%89%E4%B8%8B%E9%9D%A2openvino%E7%9B%B4%E6%8E%A5copy%E5%88%B0Anaconda%E4%B8%8Bpython3.7%E7%9A%84Libsite-packages%E4%B8%AD%E5%8D%B3%E5%8F%AF%E3%80%82">When somrthing wrong with the installation of openvino</a></p>
+<p> </p>
+<h2 id="convert-pytorch-weights-to-onnx-weights">Convert Pytorch Weights to ONNX Weights</h2>
+<h3 id="modify-modelscommon.py">Modify models/common.py</h3>
+<p>  Find the 39th line in models/common.py shown as follows <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.SiLU() <span class="keyword">if</span> act <span class="keyword">is</span> <span class="literal">True</span> <span class="keyword">else</span> (act <span class="keyword">if</span> <span class="built_in">isinstance</span>(act, nn.Module) <span class="keyword">else</span> nn.Identity())</span><br></pre></td></tr></table></figure>   Change it to the following <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.LeakyReLU(<span class="number">0.1</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></p>
+<p> </p>
+<h3 id="modify-modelsexport.py">Modify models/export.py</h3>
+  Modify the parameters from the 23th line to 29th line in models/export.py, especially the weight you want to convert
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/11/9959cabd2f68851a.png" width="500"/>
+</div>
+  Revise the script models/export.py in line 77 to opset version 10
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/11/95b88eba8e80d997.png" width="500"/>
+</div>
+<p> </p>
+<h3 id="export-onnx-weight">Export onnx weight</h3>
+<p>  Then run export.py or run following script, and we get weight.onnx <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 models/export.py  --weights weight.pt  --img-size 640</span><br></pre></td></tr></table></figure></p>
+<p> </p>
+<h3 id="solutions-with-export-errors">Solutions with export errors</h3>
+<ul>
+<li>When there is some error with coremltools, ensure your python's version is earlier than 3.7, and you'd better start a new virtual environment</li>
+<li>When it shows "ModuleNotFoundError: No module named 'utils'" , you should execute script "pip install utils"</li>
+<li>When it shows "ModuleNotFoundError: No module named 'utils.google_utils'", then <a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/issues/4392">see</a></li>
+<li>When it shows "pytorch Key already registered with the same priority: GroupSpatialSoftmax", then <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/66e33e65577d">reinstall pytorch</a></li>
+</ul>
+<p> </p>
+<h2 id="convert-onnx-weight-to-ir-file">Convert ONNX weight to IR File</h2>
+<p>  Before you convert the weight, you need to confirm that you have set OpenVINO environment and variables</p>
+<h3 id="find-the-output-nodes">Find the output nodes</h3>
+  We need to specify the output node of the IR when we use model optimizer to convert the ONNX weights file. For example, there are 3 output nodes in yolov5s.onnx. We can use Netron to visualize yolov5s.onnx. Then we find the output nodes by searching the keyword “Transpose” in Netron.
+<div data-align="center">
+<img src="https://img13.360buyimg.com/ddimg/jfs/t1/155333/35/23205/21882/6177f9f3E94d549fd/dbd1feffebf58691.png" width="300"/>
+</div>
+  After that, we can find the convolution node marked as oval shown in following Figure. After double clicking the convolution node, we can read its name “Conv_249”. Repeat the above steps to discover the other two nodes named “Conv_243” and "Conv_246".
+<div data-align="center">
+<img src="https://i.bmp.ovh/imgs/2021/11/577920450a64e35d.png" width="300"/>
+</div>
+<h3 id="transfer-onnx-weight-to-ir">Transfer ONNX weight to IR</h3>
+<p>  Use following script to get IR file, then we will get IR files(weight.xml and weight.bin) of weights <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">python F:\\openvino\\openvino_2021.4.689\\deployment_tools\\model_o</span><br><span class="line">ptimizer\\mo.py  --input_model weights/yolov5s.onnx -s 255 --reverse_input_channels --output Conv_243,Conv_246,Conv_249</span><br></pre></td></tr></table></figure></p>
+<p> </p>
+<h2 id="inference-with-openvino">Inference with OpenVINO</h2>
+<h3 id="establish-python-file">Establish python file</h3>
+<p>  Establish yolov5_demo_OV2021.3.py with following content</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"> Copyright (C) 2018-2019 Intel Corporation</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></span><br><span class="line"><span class="string"> you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="string"> You may obtain a copy of the License at</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="string"> distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></span><br><span class="line"><span class="string"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="string"> See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="string"> limitations under the License.</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function, division</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> argparse <span class="keyword">import</span> ArgumentParser, SUPPRESS</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> exp <span class="keyword">as</span> exp</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> openvino.inference_engine <span class="keyword">import</span> IENetwork, IECore</span><br><span class="line"></span><br><span class="line">logging.basicConfig(<span class="built_in">format</span>=<span class="string">&quot;[ %(levelname)s ] %(message)s&quot;</span>, level=logging.INFO, stream=sys.stdout)</span><br><span class="line">log = logging.getLogger()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_argparser</span>():</span></span><br><span class="line">    parser = ArgumentParser(add_help=<span class="literal">False</span>)</span><br><span class="line">    args = parser.add_argument_group(<span class="string">&#x27;Options&#x27;</span>)</span><br><span class="line">    args.add_argument(<span class="string">&#x27;-h&#x27;</span>, <span class="string">&#x27;--help&#x27;</span>, action=<span class="string">&#x27;help&#x27;</span>, default=SUPPRESS, <span class="built_in">help</span>=<span class="string">&#x27;Show this help message and exit.&#x27;</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-m&quot;</span>, <span class="string">&quot;--model&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Required. Path to an .xml file with a trained model.&quot;</span>,</span><br><span class="line">                      required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-i&quot;</span>, <span class="string">&quot;--input&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Required. Path to an image/video file. (Specify &#x27;cam&#x27; to work with &quot;</span></span><br><span class="line">                                            <span class="string">&quot;camera)&quot;</span>, required=<span class="literal">True</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-l&quot;</span>, <span class="string">&quot;--cpu_extension&quot;</span>,</span><br><span class="line">                      <span class="built_in">help</span>=<span class="string">&quot;Optional. Required for CPU custom layers. Absolute path to a shared library with &quot;</span></span><br><span class="line">                           <span class="string">&quot;the kernels implementations.&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="literal">None</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-d&quot;</span>, <span class="string">&quot;--device&quot;</span>,</span><br><span class="line">                      <span class="built_in">help</span>=<span class="string">&quot;Optional. Specify the target device to infer on; CPU, GPU, FPGA, HDDL or MYRIAD is&quot;</span></span><br><span class="line">                           <span class="string">&quot; acceptable. The sample will look for a suitable plugin for device specified. &quot;</span></span><br><span class="line">                           <span class="string">&quot;Default value is CPU&quot;</span>, default=<span class="string">&quot;CPU&quot;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;--labels&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Labels mapping file&quot;</span>, default=<span class="literal">None</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-t&quot;</span>, <span class="string">&quot;--prob_threshold&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Probability threshold for detections filtering&quot;</span>,</span><br><span class="line">                      default=<span class="number">0.5</span>, <span class="built_in">type</span>=<span class="built_in">float</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-iout&quot;</span>, <span class="string">&quot;--iou_threshold&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Intersection over union threshold for overlapping &quot;</span></span><br><span class="line">                                                       <span class="string">&quot;detections filtering&quot;</span>, default=<span class="number">0.4</span>, <span class="built_in">type</span>=<span class="built_in">float</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-ni&quot;</span>, <span class="string">&quot;--number_iter&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Number of inference iterations&quot;</span>, default=<span class="number">1</span>, <span class="built_in">type</span>=<span class="built_in">int</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-pc&quot;</span>, <span class="string">&quot;--perf_counts&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Report performance counters&quot;</span>, default=<span class="literal">False</span>,</span><br><span class="line">                      action=<span class="string">&quot;store_true&quot;</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;-r&quot;</span>, <span class="string">&quot;--raw_output_message&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Output inference results raw values showing&quot;</span>,</span><br><span class="line">                      default=<span class="literal">False</span>, action=<span class="string">&quot;store_true&quot;</span>)</span><br><span class="line">    args.add_argument(<span class="string">&quot;--no_show&quot;</span>, <span class="built_in">help</span>=<span class="string">&quot;Optional. Don&#x27;t show output&quot;</span>, action=<span class="string">&#x27;store_true&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> parser</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YoloParams</span>:</span></span><br><span class="line">    <span class="comment"># ------------------------------------------- Extracting layer parameters ------------------------------------------</span></span><br><span class="line">    <span class="comment"># Magic numbers are copied from yolo samples</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,  side</span>):</span></span><br><span class="line">        self.num = <span class="number">3</span> <span class="comment">#if &#x27;num&#x27; not in param else int(param[&#x27;num&#x27;])</span></span><br><span class="line">        self.coords = <span class="number">4</span> <span class="comment">#if &#x27;coords&#x27; not in param else int(param[&#x27;coords&#x27;])</span></span><br><span class="line">        self.classes = <span class="number">80</span> <span class="comment">#if &#x27;classes&#x27; not in param else int(param[&#x27;classes&#x27;])</span></span><br><span class="line">        self.side = side</span><br><span class="line">        self.anchors = [<span class="number">10.0</span>, <span class="number">13.0</span>, <span class="number">16.0</span>, <span class="number">30.0</span>, <span class="number">33.0</span>, <span class="number">23.0</span>, <span class="number">30.0</span>, <span class="number">61.0</span>, <span class="number">62.0</span>, <span class="number">45.0</span>, <span class="number">59.0</span>, <span class="number">119.0</span>, <span class="number">116.0</span>, <span class="number">90.0</span>, <span class="number">156.0</span>,</span><br><span class="line">                        <span class="number">198.0</span>,</span><br><span class="line">                        <span class="number">373.0</span>, <span class="number">326.0</span>] <span class="comment">#if &#x27;anchors&#x27; not in param else [float(a) for a in param[&#x27;anchors&#x27;].split(&#x27;,&#x27;)]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#self.isYoloV3 = False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#if param.get(&#x27;mask&#x27;):</span></span><br><span class="line">        <span class="comment">#    mask = [int(idx) for idx in param[&#x27;mask&#x27;].split(&#x27;,&#x27;)]</span></span><br><span class="line">        <span class="comment">#    self.num = len(mask)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#    maskedAnchors = []</span></span><br><span class="line">        <span class="comment">#    for idx in mask:</span></span><br><span class="line">        <span class="comment">#        maskedAnchors += [self.anchors[idx * 2], self.anchors[idx * 2 + 1]]</span></span><br><span class="line">        <span class="comment">#    self.anchors = maskedAnchors</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#    self.isYoloV3 = True # Weak way to determine but the only one.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">log_params</span>(<span class="params">self</span>):</span></span><br><span class="line">        params_to_print = &#123;<span class="string">&#x27;classes&#x27;</span>: self.classes, <span class="string">&#x27;num&#x27;</span>: self.num, <span class="string">&#x27;coords&#x27;</span>: self.coords, <span class="string">&#x27;anchors&#x27;</span>: self.anchors&#125;</span><br><span class="line">        [log.info(<span class="string">&quot;         &#123;:8&#125;: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(param_name, param)) <span class="keyword">for</span> param_name, param <span class="keyword">in</span> params_to_print.items()]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">letterbox</span>(<span class="params">img, size=(<span class="params"><span class="number">640</span>, <span class="number">640</span></span>), color=(<span class="params"><span class="number">114</span>, <span class="number">114</span>, <span class="number">114</span></span>), auto=<span class="literal">True</span>, scaleFill=<span class="literal">False</span>, scaleup=<span class="literal">True</span></span>):</span></span><br><span class="line">    <span class="comment"># Resize image to a 32-pixel-multiple rectangle https://github.com/ultralytics/yolov3/issues/232</span></span><br><span class="line">    shape = img.shape[:<span class="number">2</span>]  <span class="comment"># current shape [height, width]</span></span><br><span class="line">    w, h = size</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Scale ratio (new / old)</span></span><br><span class="line">    r = <span class="built_in">min</span>(h / shape[<span class="number">0</span>], w / shape[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> scaleup:  <span class="comment"># only scale down, do not scale up (for better test mAP)</span></span><br><span class="line">        r = <span class="built_in">min</span>(r, <span class="number">1.0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute padding</span></span><br><span class="line">    ratio = r, r  <span class="comment"># width, height ratios</span></span><br><span class="line">    new_unpad = <span class="built_in">int</span>(<span class="built_in">round</span>(shape[<span class="number">1</span>] * r)), <span class="built_in">int</span>(<span class="built_in">round</span>(shape[<span class="number">0</span>] * r))</span><br><span class="line">    dw, dh = w - new_unpad[<span class="number">0</span>], h - new_unpad[<span class="number">1</span>]  <span class="comment"># wh padding</span></span><br><span class="line">    <span class="keyword">if</span> auto:  <span class="comment"># minimum rectangle</span></span><br><span class="line">        dw, dh = np.mod(dw, <span class="number">64</span>), np.mod(dh, <span class="number">64</span>)  <span class="comment"># wh padding</span></span><br><span class="line">    <span class="keyword">elif</span> scaleFill:  <span class="comment"># stretch</span></span><br><span class="line">        dw, dh = <span class="number">0.0</span>, <span class="number">0.0</span></span><br><span class="line">        new_unpad = (w, h)</span><br><span class="line">        ratio = w / shape[<span class="number">1</span>], h / shape[<span class="number">0</span>]  <span class="comment"># width, height ratios</span></span><br><span class="line"></span><br><span class="line">    dw /= <span class="number">2</span>  <span class="comment"># divide padding into 2 sides</span></span><br><span class="line">    dh /= <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> shape[::-<span class="number">1</span>] != new_unpad:  <span class="comment"># resize</span></span><br><span class="line">        img = cv2.resize(img, new_unpad, interpolation=cv2.INTER_LINEAR)</span><br><span class="line">    top, bottom = <span class="built_in">int</span>(<span class="built_in">round</span>(dh - <span class="number">0.1</span>)), <span class="built_in">int</span>(<span class="built_in">round</span>(dh + <span class="number">0.1</span>))</span><br><span class="line">    left, right = <span class="built_in">int</span>(<span class="built_in">round</span>(dw - <span class="number">0.1</span>)), <span class="built_in">int</span>(<span class="built_in">round</span>(dw + <span class="number">0.1</span>))</span><br><span class="line">    img = cv2.copyMakeBorder(img, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  <span class="comment"># add border</span></span><br><span class="line"></span><br><span class="line">    top2, bottom2, left2, right2 = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> img.shape[<span class="number">0</span>] != h:</span><br><span class="line">        top2 = (h - img.shape[<span class="number">0</span>])//<span class="number">2</span></span><br><span class="line">        bottom2 = top2</span><br><span class="line">        img = cv2.copyMakeBorder(img, top2, bottom2, left2, right2, cv2.BORDER_CONSTANT, value=color)  <span class="comment"># add border</span></span><br><span class="line">    <span class="keyword">elif</span> img.shape[<span class="number">1</span>] != w:</span><br><span class="line">        left2 = (w - img.shape[<span class="number">1</span>])//<span class="number">2</span></span><br><span class="line">        right2 = left2</span><br><span class="line">        img = cv2.copyMakeBorder(img, top2, bottom2, left2, right2, cv2.BORDER_CONSTANT, value=color)  <span class="comment"># add border</span></span><br><span class="line">    <span class="keyword">return</span> img</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scale_bbox</span>(<span class="params">x, y, height, width, class_id, confidence, im_h, im_w, resized_im_h=<span class="number">640</span>, resized_im_w=<span class="number">640</span></span>):</span></span><br><span class="line">    gain = <span class="built_in">min</span>(resized_im_w / im_w, resized_im_h / im_h)  <span class="comment"># gain  = old / new</span></span><br><span class="line">    pad = (resized_im_w - im_w * gain) / <span class="number">2</span>, (resized_im_h - im_h * gain) / <span class="number">2</span>  <span class="comment"># wh padding</span></span><br><span class="line">    x = <span class="built_in">int</span>((x - pad[<span class="number">0</span>])/gain)</span><br><span class="line">    y = <span class="built_in">int</span>((y - pad[<span class="number">1</span>])/gain)</span><br><span class="line"></span><br><span class="line">    w = <span class="built_in">int</span>(width/gain)</span><br><span class="line">    h = <span class="built_in">int</span>(height/gain)</span><br><span class="line"> </span><br><span class="line">    xmin = <span class="built_in">max</span>(<span class="number">0</span>, <span class="built_in">int</span>(x - w / <span class="number">2</span>))</span><br><span class="line">    ymin = <span class="built_in">max</span>(<span class="number">0</span>, <span class="built_in">int</span>(y - h / <span class="number">2</span>))</span><br><span class="line">    xmax = <span class="built_in">min</span>(im_w, <span class="built_in">int</span>(xmin + w))</span><br><span class="line">    ymax = <span class="built_in">min</span>(im_h, <span class="built_in">int</span>(ymin + h))</span><br><span class="line">    <span class="comment"># Method item() used here to convert NumPy types to native types for compatibility with functions, which don&#x27;t</span></span><br><span class="line">    <span class="comment"># support Numpy types (e.g., cv2.rectangle doesn&#x27;t support int64 in color parameter)</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">dict</span>(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, class_id=class_id.item(), confidence=confidence.item())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">entry_index</span>(<span class="params">side, coord, classes, location, entry</span>):</span></span><br><span class="line">    side_power_2 = side ** <span class="number">2</span></span><br><span class="line">    n = location // side_power_2</span><br><span class="line">    loc = location % side_power_2</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(side_power_2 * (n * (coord + classes + <span class="number">1</span>) + entry) + loc)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_yolo_region</span>(<span class="params">blob, resized_image_shape, original_im_shape, params, threshold</span>):</span></span><br><span class="line">    <span class="comment"># ------------------------------------------ Validating output parameters ------------------------------------------    </span></span><br><span class="line">    out_blob_n, out_blob_c, out_blob_h, out_blob_w = blob.shape</span><br><span class="line">    predictions = <span class="number">1.0</span>/(<span class="number">1.0</span>+np.exp(-blob)) </span><br><span class="line">                   </span><br><span class="line">    <span class="keyword">assert</span> out_blob_w == out_blob_h, <span class="string">&quot;Invalid size of output blob. It sould be in NCHW layout and height should &quot;</span> \</span><br><span class="line">                                     <span class="string">&quot;be equal to width. Current height = &#123;&#125;, current width = &#123;&#125;&quot;</span> \</span><br><span class="line">                                     <span class="string">&quot;&quot;</span>.<span class="built_in">format</span>(out_blob_h, out_blob_w)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ------------------------------------------ Extracting layer parameters -------------------------------------------</span></span><br><span class="line">    orig_im_h, orig_im_w = original_im_shape</span><br><span class="line">    resized_image_h, resized_image_w = resized_image_shape</span><br><span class="line">    objects = <span class="built_in">list</span>()</span><br><span class="line"> </span><br><span class="line">    side_square = params.side * params.side</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ------------------------------------------- Parsing YOLO Region output -------------------------------------------</span></span><br><span class="line">    bbox_size = <span class="built_in">int</span>(out_blob_c/params.num) <span class="comment">#4+1+num_classes</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> row, col, n <span class="keyword">in</span> np.ndindex(params.side, params.side, params.num):</span><br><span class="line">        bbox = predictions[<span class="number">0</span>, n*bbox_size:(n+<span class="number">1</span>)*bbox_size, row, col]</span><br><span class="line">        </span><br><span class="line">        x, y, width, height, object_probability = bbox[:<span class="number">5</span>]</span><br><span class="line">        class_probabilities = bbox[<span class="number">5</span>:]</span><br><span class="line">        <span class="keyword">if</span> object_probability &lt; threshold:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        x = (<span class="number">2</span>*x - <span class="number">0.5</span> + col)*(resized_image_w/out_blob_w)</span><br><span class="line">        y = (<span class="number">2</span>*y - <span class="number">0.5</span> + row)*(resized_image_h/out_blob_h)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(resized_image_w/out_blob_w) == <span class="number">8</span> &amp; <span class="built_in">int</span>(resized_image_h/out_blob_h) == <span class="number">8</span>: <span class="comment">#80x80, </span></span><br><span class="line">            idx = <span class="number">0</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">int</span>(resized_image_w/out_blob_w) == <span class="number">16</span> &amp; <span class="built_in">int</span>(resized_image_h/out_blob_h) == <span class="number">16</span>: <span class="comment">#40x40</span></span><br><span class="line">            idx = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">int</span>(resized_image_w/out_blob_w) == <span class="number">32</span> &amp; <span class="built_in">int</span>(resized_image_h/out_blob_h) == <span class="number">32</span>: <span class="comment"># 20x20</span></span><br><span class="line">            idx = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        width = (<span class="number">2</span>*width)**<span class="number">2</span>* params.anchors[idx * <span class="number">6</span> + <span class="number">2</span> * n]</span><br><span class="line">        height = (<span class="number">2</span>*height)**<span class="number">2</span> * params.anchors[idx * <span class="number">6</span> + <span class="number">2</span> * n + <span class="number">1</span>]</span><br><span class="line">        class_id = np.argmax(class_probabilities)</span><br><span class="line">        confidence = object_probability</span><br><span class="line">        objects.append(scale_bbox(x=x, y=y, height=height, width=width, class_id=class_id, confidence=confidence,</span><br><span class="line">                                  im_h=orig_im_h, im_w=orig_im_w, resized_im_h=resized_image_h, resized_im_w=resized_image_w))</span><br><span class="line">    <span class="keyword">return</span> objects</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">intersection_over_union</span>(<span class="params">box_1, box_2</span>):</span></span><br><span class="line">    width_of_overlap_area = <span class="built_in">min</span>(box_1[<span class="string">&#x27;xmax&#x27;</span>], box_2[<span class="string">&#x27;xmax&#x27;</span>]) - <span class="built_in">max</span>(box_1[<span class="string">&#x27;xmin&#x27;</span>], box_2[<span class="string">&#x27;xmin&#x27;</span>])</span><br><span class="line">    height_of_overlap_area = <span class="built_in">min</span>(box_1[<span class="string">&#x27;ymax&#x27;</span>], box_2[<span class="string">&#x27;ymax&#x27;</span>]) - <span class="built_in">max</span>(box_1[<span class="string">&#x27;ymin&#x27;</span>], box_2[<span class="string">&#x27;ymin&#x27;</span>])</span><br><span class="line">    <span class="keyword">if</span> width_of_overlap_area &lt; <span class="number">0</span> <span class="keyword">or</span> height_of_overlap_area &lt; <span class="number">0</span>:</span><br><span class="line">        area_of_overlap = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        area_of_overlap = width_of_overlap_area * height_of_overlap_area</span><br><span class="line">    box_1_area = (box_1[<span class="string">&#x27;ymax&#x27;</span>] - box_1[<span class="string">&#x27;ymin&#x27;</span>]) * (box_1[<span class="string">&#x27;xmax&#x27;</span>] - box_1[<span class="string">&#x27;xmin&#x27;</span>])</span><br><span class="line">    box_2_area = (box_2[<span class="string">&#x27;ymax&#x27;</span>] - box_2[<span class="string">&#x27;ymin&#x27;</span>]) * (box_2[<span class="string">&#x27;xmax&#x27;</span>] - box_2[<span class="string">&#x27;xmin&#x27;</span>])</span><br><span class="line">    area_of_union = box_1_area + box_2_area - area_of_overlap</span><br><span class="line">    <span class="keyword">if</span> area_of_union == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> area_of_overlap / area_of_union</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    args = build_argparser().parse_args()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ------------- 1. Plugin initialization for specified device and load extensions library if specified -------------</span></span><br><span class="line">    log.info(<span class="string">&quot;Creating Inference Engine...&quot;</span>)</span><br><span class="line">    ie = IECore()</span><br><span class="line">    <span class="keyword">if</span> args.cpu_extension <span class="keyword">and</span> <span class="string">&#x27;CPU&#x27;</span> <span class="keyword">in</span> args.device:</span><br><span class="line">        ie.add_extension(args.cpu_extension, <span class="string">&quot;CPU&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># -------------------- 2. Reading the IR generated by the Model Optimizer (.xml and .bin files) --------------------</span></span><br><span class="line">    model = args.model</span><br><span class="line">    log.info(<span class="string">f&quot;Loading network:\n\t<span class="subst">&#123;model&#125;</span>&quot;</span>)</span><br><span class="line">    net = ie.read_network(model=model)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ---------------------------------- 3. Load CPU extension for support specific layer ------------------------------</span></span><br><span class="line"><span class="comment">#    if &quot;CPU&quot; in args.device:</span></span><br><span class="line"><span class="comment">#        supported_layers = ie.query_network(net, &quot;CPU&quot;)</span></span><br><span class="line"><span class="comment">#        not_supported_layers = [l for l in net.layers.keys() if l not in supported_layers]</span></span><br><span class="line"><span class="comment">#        if len(not_supported_layers) != 0:</span></span><br><span class="line"><span class="comment">#            log.error(&quot;Following layers are not supported by the plugin for specified device &#123;&#125;:\n &#123;&#125;&quot;.</span></span><br><span class="line"><span class="comment">#                     format(args.device, &#x27;, &#x27;.join(not_supported_layers)))</span></span><br><span class="line"><span class="comment">#            log.error(&quot;Please try to specify cpu extensions library path in sample&#x27;s command line parameters using -l &quot;</span></span><br><span class="line"><span class="comment">#                      &quot;or --cpu_extension command line argument&quot;)</span></span><br><span class="line"><span class="comment">#            sys.exit(1)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">len</span>(net.input_info.keys()) == <span class="number">1</span>, <span class="string">&quot;Sample supports only YOLO V3 based single input topologies&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ---------------------------------------------- 4. Preparing inputs -----------------------------------------------</span></span><br><span class="line">    log.info(<span class="string">&quot;Preparing inputs&quot;</span>)</span><br><span class="line">    input_blob = <span class="built_in">next</span>(<span class="built_in">iter</span>(net.input_info))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#  Defaulf batch_size is 1</span></span><br><span class="line">    net.batch_size = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Read and pre-process input images</span></span><br><span class="line">    n, c, h, w = net.input_info[input_blob].input_data.shape</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> args.labels:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(args.labels, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            labels_map = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        labels_map = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    input_stream = <span class="number">0</span> <span class="keyword">if</span> args.<span class="built_in">input</span> == <span class="string">&quot;cam&quot;</span> <span class="keyword">else</span> args.<span class="built_in">input</span></span><br><span class="line"></span><br><span class="line">    is_async_mode = <span class="literal">True</span></span><br><span class="line">    cap = cv2.VideoCapture(input_stream)</span><br><span class="line">    number_input_frames = <span class="built_in">int</span>(cap.get(cv2.CAP_PROP_FRAME_COUNT))</span><br><span class="line">    number_input_frames = <span class="number">1</span> <span class="keyword">if</span> number_input_frames != -<span class="number">1</span> <span class="keyword">and</span> number_input_frames &lt; <span class="number">0</span> <span class="keyword">else</span> number_input_frames</span><br><span class="line"></span><br><span class="line">    wait_key_code = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Number of frames in picture is 1 and this will be read in cycle. Sync mode is default value for this case</span></span><br><span class="line">    <span class="keyword">if</span> number_input_frames != <span class="number">1</span>:</span><br><span class="line">        ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        is_async_mode = <span class="literal">False</span></span><br><span class="line">        wait_key_code = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ----------------------------------------- 5. Loading model to the plugin -----------------------------------------</span></span><br><span class="line">    log.info(<span class="string">&quot;Loading model to the plugin&quot;</span>)</span><br><span class="line">    exec_net = ie.load_network(network=net, num_requests=<span class="number">2</span>, device_name=args.device)</span><br><span class="line"></span><br><span class="line">    cur_request_id = <span class="number">0</span></span><br><span class="line">    next_request_id = <span class="number">1</span></span><br><span class="line">    render_time = <span class="number">0</span></span><br><span class="line">    parsing_time = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ----------------------------------------------- 6. Doing inference -----------------------------------------------</span></span><br><span class="line">    log.info(<span class="string">&quot;Starting inference...&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;To close the application, press &#x27;CTRL+C&#x27; here or switch to the output window and press ESC key&quot;</span>)</span><br><span class="line">    print(<span class="string">&quot;To switch between sync/async modes, press TAB key in the output window&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> cap.isOpened():</span><br><span class="line">        <span class="comment"># Here is the first asynchronous point: in the Async mode, we capture frame to populate the NEXT infer request</span></span><br><span class="line">        <span class="comment"># in the regular mode, we capture frame to the CURRENT infer request</span></span><br><span class="line">        <span class="keyword">if</span> is_async_mode:</span><br><span class="line">            ret, next_frame = cap.read()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ret, frame = cap.read()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> ret:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> is_async_mode:</span><br><span class="line">            request_id = next_request_id</span><br><span class="line">            in_frame = letterbox(frame, (w, h))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            request_id = cur_request_id</span><br><span class="line">            in_frame = letterbox(frame, (w, h))</span><br><span class="line"></span><br><span class="line">        in_frame0 = in_frame</span><br><span class="line">        <span class="comment"># resize input_frame to network size</span></span><br><span class="line">        in_frame = in_frame.transpose((<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>))  <span class="comment"># Change data layout from HWC to CHW</span></span><br><span class="line">        in_frame = in_frame.reshape((n, c, h, w))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Start inference</span></span><br><span class="line">        start_time = time()</span><br><span class="line">        exec_net.start_async(request_id=request_id, inputs=&#123;input_blob: in_frame&#125;)</span><br><span class="line">        det_time = time() - start_time</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Collecting object detection results</span></span><br><span class="line">        objects = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">if</span> exec_net.requests[cur_request_id].wait(-<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">            output = exec_net.requests[cur_request_id].output_blobs</span><br><span class="line">            start_time = time()</span><br><span class="line">            <span class="keyword">for</span> layer_name, out_blob <span class="keyword">in</span> output.items():</span><br><span class="line">                layer_params = YoloParams(side=out_blob.buffer.shape[<span class="number">2</span>])</span><br><span class="line">                log.info(<span class="string">&quot;Layer &#123;&#125; parameters: &quot;</span>.<span class="built_in">format</span>(layer_name))</span><br><span class="line">                layer_params.log_params()</span><br><span class="line">                objects += parse_yolo_region(out_blob.buffer, in_frame.shape[<span class="number">2</span>:],</span><br><span class="line">                                             <span class="comment">#in_frame.shape[2:], layer_params,</span></span><br><span class="line">                                             frame.shape[:-<span class="number">1</span>], layer_params,</span><br><span class="line">                                             args.prob_threshold)</span><br><span class="line">            parsing_time = time() - start_time</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Filtering overlapping boxes with respect to the --iou_threshold CLI parameter</span></span><br><span class="line">        objects = <span class="built_in">sorted</span>(objects, key=<span class="keyword">lambda</span> obj : obj[<span class="string">&#x27;confidence&#x27;</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(objects)):</span><br><span class="line">            <span class="keyword">if</span> objects[i][<span class="string">&#x27;confidence&#x27;</span>] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(objects)):</span><br><span class="line">                <span class="keyword">if</span> intersection_over_union(objects[i], objects[j]) &gt; args.iou_threshold:</span><br><span class="line">                    objects[j][<span class="string">&#x27;confidence&#x27;</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Drawing objects with respect to the --prob_threshold CLI parameter</span></span><br><span class="line">        objects = [obj <span class="keyword">for</span> obj <span class="keyword">in</span> objects <span class="keyword">if</span> obj[<span class="string">&#x27;confidence&#x27;</span>] &gt;= args.prob_threshold]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(objects) <span class="keyword">and</span> args.raw_output_message:</span><br><span class="line">            log.info(<span class="string">&quot;\nDetected boxes for batch &#123;&#125;:&quot;</span>.<span class="built_in">format</span>(<span class="number">1</span>))</span><br><span class="line">            log.info(<span class="string">&quot; Class ID | Confidence | XMIN | YMIN | XMAX | YMAX | COLOR &quot;</span>)</span><br><span class="line"></span><br><span class="line">        origin_im_size = frame.shape[:-<span class="number">1</span>]</span><br><span class="line">        print(origin_im_size)</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> objects:</span><br><span class="line">            <span class="comment"># Validation bbox of detected object</span></span><br><span class="line">            <span class="keyword">if</span> obj[<span class="string">&#x27;xmax&#x27;</span>] &gt; origin_im_size[<span class="number">1</span>] <span class="keyword">or</span> obj[<span class="string">&#x27;ymax&#x27;</span>] &gt; origin_im_size[<span class="number">0</span>] <span class="keyword">or</span> obj[<span class="string">&#x27;xmin&#x27;</span>] &lt; <span class="number">0</span> <span class="keyword">or</span> obj[<span class="string">&#x27;ymin&#x27;</span>] &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            color = (<span class="built_in">int</span>(<span class="built_in">min</span>(obj[<span class="string">&#x27;class_id&#x27;</span>] * <span class="number">12.5</span>, <span class="number">255</span>)),</span><br><span class="line">                     <span class="built_in">min</span>(obj[<span class="string">&#x27;class_id&#x27;</span>] * <span class="number">7</span>, <span class="number">255</span>), <span class="built_in">min</span>(obj[<span class="string">&#x27;class_id&#x27;</span>] * <span class="number">5</span>, <span class="number">255</span>))</span><br><span class="line">            det_label = labels_map[obj[<span class="string">&#x27;class_id&#x27;</span>]] <span class="keyword">if</span> labels_map <span class="keyword">and</span> <span class="built_in">len</span>(labels_map) &gt;= obj[<span class="string">&#x27;class_id&#x27;</span>] <span class="keyword">else</span> \</span><br><span class="line">                <span class="built_in">str</span>(obj[<span class="string">&#x27;class_id&#x27;</span>])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> args.raw_output_message:</span><br><span class="line">                log.info(</span><br><span class="line">                    <span class="string">&quot;&#123;:^9&#125; | &#123;:10f&#125; | &#123;:4&#125; | &#123;:4&#125; | &#123;:4&#125; | &#123;:4&#125; | &#123;&#125; &quot;</span>.<span class="built_in">format</span>(det_label, obj[<span class="string">&#x27;confidence&#x27;</span>], obj[<span class="string">&#x27;xmin&#x27;</span>],</span><br><span class="line">                                                                              obj[<span class="string">&#x27;ymin&#x27;</span>], obj[<span class="string">&#x27;xmax&#x27;</span>], obj[<span class="string">&#x27;ymax&#x27;</span>],</span><br><span class="line">                                                                              color))</span><br><span class="line"></span><br><span class="line">            cv2.rectangle(frame, (obj[<span class="string">&#x27;xmin&#x27;</span>], obj[<span class="string">&#x27;ymin&#x27;</span>]), (obj[<span class="string">&#x27;xmax&#x27;</span>], obj[<span class="string">&#x27;ymax&#x27;</span>]), color, <span class="number">2</span>)</span><br><span class="line">            cv2.putText(frame,</span><br><span class="line">                        <span class="string">&quot;#&quot;</span> + det_label + <span class="string">&#x27; &#x27;</span> + <span class="built_in">str</span>(<span class="built_in">round</span>(obj[<span class="string">&#x27;confidence&#x27;</span>] * <span class="number">100</span>, <span class="number">1</span>)) + <span class="string">&#x27; %&#x27;</span>,</span><br><span class="line">                        (obj[<span class="string">&#x27;xmin&#x27;</span>], obj[<span class="string">&#x27;ymin&#x27;</span>] - <span class="number">7</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">0.6</span>, color, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Draw performance stats over frame</span></span><br><span class="line">        inf_time_message = <span class="string">&quot;Inference time: N\A for async mode&quot;</span> <span class="keyword">if</span> is_async_mode <span class="keyword">else</span> \</span><br><span class="line">            <span class="string">&quot;Inference time: &#123;:.3f&#125; ms&quot;</span>.<span class="built_in">format</span>(det_time * <span class="number">1e3</span>)</span><br><span class="line">        render_time_message = <span class="string">&quot;OpenCV rendering time: &#123;:.3f&#125; ms&quot;</span>.<span class="built_in">format</span>(render_time * <span class="number">1e3</span>)</span><br><span class="line">        async_mode_message = <span class="string">&quot;Async mode is on. Processing request &#123;&#125;&quot;</span>.<span class="built_in">format</span>(cur_request_id) <span class="keyword">if</span> is_async_mode <span class="keyword">else</span> \</span><br><span class="line">            <span class="string">&quot;Async mode is off. Processing request &#123;&#125;&quot;</span>.<span class="built_in">format</span>(cur_request_id)</span><br><span class="line">        parsing_message = <span class="string">&quot;YOLO parsing time is &#123;:.3f&#125; ms&quot;</span>.<span class="built_in">format</span>(parsing_time * <span class="number">1e3</span>)</span><br><span class="line"></span><br><span class="line">        cv2.putText(frame, inf_time_message, (<span class="number">15</span>, <span class="number">15</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">0.5</span>, (<span class="number">200</span>, <span class="number">10</span>, <span class="number">10</span>), <span class="number">1</span>)</span><br><span class="line">        cv2.putText(frame, render_time_message, (<span class="number">15</span>, <span class="number">45</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">0.5</span>, (<span class="number">10</span>, <span class="number">10</span>, <span class="number">200</span>), <span class="number">1</span>)</span><br><span class="line">        cv2.putText(frame, async_mode_message, (<span class="number">10</span>, <span class="built_in">int</span>(origin_im_size[<span class="number">0</span>] - <span class="number">20</span>)), cv2.FONT_HERSHEY_COMPLEX, <span class="number">0.5</span>,</span><br><span class="line">                    (<span class="number">10</span>, <span class="number">10</span>, <span class="number">200</span>), <span class="number">1</span>)</span><br><span class="line">        cv2.putText(frame, parsing_message, (<span class="number">15</span>, <span class="number">30</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">0.5</span>, (<span class="number">10</span>, <span class="number">10</span>, <span class="number">200</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        start_time = time()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> args.no_show:</span><br><span class="line">            cv2.imshow(<span class="string">&quot;DetectionResults&quot;</span>, frame)</span><br><span class="line">        render_time = time() - start_time</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> is_async_mode:</span><br><span class="line">            cur_request_id, next_request_id = next_request_id, cur_request_id</span><br><span class="line">            frame = next_frame</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> args.no_show:</span><br><span class="line">            key = cv2.waitKey(wait_key_code)</span><br><span class="line">    </span><br><span class="line">            <span class="comment"># ESC key</span></span><br><span class="line">            <span class="keyword">if</span> key == <span class="number">27</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># Tab key</span></span><br><span class="line">            <span class="keyword">if</span> key == <span class="number">9</span>:</span><br><span class="line">                exec_net.requests[cur_request_id].wait()</span><br><span class="line">                is_async_mode = <span class="keyword">not</span> is_async_mode</span><br><span class="line">                log.info(<span class="string">&quot;Switched to &#123;&#125; mode&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;async&quot;</span> <span class="keyword">if</span> is_async_mode <span class="keyword">else</span> <span class="string">&quot;sync&quot;</span>))</span><br><span class="line"></span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    sys.exit(main() <span class="keyword">or</span> <span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> </p>
+<h3 id="get-ir-files">Get IR files</h3>
+<p>  Run following script <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python yolov5_demo_OV2021.3.py -i img.jpg -m weight.xml</span><br></pre></td></tr></table></figure></p>
+  Then we can see the inference demo
+<div data-align="center">
+<img src="https://img10.360buyimg.com/ddimg/jfs/t1/169132/19/21631/3241202/6178088dE688c2bed/4d00f7979d98e73d.png" width="400"/>
+</div>
+<p> </p>
+<h3 id="solutions-with-some-errors">Solutions with some errors</h3>
+<ul>
+<li><p>No module named 'networkx'<br />
+pip install networkx</p></li>
+<li><p>ModuleNotFoundError: No module named 'defusedxml'<br />
+pip install defusedxml</p></li>
+<li><p>Detected not satisfied dependencies: onnx: installed: 1.8.0, required: &gt;= 1.8.1<br />
+pip install onnx==1.8.1</p></li>
+</ul>
+<p> </p>
+<h2 id="reference">Reference</h2>
+<p>https://github.com/violet17/yolov5_demo https://github.com/Chen-MingChang/pytorch_YOLO_OpenVINO_demo https://cloud.tencent.com/developer/article/1764073</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/15/yolox/" rel="prev" title="Train custom coco dataset using Yolox">
+                  <i class="fa fa-chevron-left"></i> Train custom coco dataset using Yolox
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yu Yuan</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+
+    <script async src=“https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : ,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'all'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/11/01/openvino_yolov5/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/boom.js"></script>

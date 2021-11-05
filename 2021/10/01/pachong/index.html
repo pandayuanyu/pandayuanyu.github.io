@@ -32,7 +32,7 @@
 <meta property="og:description" content="爬虫学好，牢饭管饱">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-01T08:33:11.000Z">
-<meta property="article:modified_time" content="2021-10-01T10:57:50.535Z">
+<meta property="article:modified_time" content="2021-11-03T15:35:52.273Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="好玩的">
 <meta property="article:tag" content="爬虫">
@@ -131,7 +131,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">11</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">21</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">22</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -203,7 +203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -280,10 +280,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-10-01 16:33:11 / Modified: 18:57:50" itemprop="dateCreated datePublished" datetime="2021-10-01T16:33:11+08:00">2021-10-01</time>
+      <time title="Created: 2021-10-01 16:33:11" itemprop="dateCreated datePublished" datetime="2021-10-01T16:33:11+08:00">2021-10-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-11-03 23:35:52" itemprop="dateModified" datetime="2021-11-03T23:35:52+08:00">2021-11-03</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -309,7 +315,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>795</span>
+      <span>794</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -333,7 +339,7 @@
 <span id="more"></span>
 <h2 id="概念介绍">概念介绍</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用requests抓取页面内容，并将响应赋值给page变量</span></span><br><span class="line">html = requests.get(<span class="string">&#x27;https://yuanyuspace.cn/tags/&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用content属性获取页面的源页面</span></span><br><span class="line"><span class="comment"># 使用BeautifulSoap解析，把内容传递到BeautifulSoap类</span></span><br><span class="line">soup = BeautifulSoup(html.content, <span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line">links = soup.find_all(<span class="string">&#x27;div&#x27;</span>, class_= <span class="string">&#x27;tag-cloud-tags&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># link的内容就是div，我们取它的span内容就是我们需要段子的内容</span></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">    print(link.get_text())</span><br></pre></td></tr></table></figure>
-<p>得到结果 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D:\ananconda\python.exe <span class="string">&quot;D:\pycharmm\PyCharm Community Edition 2020.3.4\plugins\python-ce\helpers\pydev\pydevd.py&quot;</span> --multiproc --qt-support=auto --client <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> --port <span class="number">3450</span> --file C:/Users/<span class="number">11734</span>/PycharmProjects/pythonProject1/main.py</span><br><span class="line">Connected to pydev debugger (build <span class="number">203.7717</span><span class="number">.65</span>)</span><br><span class="line"></span><br><span class="line">AI CS CV docker 写给CC 卡尔曼滤波 图像融合 好玩的 正则化表达式 爬虫 目标跟踪 自动驾驶</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>得到结果 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\ananconda\python.exe <span class="string">&quot;D:\pycharmm\PyCharm Community Edition 2020.3.4\plugins\python-ce\helpers\pydev\pydevd.py&quot;</span> --multiproc --qt-support=auto --client <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> --port <span class="number">3450</span> --file C:/Users/<span class="number">11734</span>/PycharmProjects/pythonProject1/main.py</span><br><span class="line">Connected to pydev debugger (build <span class="number">203.7717</span><span class="number">.65</span>)</span><br><span class="line"></span><br><span class="line">AI CS CV docker 写给CC 卡尔曼滤波 图像融合 好玩的 正则化表达式 爬虫 目标跟踪 自动驾驶</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="section"></h2>
 <h2 id="资料">资料</h2>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35324806?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=745016002512715776&amp;wechatShare=1&amp;s_r=0">爬虫基本原理</a></p>
