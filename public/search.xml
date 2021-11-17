@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>trajectory registration of IMU and USBL data</title>
+      <link href="/2021/11/17/trajectory_registration/"/>
+      <url>/2021/11/17/trajectory_registration/</url>
+      
+        <content type="html"><![CDATA[<center>trajectory registration of IMU and USBL data, from WGS84 to ENU</center><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一些算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 配准 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Deploy yolov5 with OpenVINO</title>
       <link href="/2021/11/01/openvino_yolov5/"/>
       <url>/2021/11/01/openvino_yolov5/</url>
@@ -45,7 +70,9 @@
       
         <tags>
             
-            <tag> -- CV -- Yolox </tag>
+            <tag> CV </tag>
+            
+            <tag> Yolox </tag>
             
         </tags>
       
@@ -160,7 +187,7 @@
       <link href="/2021/09/03/sample/"/>
       <url>/2021/09/03/sample/</url>
       
-        <content type="html"><![CDATA[<center>语法样本</center><span id="more"></span><h2 id="插入图片">插入图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;i.bmp.ovh&#x2F;imgs&#x2F;2021&#x2F;04&#x2F;b9dddd6c69cdbbba.png&quot; width&#x3D;&quot;300&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure><div data-align="center"><img src="https://i.bmp.ovh/imgs/2021/04/b9dddd6c69cdbbba.png" width="300"/></div><h2 id="公式">公式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">E(\mathcal&#123;T&#125;) \approx \sum_&#123;i&#125; \sum_&#123;j&#125; \sqrt&#123;\sum_&#123;d&#125;\left(\nabla_&#123;1&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\left(\nabla_&#123;2&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\epsilon&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure><p><span class="math display">\[E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}\]</span></p><h2 id="代码块">代码块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure><p>注意```后面可以跟语言，点亮代码块</p><h2 id="超链接">超链接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SDK Manager](https:&#x2F;&#x2F;developer.nvidia.com&#x2F;nvidia-sdk-manager)</span><br></pre></td></tr></table></figure><p><a href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a></p><h2 id="缩进与空行">缩进与空行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;缩进</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;换行</span><br></pre></td></tr></table></figure><p>  缩进</p><p>  换行</p><h2 id="列举">列举</h2><ul><li>一二三四五</li><li>上山打老虎</li><li>老虎打不到</li><li>打到小松鼠</li></ul><h2 id="排序">排序</h2><ol type="1"><li>窗前明月光</li><li>疑是地上霜</li><li>举头望明月</li><li>低头思故乡</li></ol><h2 id="注释">注释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#x2F;&#x2F;]: &lt;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<center>语法样本</center><span id="more"></span><h2 id="插入图片">插入图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div align&#x3D;center&gt;&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;i.bmp.ovh&#x2F;imgs&#x2F;2021&#x2F;04&#x2F;b9dddd6c69cdbbba.png&quot; width&#x3D;&quot;300&quot;&#x2F;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure><h2 id="公式">公式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">E(\mathcal&#123;T&#125;) \approx \sum_&#123;i&#125; \sum_&#123;j&#125; \sqrt&#123;\sum_&#123;d&#125;\left(\nabla_&#123;1&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\left(\nabla_&#123;2&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\epsilon&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure><p><span class="math display">\[E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}\]</span></p><h2 id="代码块">代码块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure><p>注意```后面可以跟语言，点亮代码块</p><h2 id="超链接">超链接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SDK Manager](https:&#x2F;&#x2F;developer.nvidia.com&#x2F;nvidia-sdk-manager)</span><br></pre></td></tr></table></figure><p><a href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a></p><h2 id="缩进与空行">缩进与空行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;缩进</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;换行</span><br></pre></td></tr></table></figure><p>  缩进</p><p>  换行</p><h2 id="列举">列举</h2><ul><li>一二三四五</li><li>上山打老虎</li><li>老虎打不到</li><li>打到小松鼠</li></ul><h2 id="排序">排序</h2><ol type="1"><li>窗前明月光</li><li>疑是地上霜</li><li>举头望明月</li><li>低头思故乡</li></ol><h2 id="注释">注释</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#x2F;&#x2F;]: &lt;&gt;</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
