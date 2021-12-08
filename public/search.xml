@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>trajectory registration of IMU and USBL data</title>
+      <link href="/2021/11/17/vistereo/"/>
+      <url>/2021/11/17/vistereo/</url>
+      
+        <content type="html"><![CDATA[<center>Trajectory registration of IMU and USBL data, from WGS84 to ENU</center><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一些算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 配准 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Deploy yolov5 with OpenVINO</title>
       <link href="/2021/11/01/openvino_yolov5/"/>
       <url>/2021/11/01/openvino_yolov5/</url>
