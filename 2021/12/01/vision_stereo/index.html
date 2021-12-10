@@ -24,16 +24,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"pandayuanyu.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"livere","storage":true,"lazyload":false,"nav":null,"activeClass":"livere"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/./public/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false}};
   </script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Falcon&#39;s Space">
-<meta property="og:url" content="https://pandayuanyu.github.io/tags/CV/index.html">
+<meta name="description" content="Knowledge on Stereo Vision">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stereo Vision">
+<meta property="og:url" content="https://pandayuanyu.github.io/2021/12/01/vision_stereo/index.html">
 <meta property="og:site_name" content="Falcon&#39;s Space">
+<meta property="og:description" content="Knowledge on Stereo Vision">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-01T00:08:11.000Z">
+<meta property="article:modified_time" content="2021-12-10T06:36:34.324Z">
 <meta property="article:author" content="Yu Yuan">
+<meta property="article:tag" content="CV">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://pandayuanyu.github.io/tags/CV/">
+<link rel="canonical" href="https://pandayuanyu.github.io/2021/12/01/vision_stereo/">
 
 
 <script class="page-configurations">
@@ -41,11 +46,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
-<title>Tag: CV | Falcon's Space</title>
+<title>Stereo Vision | Falcon's Space</title>
   
 
 
@@ -170,7 +175,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -183,6 +188,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dot-and-cross-products-of-vectors-and-matrices"><span class="nav-number">1.</span> <span class="nav-text">Dot and Cross Products of Vectors and Matrices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geometric-description-of-camera-imaging"><span class="nav-number">2.</span> <span class="nav-text">Geometric Description of Camera Imaging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#essential-matrix-and-fundamental-matrix"><span class="nav-number">3.</span> <span class="nav-text">Essential Matrix and Fundamental Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epipolar-geometry"><span class="nav-number">4.</span> <span class="nav-text">Epipolar Geometry</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,231 +245,157 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">CV
-          <small>Tag</small>
-        </h2>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://pandayuanyu.github.io/2021/12/01/vision_stereo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yu Yuan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Falcon's Space">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Stereo Vision
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-01 08:08:11" itemprop="dateCreated datePublished" datetime="2021-12-01T08:08:11+08:00">2021-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-12-10 14:36:34" itemprop="dateModified" datetime="2021-12-10T14:36:34+08:00">2021-12-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8F%90%E9%AB%98%E5%A7%BF%E5%8A%BF%E6%B0%B4%E5%B9%B3/" itemprop="url" rel="index"><span itemprop="name">提高姿势水平</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
       </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>820</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <center>
+Knowledge on Stereo Vision
+</center>
+<span id="more"></span>
+<h2 id="dot-and-cross-products-of-vectors-and-matrices">Dot and Cross Products of Vectors and Matrices</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wzyaiwl/article/details/106310705">Dot and Cross Products of Vectors and Matrices</a></li>
+<li>Matrix dot product: is the multiplication of the corresponding elements of the matrix</li>
+<li>Matrix cross product: Matrix multiplication is the Mth row of matrix A multiplied by the Nth column of matrix B. Each element is multiplied and summed as the values of the Mth row and column.</li>
+</ul>
+<p> </p>
+<h2 id="geometric-description-of-camera-imaging">Geometric Description of Camera Imaging</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xhy3054.github.io/camerca-module/">This blog</a></li>
+<li>Why is it common to see the image plane in front of the camera's optical center: Generally, in order to simplify the model, we uniformly symmetric the imaging plane to the front of the optical center of the camera, so that the imaging plane and three-dimensional space points are placed on the same side of the camera coordinate system, which is called virtual image.</li>
+</ul>
+<p> </p>
+<h2 id="essential-matrix-and-fundamental-matrix">Essential Matrix and Fundamental Matrix</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h763247747/article/details/100943169">Essential Matrix and Fundamental Matrix</a></li>
+</ul>
+<h2 id="epipolar-geometry">Epipolar Geometry</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.360doc.com/content/14/0205/14/10724725_349963695.shtml">Epipolar Geometry</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caster99/p/4703033.html">Why the rotation matrix is an orthogonal matrix</a></li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-12-01T08:08:11+08:00"
-              content="2021-12-01">
-          12-01
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/12/01/vision_stereo/" itemprop="url">
-            <span itemprop="name">Stereo Vision</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
 
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-11-01T18:00:11+08:00"
-              content="2021-11-01">
-          11-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/11/01/openvino_yolov5/" itemprop="url">
-            <span itemprop="name">Deploy yolov5 with OpenVINO</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-10-15T12:00:11+08:00"
-              content="2021-10-15">
-          10-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/10/15/yolox/" itemprop="url">
-            <span itemprop="name">Train custom coco dataset using Yolox</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-15T18:00:11+08:00"
-              content="2021-09-15">
-          09-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/15/learndarknet/" itemprop="url">
-            <span itemprop="name">darknet 源码学习</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-08-18T12:00:00+08:00"
-              content="2021-08-18">
-          08-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/08/18/haikangcam/" itemprop="url">
-            <span itemprop="name">自组双目测距定位系统</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-04-18T23:11:11+08:00"
-              content="2021-04-18">
-          04-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/18/fastmot/" itemprop="url">
-            <span itemprop="name">FastMOT demo 复现</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-04-15T23:11:11+08:00"
-              content="2021-04-15">
-          04-15
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/15/dellbisai/" itemprop="url">
-            <span itemprop="name">Dell AI/ADS 比赛</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-04-11T23:11:11+08:00"
-              content="2021-04-11">
-          04-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/11/SIRF/" itemprop="url">
-            <span itemprop="name">Simultaneous Image Registration and Fusion in a Unified Framework</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-04-05T16:11:11+08:00"
-              content="2021-04-05">
-          04-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/05/STTV/" itemprop="url">
-            <span itemprop="name">Structure Tensor Total Variation</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-03-30T11:11:11+08:00"
-              content="2021-03-30">
-          03-30
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/03/30/zeroshot/" itemprop="url">
-            <span itemprop="name">Zero Shot Objects Classification Method of Side scan Sonar Image Based on Synthesis of Pseudo Samples</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
     </div>
   </div>
-  
-  
-  
 
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/17/trajectory_registration/" rel="prev" title="trajectory registration of IMU and USBL data">
+                  <i class="fa fa-chevron-left"></i> trajectory registration of IMU and USBL data
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MzEwMS8yOTU3Nw=="></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -601,6 +533,21 @@
 
 
 
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2021/12/01/vision_stereo/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
