@@ -130,7 +130,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -341,10 +341,20 @@
 <ul>
 <li>网上刷机教程很多，在此仅列出以下关键点和踩坑点</li>
 <li>首先确保有良好的网络环境，出现问题最多的便在网络上！有网线就不要连Wifi。网络实在不行就换其他网络，比如用手机开热点</li>
-<li>最有参考价值的是这篇<a target="_blank" rel="noopener" href="https://www.it610.com/article/1293370881787109376.htm">TX2 刷Jetpack4.4</a></li>
-<li>新版本Jetpack均通过<a target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a>刷入</li>
-<li>刷机前需要准备的硬件与环境: 1.装有Ubuntu操作系统（16.04/18.04/20.04均可）的主机(尽量避免虚拟机)，硬盘空间至少60GB以上，不然使用SDK Manager安装时会提示空间不足; 2.准备好USB hub(TX2板子上仅有一个USB A 接口，需要hub连接键鼠等)</li>
-<li>在主机下载安装好SDK Manager后运行软件，第一次需要登录英伟达账号，选择对应板子型号，按照step 01——&gt;step 02——&gt;step 03顺序操作。可以先不连板子，先下载安装包。不用安装主机(host)的相关部分</li>
+<li>最有参考价值的是这篇<a
+target="_blank" rel="noopener" href="https://www.it610.com/article/1293370881787109376.htm">TX2
+刷Jetpack4.4</a></li>
+<li>新版本Jetpack均通过<a
+target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-sdk-manager">SDK
+Manager</a>刷入</li>
+<li>刷机前需要准备的硬件与环境:
+1.装有Ubuntu操作系统（16.04/18.04/20.04均可）的主机(尽量避免虚拟机)，硬盘空间至少60GB以上，不然使用SDK
+Manager安装时会提示空间不足; 2.准备好USB hub(TX2板子上仅有一个USB A
+接口，需要hub连接键鼠等)</li>
+<li>在主机下载安装好SDK
+Manager后运行软件，第一次需要登录英伟达账号，选择对应板子型号，按照step
+01——&gt;step 02——&gt;step
+03顺序操作。可以先不连板子，先下载安装包。不用安装主机(host)的相关部分</li>
 <li>SDK Manager登录账号容易失败，多试几次</li>
 <li>主机在下载过Jetpack后，下一次再刷机时，可以不用登录账号，直接在登录界面点最右离线安装(安装包已经下好了，在主机里)</li>
 <li>不要在TX2刷CUDA时主机终端还在占用apt命令</li>
@@ -359,7 +369,11 @@
 <ul>
 <li>NX 刷机简单许多，只要一个TF卡和读卡器、Windows PC</li>
 <li>SD卡镜像最快</li>
-<li>先使用<a target="_blank" rel="noopener" href="https://www.sdcardformatter.com/">SD Card Formatter</a>格式化，后去下<a target="_blank" rel="noopener" href="https://developer.nvidia.com/zh-cn/embedded/downloads">NX系统镜像</a>， 最后<a target="_blank" rel="noopener" href="https://win32diskimager.com/">Win32 Disk Imager</a>烧录。</li>
+<li>先使用<a target="_blank" rel="noopener" href="https://www.sdcardformatter.com/">SD Card
+Formatter</a>格式化，后去下<a
+target="_blank" rel="noopener" href="https://developer.nvidia.com/zh-cn/embedded/downloads">NX系统镜像</a>，
+最后<a target="_blank" rel="noopener" href="https://win32diskimager.com/">Win32 Disk
+Imager</a>烧录。</li>
 </ul>
 <p> </p>
 <h2 id="jetson-agx-xavier">Jetson AGX Xavier</h2>
@@ -371,7 +385,8 @@
 <p> </p>
 <h2 id="其他注意事项">其他注意事项</h2>
 <ul>
-<li>刷机完毕，看有无CUDA <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure> 如果没有 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib</span><br><span class="line">export PATH=$PATH:/usr/local/cuda/<span class="built_in">bin</span></span><br></pre></td></tr></table></figure> 再次查看就有了</li>
+<li>刷机完毕，看有无CUDA <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvcc -V</span><br></pre></td></tr></table></figure> 如果没有 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib</span><br><span class="line">export PATH=$PATH:/usr/local/cuda/<span class="built_in">bin</span></span><br></pre></td></tr></table></figure>
+再次查看就有了</li>
 <li>若需要卸载CUDA <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get --purge remove <span class="string">&quot;*cublas*&quot;</span> <span class="string">&quot;*cufft*&quot;</span> <span class="string">&quot;*curand*&quot;</span> \</span><br><span class="line"> <span class="string">&quot;*cusolver*&quot;</span> <span class="string">&quot;*cusparse*&quot;</span> <span class="string">&quot;*npp*&quot;</span> <span class="string">&quot;*nvjpeg*&quot;</span> <span class="string">&quot;cuda*&quot;</span> <span class="string">&quot;nsight*&quot;</span></span><br></pre></td></tr></table></figure> 自动卸载残余 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure></li>
 </ul>
 
@@ -509,6 +524,25 @@
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

@@ -1173,6 +1173,11 @@ pre code {
 .post-body .note.danger h6 {
   color: #d9534f;
 }
+.pdfobject-container iframe,
+.pdfobject-container embed {
+  height: 500px;
+  width: 100%;
+}
 .pagination .prev,
 .pagination .next,
 .pagination .page-number,
@@ -2941,7 +2946,7 @@ mjx-container[display="true"] + br {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #127950;
+  background: #d0ff41;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);

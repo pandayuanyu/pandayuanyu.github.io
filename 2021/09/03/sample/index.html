@@ -130,7 +130,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -341,14 +341,17 @@
 <h2 id="公式">公式</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">E(\mathcal&#123;T&#125;) \approx \sum_&#123;i&#125; \sum_&#123;j&#125; \sqrt&#123;\sum_&#123;d&#125;\left(\nabla_&#123;1&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\left(\nabla_&#123;2&#125; \mathbf&#123;r&#125;_&#123;i, j, d&#125;\right)^&#123;2&#125;+\epsilon&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
 <p><span class="math display">\[
-E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j, d}\right)^{2}+\epsilon}
+E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1}
+\mathbf{r}_{i, j, d}\right)^{2}+\left(\nabla_{2} \mathbf{r}_{i, j,
+d}\right)^{2}+\epsilon}
 \]</span></p>
 <h2 id="代码块">代码块</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove</span><br></pre></td></tr></table></figure>
 <p>注意```后面可以跟语言，点亮代码块</p>
 <h2 id="超链接">超链接</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[SDK Manager](https:&#x2F;&#x2F;developer.nvidia.com&#x2F;nvidia-sdk-manager)</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-sdk-manager">SDK Manager</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/nvidia-sdk-manager">SDK
+Manager</a></p>
 <h2 id="缩进与空行">缩进与空行</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;emsp;&amp;emsp;缩进</span><br><span class="line"></span><br><span class="line">&amp;emsp;&amp;emsp;换行</span><br></pre></td></tr></table></figure>
 <p>  缩进</p>
@@ -504,6 +507,25 @@ E(\mathcal{T}) \approx \sum_{i} \sum_{j} \sqrt{\sum_{d}\left(\nabla_{1} \mathbf{
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

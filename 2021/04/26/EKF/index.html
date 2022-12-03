@@ -135,7 +135,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -206,7 +206,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -335,9 +335,13 @@
 </center>
 <span id="more"></span>
 <p> </p>
-<p>// 初值<span class="math inline">\(x_{0}=[120,4,25,0]^{T}\)</span>, 量测初值<span class="math inline">\(\hat{x}_{0}=[125,4.1,26,0.1]^{T}\)</span> // T为采样周期，q为过程噪声方差，r为量测噪声方差<br />
+<p>// 初值<span class="math inline">\(x_{0}=[120,4,25,0]^{T}\)</span>,
+量测初值<span
+class="math inline">\(\hat{x}_{0}=[125,4.1,26,0.1]^{T}\)</span> //
+T为采样周期，q为过程噪声方差，r为量测噪声方差<br />
 // N为蒙特卡洛模拟次数<br />
-// 初始状态协方差矩阵<span class="math inline">\(P_{0}=0.2 I_{4 \times 4}\)</span><br />
+// 初始状态协方差矩阵<span class="math inline">\(P_{0}=0.2 I_{4 \times
+4}\)</span><br />
 // 定常速度模型 constant velocity <span class="math display">\[
 \begin{array}{l}
 x_{k+1} \triangleq\left[\begin{array}{l}
@@ -373,12 +377,13 @@ T &amp; 0 \\
 0 &amp; T^{2} / 2 \\
 0 &amp; T
 \end{array}\right]
- \\
- \\
+\\
+\\
 E\left[v_{k}\right]=\left[\begin{array}{l}
 0 \\
 0
-\end{array}\right], Q_{k} \triangleq E\left[v_{k} v_{k}^{T}\right]=\left[\begin{array}{ll}
+\end{array}\right], Q_{k} \triangleq E\left[v_{k}
+v_{k}^{T}\right]=\left[\begin{array}{ll}
 q &amp; 0 \\
 0 &amp; q
 \end{array}\right] \\
@@ -386,7 +391,8 @@ q &amp; 0 \\
 E\left[w_{k+1}\right]=\left[\begin{array}{l}
 0 \\
 0
-\end{array}\right], R_{k+1} \triangleq E\left[w_{k+1} w_{k+1}^{T}\right]=\left[\begin{array}{ll}
+\end{array}\right], R_{k+1} \triangleq E\left[w_{k+1}
+w_{k+1}^{T}\right]=\left[\begin{array}{ll}
 1 &amp; 0 \\
 0 &amp; 1
 \end{array}\right]
@@ -549,6 +555,25 @@ E\left[w_{k+1}\right]=\left[\begin{array}{l}
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

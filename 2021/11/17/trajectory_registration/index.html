@@ -137,7 +137,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -195,7 +195,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-processing"><span class="nav-number">1.</span> <span class="nav-text">Data processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#imu-data-calculation-and-trajectory-drawing"><span class="nav-number">2.</span> <span class="nav-text">IMU data calculation and trajectory drawing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usbl-data-calculation-and-trajectory-drawing"><span class="nav-number">3.</span> <span class="nav-text">USBL data calculation and trajectory drawing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#imu-and-usbl-data-registration"><span class="nav-number">4.</span> <span class="nav-text">IMU and USBL data registration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trajectory-matching"><span class="nav-number">5.</span> <span class="nav-text">Trajectory matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">6.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-processing"><span class="nav-number">1.</span> <span class="nav-text">Data processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#imu-data-calculation-and-trajectory-drawing"><span class="nav-number">2.</span> <span class="nav-text">IMU data
+calculation and trajectory drawing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usbl-data-calculation-and-trajectory-drawing"><span class="nav-number">3.</span> <span class="nav-text">USBL data
+calculation and trajectory drawing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#imu-and-usbl-data-registration"><span class="nav-number">4.</span> <span class="nav-text">IMU and USBL data
+registration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trajectory-matching"><span class="nav-number">5.</span> <span class="nav-text">Trajectory matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">6.</span> <span class="nav-text">Code</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,7 +212,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -344,13 +347,31 @@ Trajectory registration of IMU and USBL data, from WGS84 to ENU
 </center>
 <span id="more"></span>
 <h2 id="data-processing">Data processing</h2>
-<p>  Inertial navigationa data(IMU) is relatively continuous and fluctuates less, which can be directly used for trajectory transformation. Due to the influence of USBL equipment, USBL data has many anomalies,such as large jump in time series, data not updated, numerical anomaly and not continuous enough. Therefore, USBL data need to be screened to eliminate outliers before they can be used for trajectory description.<br />
+<p>  Inertial navigationa data(IMU) is relatively continuous and
+fluctuates less, which can be directly used for trajectory
+transformation. Due to the influence of USBL equipment, USBL data has
+many anomalies,such as large jump in time series, data not updated,
+numerical anomaly and not continuous enough. Therefore, USBL data need
+to be screened to eliminate outliers before they can be used for
+trajectory description.<br />
   The USBL data screening scheme is as follows:<br />
-  1. Delete the data that XYZ is 0 at the initial moment, during which the USBL device does not normally send/receive valid data.<br />
-  2. The X-axis of USBL points upward horizontally, which can be understood as depth data. Since the relative variation range of depth value is very small, data points with X value greater than 10 can be deleted based on this standard.<br />
-  3. The direction of the Y-axis of the USBL is roughly parallel to the short edge of the experimental water area. With the USBL equipment as the center, the range of the short edge of the experimental water area is limited to ±50m.<br />
-  4. Since the motion state of the object changes continuously and the motion speed is relatively slow, the changes of data with similar time stamps are generally monotonous and small, which can be used as the standard to eliminate data points with large jumps.</p>
-<p>  The following figure shows the track of unexcluded USBL abnormal data. The green scatter points represent USBL data points, and the existence of many abnormal points can be observed from the figure.</p>
+  1. Delete the data that XYZ is 0 at the initial moment, during which
+the USBL device does not normally send/receive valid data.<br />
+  2. The X-axis of USBL points upward horizontally, which can be
+understood as depth data. Since the relative variation range of depth
+value is very small, data points with X value greater than 10 can be
+deleted based on this standard.<br />
+  3. The direction of the Y-axis of the USBL is roughly parallel to the
+short edge of the experimental water area. With the USBL equipment as
+the center, the range of the short edge of the experimental water area
+is limited to ±50m.<br />
+  4. Since the motion state of the object changes continuously and the
+motion speed is relatively slow, the changes of data with similar time
+stamps are generally monotonous and small, which can be used as the
+standard to eliminate data points with large jumps.</p>
+<p>  The following figure shows the track of unexcluded USBL abnormal
+data. The green scatter points represent USBL data points, and the
+existence of many abnormal points can be observed from the figure.</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/9032095f4213b9e2.jpg" width="300"/>
 </div>
@@ -358,25 +379,97 @@ Trajectory registration of IMU and USBL data, from WGS84 to ENU
 Fig.1 Trajectory diagram without excluding USBL abnormal data
 </center>
 <p> </p>
-<h2 id="imu-data-calculation-and-trajectory-drawing">IMU data calculation and trajectory drawing</h2>
-<p>  Since the IMU data initialization comes from GPS calibration, the data values after IMU are also longitude and latitude values, and the coordinate system is WGS84 geodetic coordinate system. In order to draw the trajectory conveniently, the longitude and latitude values under WGS84 need to be converted into the northeast Sky (ENU) coordinate system with the origin of the first point measured by IMU. ENU coordinate system is also called station center coordinate system. The coordinate system takes the user's position as the origin, with X axis pointing east, Y axis pointing north and Z axis pointing to the zenith.<br />
-  The transformation of data point coordinates from WGS84 to ENU coordinate system consists of two steps:<br />
-  1. Transfer the ENU coordinate system to the ECEF (Earth-centered solid Right Angle) coordinate system</p>
-<p>  The ORIGIN of the ECEF coordinate system is the earth's center of mass, the X-axis extends through the intersection of the prime meridian (0 degrees longitude) and the equator (0 degrees latitude), and the Z-axis extends through the North Pole (that is, coincides with the earth's rotation axis). The Y-axis follows the right-handed coordinate system, crossing the equator and 90 degrees longitude. (Lon, Lat, Alt) in the WGS84 coordinate system is converted to points (X,Y,Z) in the ECEF coordinate system:</p>
-<p><span class="math display">\[\left\{\begin{array}{l}X=(N+a l t) \cos (l a t) \cos (l o n) \\ Y=(N+a l t) \cos (l a t) \sin (l o n) \\ Z=\left(N\left(1-e^{2}\right)+a l t\right) \sin (l a t)\end{array}\right.\]</span></p>
-<p>  Where e is the eccentricity of the ellipsoid and N is the radius of curvature of the reference ellipsoid.</p>
-<p><span class="math display">\[\left\{\begin{array}{l}e^{2}=\frac{a^{2}-b^{2}}{a^{2}} \\ N=\frac{a}{\sqrt{1-e^{2} \sin ^{2} l a t}}\end{array}\right.\]</span></p>
-<p>  Since polar flattening <span class="math inline">\(f=\frac{a-b}{a}\)</span> under WGS-84, the relationship between eccentricity e and polar flattening f is as follows:</p>
+<h2 id="imu-data-calculation-and-trajectory-drawing">IMU data
+calculation and trajectory drawing</h2>
+<p>  Since the IMU data initialization comes from GPS calibration, the
+data values after IMU are also longitude and latitude values, and the
+coordinate system is WGS84 geodetic coordinate system. In order to draw
+the trajectory conveniently, the longitude and latitude values under
+WGS84 need to be converted into the northeast Sky (ENU) coordinate
+system with the origin of the first point measured by IMU. ENU
+coordinate system is also called station center coordinate system. The
+coordinate system takes the user's position as the origin, with X axis
+pointing east, Y axis pointing north and Z axis pointing to the
+zenith.<br />
+  The transformation of data point coordinates from WGS84 to ENU
+coordinate system consists of two steps:<br />
+  1. Transfer the ENU coordinate system to the ECEF (Earth-centered
+solid Right Angle) coordinate system</p>
+<p>  The ORIGIN of the ECEF coordinate system is the earth's center of
+mass, the X-axis extends through the intersection of the prime meridian
+(0 degrees longitude) and the equator (0 degrees latitude), and the
+Z-axis extends through the North Pole (that is, coincides with the
+earth's rotation axis). The Y-axis follows the right-handed coordinate
+system, crossing the equator and 90 degrees longitude. (Lon, Lat, Alt)
+in the WGS84 coordinate system is converted to points (X,Y,Z) in the
+ECEF coordinate system:</p>
+<p><span class="math display">\[\left\{\begin{array}{l}X=(N+a l t) \cos
+(l a t) \cos (l o n) \\ Y=(N+a l t) \cos (l a t) \sin (l o n) \\
+Z=\left(N\left(1-e^{2}\right)+a l t\right) \sin (l a
+t)\end{array}\right.\]</span></p>
+<p>  Where e is the eccentricity of the ellipsoid and N is the radius of
+curvature of the reference ellipsoid.</p>
+<p><span
+class="math display">\[\left\{\begin{array}{l}e^{2}=\frac{a^{2}-b^{2}}{a^{2}}
+\\ N=\frac{a}{\sqrt{1-e^{2} \sin ^{2} l a
+t}}\end{array}\right.\]</span></p>
+<p>  Since polar flattening <span
+class="math inline">\(f=\frac{a-b}{a}\)</span> under WGS-84, the
+relationship between eccentricity e and polar flattening f is as
+follows:</p>
 <p><span class="math display">\[e^{2}=f(2-f)\]</span></p>
 <p>  So N could also be written as</p>
-<p><span class="math display">\[N=\frac{a}{\sqrt{1-f(2-f) \sin ^{2} \operatorname{lat}}}\]</span></p>
-<p>  2. Switch the ECEF coordinate system to the ENU coordinate system</p>
-<p>  The user's coordinate origin <span class="math inline">\(P_{0}=\left(x_{0}, y_{0}, z_{0}\right)\)</span>, calculate point <span class="math inline">\(P=(x, y, z)\)</span> at the position of ENU coordinate system (e,n,u) with point <span class="math inline">\(P_{0}\)</span> as the coordinate origin, the data of WGS84 coordinate system are needed here, <span class="math inline">\(L L A_{0}=\left(\right.\)</span> lon<span class="math inline">\(_{0}\)</span>, lat<span class="math inline">\(_{0}\)</span>, alt<span class="math inline">\(\left._{0}\right)\)</span></p>
-<p><span class="math display">\[\left[\begin{array}{l}\Delta x \\ \Delta y \\ \Delta z\end{array}\right]=\left[\begin{array}{l}x \\ y \\ z\end{array}\right]-\left[\begin{array}{l}x_{0} \\ y_{0} \\ z_{0}\end{array}\right]\]</span></p>
-<p><span class="math display">\[\left[\begin{array}{l}e \\ n \\ u\end{array}\right]=S \cdot\left[\begin{array}{l}\Delta x \\ \Delta y \\ \Delta z\end{array}\right]=\left[\begin{array}{ccc}-\sin \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lon}_{0}\right) &amp; 0 \\ -\sin \left(\operatorname{lat}_{0}\right) \cos \left(\operatorname{lon}_{0}\right) &amp; -\sin \left(\operatorname{lat}_{0}\right) \sin \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lat}_{0}\right) \\ \cos \left(\operatorname{lat}_{0}\right) \cos \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lat}_{0}\right) \sin \left(\operatorname{lon}_{0}\right) &amp; \sin \left(\operatorname{lat}_{0}\right)\end{array}\right] \cdot\left[\begin{array}{l}\Delta x \\ \Delta y \\ \Delta z\end{array}\right]\]</span></p>
+<p><span class="math display">\[N=\frac{a}{\sqrt{1-f(2-f) \sin ^{2}
+\operatorname{lat}}}\]</span></p>
+<p>  2. Switch the ECEF coordinate system to the ENU coordinate
+system</p>
+<p>  The user's coordinate origin <span
+class="math inline">\(P_{0}=\left(x_{0}, y_{0}, z_{0}\right)\)</span>,
+calculate point <span class="math inline">\(P=(x, y, z)\)</span> at the
+position of ENU coordinate system (e,n,u) with point <span
+class="math inline">\(P_{0}\)</span> as the coordinate origin, the data
+of WGS84 coordinate system are needed here, <span
+class="math inline">\(L L A_{0}=\left(\right.\)</span> lon<span
+class="math inline">\(_{0}\)</span>, lat<span
+class="math inline">\(_{0}\)</span>, alt<span
+class="math inline">\(\left._{0}\right)\)</span></p>
+<p><span class="math display">\[\left[\begin{array}{l}\Delta x \\ \Delta
+y \\ \Delta z\end{array}\right]=\left[\begin{array}{l}x \\ y \\
+z\end{array}\right]-\left[\begin{array}{l}x_{0} \\ y_{0} \\
+z_{0}\end{array}\right]\]</span></p>
+<p><span class="math display">\[\left[\begin{array}{l}e \\ n \\
+u\end{array}\right]=S \cdot\left[\begin{array}{l}\Delta x \\ \Delta y \\
+\Delta z\end{array}\right]=\left[\begin{array}{ccc}-\sin
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lon}_{0}\right) &amp; 0 \\ -\sin
+\left(\operatorname{lat}_{0}\right) \cos
+\left(\operatorname{lon}_{0}\right) &amp; -\sin
+\left(\operatorname{lat}_{0}\right) \sin
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lat}_{0}\right) \\ \cos
+\left(\operatorname{lat}_{0}\right) \cos
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lat}_{0}\right) \sin
+\left(\operatorname{lon}_{0}\right) &amp; \sin
+\left(\operatorname{lat}_{0}\right)\end{array}\right]
+\cdot\left[\begin{array}{l}\Delta x \\ \Delta y \\ \Delta
+z\end{array}\right]\]</span></p>
 <p>  Namely, coordinate transformation matrix:</p>
-<p><span class="math display">\[S=\left[\begin{array}{ccc}-\sin \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lon}_{0}\right) &amp; 0 \\ -\sin \left(\operatorname{lat}_{0}\right) \cos \left(\operatorname{lon}_{0}\right) &amp; -\sin \left(\operatorname{lat}_{0}\right) \sin \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lat}_{0}\right) \\ \cos \left(\operatorname{lat}_{0}\right) \cos \left(\operatorname{lon}_{0}\right) &amp; \cos \left(\operatorname{lat}_{0}\right) \sin \left(\operatorname{lon}_{0}\right) &amp; \sin \left(\operatorname{lat}_{0}\right)\end{array}\right]\]</span></p>
-<p>  After all IMU data points have been converted to ENU coordinates, the trajectory recorded by the IMU is plotted.</p>
+<p><span class="math display">\[S=\left[\begin{array}{ccc}-\sin
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lon}_{0}\right) &amp; 0 \\ -\sin
+\left(\operatorname{lat}_{0}\right) \cos
+\left(\operatorname{lon}_{0}\right) &amp; -\sin
+\left(\operatorname{lat}_{0}\right) \sin
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lat}_{0}\right) \\ \cos
+\left(\operatorname{lat}_{0}\right) \cos
+\left(\operatorname{lon}_{0}\right) &amp; \cos
+\left(\operatorname{lat}_{0}\right) \sin
+\left(\operatorname{lon}_{0}\right) &amp; \sin
+\left(\operatorname{lat}_{0}\right)\end{array}\right]\]</span></p>
+<p>  After all IMU data points have been converted to ENU coordinates,
+the trajectory recorded by the IMU is plotted.</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/849d1aed42bb353a.png" width="300"/>
 </div>
@@ -384,33 +477,68 @@ Fig.1 Trajectory diagram without excluding USBL abnormal data
 Fig.2 Trajectory of IMU
 </center>
 <p> </p>
-<h2 id="usbl-data-calculation-and-trajectory-drawing">USBL data calculation and trajectory drawing</h2>
-<p>  For the USBL data, the data took the USBL device as the origin and the direction defined by the USBL device as the coordinate system. The values were given. The Y-axis of the USBL coordinate system was closer to the E-axis of ENU, and the Z-axis of the USBL coordinate system was closer to the axis of ENU. The trajectory directly drawn is as follows:</p>
+<h2 id="usbl-data-calculation-and-trajectory-drawing">USBL data
+calculation and trajectory drawing</h2>
+<p>  For the USBL data, the data took the USBL device as the origin and
+the direction defined by the USBL device as the coordinate system. The
+values were given. The Y-axis of the USBL coordinate system was closer
+to the E-axis of ENU, and the Z-axis of the USBL coordinate system was
+closer to the axis of ENU. The trajectory directly drawn is as
+follows:</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/4fa1345969287866.png" width="300"/>
 </div>
 <center>
 Fig.3 Trajectories of IMU and USBL
 </center>
-<p>  It can be intuitively observed from the figure that due to the Angle difference and position difference between USBL coordinate system and ENU coordinate system, the trajectory angles of the two coordinate systems differ by one Angle and their positions differ. Therefore, data registration of the two coordinate systems is required.</p>
+<p>  It can be intuitively observed from the figure that due to the
+Angle difference and position difference between USBL coordinate system
+and ENU coordinate system, the trajectory angles of the two coordinate
+systems differ by one Angle and their positions differ. Therefore, data
+registration of the two coordinate systems is required.</p>
 <p> </p>
-<h2 id="imu-and-usbl-data-registration">IMU and USBL data registration</h2>
-<p>  Since there is an Angle difference between USBL and ENU coordinates (e-n and Y-Z planes), we need to eliminate this Angle difference. Because the Angle difference of the slope of the same line in different coordinate systems on the same plane is equal to the Angle difference of the coordinate axes. To calculate the Angle difference, A relatively reliable data point A (the 225th timestamp data point) was selected to calculate the coordinates of point A in ENU coordinate system (EN plane) (-14.88295364,-35.75550466) and point A in USBL coordinate system (YZ plane) (-38.0,-57.7). Then, according to the latitude and longitude value of the USBL device coordinate point O, the coordinates of point O in ENU coordinate system (13.16433724, 36.59235146) and the coordinates of point O in USBL coordinate system (0,0) are calculated. After obtaining the above four coordinates, the slope and Angle α of line OA in ENU coordinate system and the slope and Angle β of line OA in USBL coordinate system can be obtained, and then the Angle difference of the two coordinate systems γ can be obtained:</p>
-<p><span class="math display">\[\gamma=\alpha-\beta=56.63194470^{\circ}-43.54190515^{\circ}=13.09003955^{\circ}\]</span></p>
+<h2 id="imu-and-usbl-data-registration">IMU and USBL data
+registration</h2>
+<p>  Since there is an Angle difference between USBL and ENU coordinates
+(e-n and Y-Z planes), we need to eliminate this Angle difference.
+Because the Angle difference of the slope of the same line in different
+coordinate systems on the same plane is equal to the Angle difference of
+the coordinate axes. To calculate the Angle difference, A relatively
+reliable data point A (the 225th timestamp data point) was selected to
+calculate the coordinates of point A in ENU coordinate system (EN plane)
+(-14.88295364,-35.75550466) and point A in USBL coordinate system (YZ
+plane) (-38.0,-57.7). Then, according to the latitude and longitude
+value of the USBL device coordinate point O, the coordinates of point O
+in ENU coordinate system (13.16433724, 36.59235146) and the coordinates
+of point O in USBL coordinate system (0,0) are calculated. After
+obtaining the above four coordinates, the slope and Angle α of line OA
+in ENU coordinate system and the slope and Angle β of line OA in USBL
+coordinate system can be obtained, and then the Angle difference of the
+two coordinate systems γ can be obtained:</p>
+<p><span
+class="math display">\[\gamma=\alpha-\beta=56.63194470^{\circ}-43.54190515^{\circ}=13.09003955^{\circ}\]</span></p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/0cae621f66ec52aa.png" width="300"/>
 </div>
 <center>
 Fig.4 ENU coordinate and USBL coordinate
 </center>
-<p>  USBL data points can be registered into ENU coordinate system after the Angle difference and position difference of the two coordinate axes are known. The specific steps are as follows:<br />
-1. Rotate the USBL coordinate system clockwise by the Angle γ The rotation transformation formula of the coordinate axis is:</p>
-<p><span class="math display">\[\left\{\begin{array}{l}x_{1}=x \cos \theta+y \sin \theta \\ y_{1}=y \cos \theta-x \sin \theta\end{array}\right.\]</span></p>
+<p>  USBL data points can be registered into ENU coordinate system after
+the Angle difference and position difference of the two coordinate axes
+are known. The specific steps are as follows:<br />
+1. Rotate the USBL coordinate system clockwise by the Angle γ The
+rotation transformation formula of the coordinate axis is:</p>
+<p><span class="math display">\[\left\{\begin{array}{l}x_{1}=x \cos
+\theta+y \sin \theta \\ y_{1}=y \cos \theta-x \sin
+\theta\end{array}\right.\]</span></p>
 <ol start="2" type="1">
-<li>Align the data coordinates obtained in Step 1 with the ENU coordinate system</li>
+<li>Align the data coordinates obtained in Step 1 with the ENU
+coordinate system</li>
 </ol>
-<p><span class="math display">\[\left\{\begin{array}{l}x_{2}=x_{1}+O_{E} \\ y_{2}=y_{1}+O_{N}\end{array}\right.\]</span></p>
-<p>  After obtaining the USBL data points after registration, the IMU and USBL data tracks after registration are plotted.</p>
+<p><span class="math display">\[\left\{\begin{array}{l}x_{2}=x_{1}+O_{E}
+\\ y_{2}=y_{1}+O_{N}\end{array}\right.\]</span></p>
+<p>  After obtaining the USBL data points after registration, the IMU
+and USBL data tracks after registration are plotted.</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/d43c7cc0fd3cb1c2.png" width="300"/>
 </div>
@@ -419,7 +547,12 @@ Fig.5 IMU and USBL tracks after registration
 </center>
 <p> </p>
 <h2 id="trajectory-matching">Trajectory matching</h2>
-<p>  Using satellite photos and relevant GPS coordinates, the obtained trajectory is superimposed with the actual field, and the following results are obtained. The comparison between the figure and the actual environment shows that the start point and the docking dock are consistent with the actual situation, which proves the validity of data processing and the authenticity of the trajectory from the side.</p>
+<p>  Using satellite photos and relevant GPS coordinates, the obtained
+trajectory is superimposed with the actual field, and the following
+results are obtained. The comparison between the figure and the actual
+environment shows that the start point and the docking dock are
+consistent with the actual situation, which proves the validity of data
+processing and the authenticity of the trajectory from the side.</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/4da7c7ea6e10d948.png" width="300"/>
 </div>
@@ -564,6 +697,25 @@ Fig.6 Trajectory matching satellite image result
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

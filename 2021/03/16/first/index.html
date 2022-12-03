@@ -130,7 +130,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -337,28 +337,35 @@ Long long ago, a boy want to build his own website...
 </center>
 <span id="more"></span>
 <h2 id="网站架构">网站架构</h2>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> + <a target="_blank" rel="noopener" href="https://github.com/">Github</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a> + <a
+target="_blank" rel="noopener" href="https://github.com/">Github</a></p>
 <h2 id="主题">主题</h2>
 <p><a target="_blank" rel="noopener" href="https://theme-next.js.org/muse/">NexT.Muse</a></p>
 <h2 id="公式插件">公式插件</h2>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8424da4dd673">网站公式插件</a></p>
 <h2 id="网站图标">网站图标</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Olivia_Vang/article/details/92976637?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&amp;spm=1001.2101.3001.4242">图标</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/Olivia_Vang/article/details/92976637?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&amp;spm=1001.2101.3001.4242">图标</a></p>
 <h2 id="评论插件">评论插件</h2>
 <p><a target="_blank" rel="noopener" href="https://livere.com/">livere</a></p>
 <h2 id="字数统计与阅览时间插件">字数统计与阅览时间插件</h2>
-<p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-symbols-count-time">symbols-count-time</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-symbols-count-time">symbols-count-time</a></p>
 <h2 id="访问与阅览次数统计插件">访问与阅览次数统计插件</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_34310405/article/details/102665373">访问量和阅览次数</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_34310405/article/details/102665373">访问量和阅览次数</a></p>
 <h2 id="图床">图床</h2>
 <p><a target="_blank" rel="noopener" href="https://imgurl.org/">图床</a></p>
 <h2 id="鼠标点击特效">鼠标点击特效</h2>
-<p><a target="_blank" rel="noopener" href="https://yuanyuspace.cn/2021/04/01/clickeffect/#more">鼠标点击特效</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://yuanyuspace.cn/2021/04/01/clickeffect/#more">鼠标点击特效</a></p>
 <h2 id="网页内嵌b站">网页内嵌B站</h2>
-<p><a target="_blank" rel="noopener" href="https://hongcyu.cn/posts/hexo-bilibili.html">网页内嵌B站,方法二</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://hongcyu.cn/posts/hexo-bilibili.html">网页内嵌B站,方法二</a></p>
 <p> </p>
 <h2 id="blogroll">Blogroll</h2>
-<p>Thanks to Mr.Wang, who helps me a lot to finish this website's construcion.<br />
+<p>Thanks to Mr.Wang, who helps me a lot to finish this website's
+construcion.<br />
 <a target="_blank" rel="noopener" href="https://wanglindong.com">gaoshi_boy's blog</a></p>
 
     </div>
@@ -492,6 +499,25 @@ Long long ago, a boy want to build his own website...
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

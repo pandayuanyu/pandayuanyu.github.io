@@ -136,7 +136,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -194,7 +194,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#environment"><span class="nav-number">1.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-openvino"><span class="nav-number">2.</span> <span class="nav-text">Install OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#download-openvino"><span class="nav-number">2.1.</span> <span class="nav-text">Download OpenVINO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setting-environment-variables"><span class="nav-number">2.2.</span> <span class="nav-text">Setting environment variables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-pytorch-weights-to-onnx-weights"><span class="nav-number">3.</span> <span class="nav-text">Convert Pytorch Weights to ONNX Weights</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelscommon.py"><span class="nav-number">3.1.</span> <span class="nav-text">Modify models&#x2F;common.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelsexport.py"><span class="nav-number">3.2.</span> <span class="nav-text">Modify models&#x2F;export.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-onnx-weight"><span class="nav-number">3.3.</span> <span class="nav-text">Export onnx weight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-export-errors"><span class="nav-number">3.4.</span> <span class="nav-text">Solutions with export errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-onnx-weight-to-ir-file"><span class="nav-number">4.</span> <span class="nav-text">Convert ONNX weight to IR File</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-the-output-nodes"><span class="nav-number">4.1.</span> <span class="nav-text">Find the output nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transfer-onnx-weight-to-ir"><span class="nav-number">4.2.</span> <span class="nav-text">Transfer ONNX weight to IR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-with-openvino"><span class="nav-number">5.</span> <span class="nav-text">Inference with OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#establish-python-file"><span class="nav-number">5.1.</span> <span class="nav-text">Establish python file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-ir-files"><span class="nav-number">5.2.</span> <span class="nav-text">Get IR files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-some-errors"><span class="nav-number">5.3.</span> <span class="nav-text">Solutions with some errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#environment"><span class="nav-number">1.</span> <span class="nav-text">Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-openvino"><span class="nav-number">2.</span> <span class="nav-text">Install OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#download-openvino"><span class="nav-number">2.1.</span> <span class="nav-text">Download OpenVINO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setting-environment-variables"><span class="nav-number">2.2.</span> <span class="nav-text">Setting environment
+variables</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-pytorch-weights-to-onnx-weights"><span class="nav-number">3.</span> <span class="nav-text">Convert Pytorch Weights
+to ONNX Weights</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelscommon.py"><span class="nav-number">3.1.</span> <span class="nav-text">Modify models&#x2F;common.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-modelsexport.py"><span class="nav-number">3.2.</span> <span class="nav-text">Modify models&#x2F;export.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#export-onnx-weight"><span class="nav-number">3.3.</span> <span class="nav-text">Export onnx weight</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-export-errors"><span class="nav-number">3.4.</span> <span class="nav-text">Solutions with export errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#convert-onnx-weight-to-ir-file"><span class="nav-number">4.</span> <span class="nav-text">Convert ONNX weight to IR
+File</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-the-output-nodes"><span class="nav-number">4.1.</span> <span class="nav-text">Find the output nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transfer-onnx-weight-to-ir"><span class="nav-number">4.2.</span> <span class="nav-text">Transfer ONNX weight to IR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inference-with-openvino"><span class="nav-number">5.</span> <span class="nav-text">Inference with OpenVINO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#establish-python-file"><span class="nav-number">5.1.</span> <span class="nav-text">Establish python file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-ir-files"><span class="nav-number">5.2.</span> <span class="nav-text">Get IR files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#solutions-with-some-errors"><span class="nav-number">5.3.</span> <span class="nav-text">Solutions with some errors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +211,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -356,19 +359,31 @@ deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved
 <p> </p>
 <h2 id="install-openvino">Install OpenVINO</h2>
 <h3 id="download-openvino">Download OpenVINO</h3>
-<p>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91882515">What is OpenVINO</a><br />
-  <a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/developer/tools/openvino-toolkit-download.html?operatingsystem=window&amp;distributions=webdownload&amp;version=2021.4.1%20LTS%20(latest)&amp;options=offline">Download OpenVINO 2021.4</a></p>
+<p>  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91882515">What is
+OpenVINO</a><br />
+  <a
+target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/developer/tools/openvino-toolkit-download.html?operatingsystem=window&amp;distributions=webdownload&amp;version=2021.4.1%20LTS%20(latest)&amp;options=offline">Download
+OpenVINO 2021.4</a></p>
 <p> </p>
-<h3 id="setting-environment-variables">Setting environment variables</h3>
-<p>  Before OpenVINO can be compiled and run, several environment variables must be updated. Open the command prompt and run the following batch file to temporarily set the environment variables: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files(x86)\IntelSWTools\openvino\bin\setupvars.bat</span><br></pre></td></tr></table></figure>   Add system environment variables as well <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\ngraph\lib</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\bin\intel64\Release</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\external\tbb\bin</span><br><span class="line">F:\openvino\openvino_2021.4.689\opencv\bin</span><br></pre></td></tr></table></figure></p>
-<p>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/cc77_2019/article/details/108112228#:~:text=ModuleNotFoundError%3A%20No%20module,named%20%E2%80%98openvino%E2%80%99%20%E5%8E%9F%E5%9B%A0%3A%E6%B2%A1%E6%9C%89%E5%90%A7openvino%E4%B8%8B%E7%9A%84python3.7%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%8D%E5%88%B6%E5%88%B0anoconda%E7%9A%84%E5%AF%B9%E5%BA%94%E7%9B%AE%E5%BD%95%20%E8%A7%A3%E5%86%B3%EF%BC%9AC%3AIntelopenvino_2020.1.033pythonpython3.7%EF%BC%88%E6%98%AF%E4%BD%A0%E5%AE%89%E8%A3%85openvino%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%89%E4%B8%8B%E9%9D%A2openvino%E7%9B%B4%E6%8E%A5copy%E5%88%B0Anaconda%E4%B8%8Bpython3.7%E7%9A%84Libsite-packages%E4%B8%AD%E5%8D%B3%E5%8F%AF%E3%80%82">When somrthing wrong with the installation of openvino</a></p>
+<h3 id="setting-environment-variables">Setting environment
+variables</h3>
+<p>  Before OpenVINO can be compiled and run, several environment
+variables must be updated. Open the command prompt and run the following
+batch file to temporarily set the environment variables: <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Program Files(x86)\IntelSWTools\openvino\bin\setupvars.bat</span><br></pre></td></tr></table></figure>
+  Add system environment variables as well <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\ngraph\lib</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\bin\intel64\Release</span><br><span class="line">F:\openvino\openvino_2021.4.689\deployment_tools\inference_engine\external\tbb\bin</span><br><span class="line">F:\openvino\openvino_2021.4.689\opencv\bin</span><br></pre></td></tr></table></figure></p>
+<p>  <a
+target="_blank" rel="noopener" href="https://blog.csdn.net/cc77_2019/article/details/108112228#:~:text=ModuleNotFoundError%3A%20No%20module,named%20%E2%80%98openvino%E2%80%99%20%E5%8E%9F%E5%9B%A0%3A%E6%B2%A1%E6%9C%89%E5%90%A7openvino%E4%B8%8B%E7%9A%84python3.7%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E5%A4%8D%E5%88%B6%E5%88%B0anoconda%E7%9A%84%E5%AF%B9%E5%BA%94%E7%9B%AE%E5%BD%95%20%E8%A7%A3%E5%86%B3%EF%BC%9AC%3AIntelopenvino_2020.1.033pythonpython3.7%EF%BC%88%E6%98%AF%E4%BD%A0%E5%AE%89%E8%A3%85openvino%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%89%E4%B8%8B%E9%9D%A2openvino%E7%9B%B4%E6%8E%A5copy%E5%88%B0Anaconda%E4%B8%8Bpython3.7%E7%9A%84Libsite-packages%E4%B8%AD%E5%8D%B3%E5%8F%AF%E3%80%82">When
+somrthing wrong with the installation of openvino</a></p>
 <p> </p>
-<h2 id="convert-pytorch-weights-to-onnx-weights">Convert Pytorch Weights to ONNX Weights</h2>
+<h2 id="convert-pytorch-weights-to-onnx-weights">Convert Pytorch Weights
+to ONNX Weights</h2>
 <h3 id="modify-modelscommon.py">Modify models/common.py</h3>
-<p>  Find the 39th line in models/common.py shown as follows <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.SiLU() <span class="keyword">if</span> act <span class="keyword">is</span> <span class="literal">True</span> <span class="keyword">else</span> (act <span class="keyword">if</span> <span class="built_in">isinstance</span>(act, nn.Module) <span class="keyword">else</span> nn.Identity())</span><br></pre></td></tr></table></figure>   Change it to the following <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.LeakyReLU(<span class="number">0.1</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></p>
+<p>  Find the 39th line in models/common.py shown as follows
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.SiLU() <span class="keyword">if</span> act <span class="keyword">is</span> <span class="literal">True</span> <span class="keyword">else</span> (act <span class="keyword">if</span> <span class="built_in">isinstance</span>(act, nn.Module) <span class="keyword">else</span> nn.Identity())</span><br></pre></td></tr></table></figure>   Change it to the following <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.act = nn.LeakyReLU(<span class="number">0.1</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></p>
 <p> </p>
 <h3 id="modify-modelsexport.py">Modify models/export.py</h3>
-  Modify the parameters from the 23th line to 29th line in models/export.py, especially the weight you want to convert
+  Modify the parameters from the 23th line to 29th line in
+models/export.py, especially the weight you want to convert
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/9959cabd2f68851a.png" width="500"/>
 </div>
@@ -378,29 +393,47 @@ deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved
 </div>
 <p> </p>
 <h3 id="export-onnx-weight">Export onnx weight</h3>
-<p>  Then run export.py or run following script, and we get weight.onnx <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 models/export.py  --weights weight.pt  --img-size 640</span><br></pre></td></tr></table></figure></p>
+<p>  Then run export.py or run following script, and we get weight.onnx
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 models/export.py  --weights weight.pt  --img-size 640</span><br></pre></td></tr></table></figure></p>
 <p> </p>
 <h3 id="solutions-with-export-errors">Solutions with export errors</h3>
 <ul>
-<li>When there is some error with coremltools, ensure your python's version is earlier than 3.7, and you'd better start a new virtual environment</li>
-<li>When it shows "ModuleNotFoundError: No module named 'utils'" , you should execute script "pip install utils"</li>
-<li>When it shows "ModuleNotFoundError: No module named 'utils.google_utils'", then <a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/issues/4392">see</a></li>
-<li>When it shows "pytorch Key already registered with the same priority: GroupSpatialSoftmax", then <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/66e33e65577d">reinstall pytorch</a></li>
+<li>When there is some error with coremltools, ensure your python's
+version is earlier than 3.7, and you'd better start a new virtual
+environment</li>
+<li>When it shows "ModuleNotFoundError: No module named 'utils'" , you
+should execute script "pip install utils"</li>
+<li>When it shows "ModuleNotFoundError: No module named
+'utils.google_utils'", then <a
+target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5/issues/4392">see</a></li>
+<li>When it shows "pytorch Key already registered with the same
+priority: GroupSpatialSoftmax", then <a
+target="_blank" rel="noopener" href="https://www.jianshu.com/p/66e33e65577d">reinstall pytorch</a></li>
 </ul>
 <p> </p>
-<h2 id="convert-onnx-weight-to-ir-file">Convert ONNX weight to IR File</h2>
-<p>  Before you convert the weight, you need to confirm that you have set OpenVINO environment and variables</p>
+<h2 id="convert-onnx-weight-to-ir-file">Convert ONNX weight to IR
+File</h2>
+<p>  Before you convert the weight, you need to confirm that you have
+set OpenVINO environment and variables</p>
 <h3 id="find-the-output-nodes">Find the output nodes</h3>
-  We need to specify the output node of the IR when we use model optimizer to convert the ONNX weights file. For example, there are 3 output nodes in yolov5s.onnx. We can use Netron to visualize yolov5s.onnx. Then we find the output nodes by searching the keyword “Transpose” in Netron.
+  We need to specify the output node of the IR when we use model
+optimizer to convert the ONNX weights file. For example, there are 3
+output nodes in yolov5s.onnx. We can use Netron to visualize
+yolov5s.onnx. Then we find the output nodes by searching the keyword
+“Transpose” in Netron.
 <div data-align="center">
 <img src="https://img13.360buyimg.com/ddimg/jfs/t1/155333/35/23205/21882/6177f9f3E94d549fd/dbd1feffebf58691.png" width="300"/>
 </div>
-  After that, we can find the convolution node marked as oval shown in following Figure. After double clicking the convolution node, we can read its name “Conv_249”. Repeat the above steps to discover the other two nodes named “Conv_243” and "Conv_246".
+  After that, we can find the convolution node marked as oval shown in
+following Figure. After double clicking the convolution node, we can
+read its name “Conv_249”. Repeat the above steps to discover the other
+two nodes named “Conv_243” and "Conv_246".
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/11/577920450a64e35d.png" width="300"/>
 </div>
 <h3 id="transfer-onnx-weight-to-ir">Transfer ONNX weight to IR</h3>
-<p>  Use following script to get IR file, then we will get IR files(weight.xml and weight.bin) of weights <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">python F:\\openvino\\openvino_2021.4.689\\deployment_tools\\model_o</span><br><span class="line">ptimizer\\mo.py  --input_model weights/yolov5s.onnx -s 255 --reverse_input_channels --output Conv_243,Conv_246,Conv_249</span><br></pre></td></tr></table></figure></p>
+<p>  Use following script to get IR file, then we will get IR
+files(weight.xml and weight.bin) of weights <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">python F:\\openvino\\openvino_2021.4.689\\deployment_tools\\model_o</span><br><span class="line">ptimizer\\mo.py  --input_model weights/yolov5s.onnx -s 255 --reverse_input_channels --output Conv_243,Conv_246,Conv_249</span><br></pre></td></tr></table></figure></p>
 <p> </p>
 <h2 id="inference-with-openvino">Inference with OpenVINO</h2>
 <h3 id="establish-python-file">Establish python file</h3>
@@ -420,12 +453,15 @@ deploy yolov5 with OpenVINO, mainly in python, while C++ to be solved
 pip install networkx</p></li>
 <li><p>ModuleNotFoundError: No module named 'defusedxml'<br />
 pip install defusedxml</p></li>
-<li><p>Detected not satisfied dependencies: onnx: installed: 1.8.0, required: &gt;= 1.8.1<br />
+<li><p>Detected not satisfied dependencies: onnx: installed: 1.8.0,
+required: &gt;= 1.8.1<br />
 pip install onnx==1.8.1</p></li>
 </ul>
 <p> </p>
 <h2 id="reference">Reference</h2>
-<p>https://github.com/violet17/yolov5_demo https://github.com/Chen-MingChang/pytorch_YOLO_OpenVINO_demo https://cloud.tencent.com/developer/article/1764073</p>
+<p>https://github.com/violet17/yolov5_demo
+https://github.com/Chen-MingChang/pytorch_YOLO_OpenVINO_demo
+https://cloud.tencent.com/developer/article/1764073</p>
 
     </div>
 
@@ -561,6 +597,25 @@ pip install onnx==1.8.1</p></li>
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

@@ -142,7 +142,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -214,7 +214,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -351,9 +351,11 @@
 <p> </p>
 <h2 id="硬件结构">硬件结构</h2>
 <ul>
-<li>海康威视工业相机：MV-CE120-10UM/UC 1/1.7' CMOS + MVL-KF1228M-12MP 12mm 镜头 + 触发线缆<br />
+<li>海康威视工业相机：MV-CE120-10UM/UC 1/1.7' CMOS + MVL-KF1228M-12MP
+12mm 镜头 + 触发线缆<br />
 </li>
-<li><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1oLuOgixCIC-fdbDDdDQywA">海康威视相机资料，提取码：6666</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://pan.baidu.com/s/1oLuOgixCIC-fdbDDdDQywA">海康威视相机资料，提取码：6666</a></li>
 <li>Nvidia Jetson NX 开发板</li>
 <li>结构件（横梁用来固定双目基线等）</li>
 <li>总体示意图：
@@ -387,7 +389,8 @@
 <li>内触发模式：相机通过设备内部给出的信号采集图像</li>
 <li>外触发模式：相机通过外部给出的信号采集图像。外部信号可以是软件信号，也可以是硬件信号，包含软触发、硬件触发、计数器触发和自由触发4种方式</li>
 <li>软触发：触发信号由软件发出，通过千兆网传输给相机进行采图</li>
-<li>硬件触发：外部设备通过相机的 I/O 接口与相机进行连接，触发信号由外部设备给到相机进行采图</li>
+<li>硬件触发：外部设备通过相机的 I/O
+接口与相机进行连接，触发信号由外部设备给到相机进行采图</li>
 <li>计数器触发：通过计数器的方式给相机信号进行采图</li>
 <li>自由触发：相机可接收软触发或硬件触发信号</li>
 <li>触发响应方式，如下图：
@@ -400,20 +403,25 @@
 </ul>
 <p> </p>
 <h3 id="光耦隔离输入输出">光耦隔离输入/输出</h3>
-<p>  <a target="_blank" rel="noopener" href="https://www.eet-china.com/mp/a51439.html">光耦的核心应用是隔离作用，常用于输入与输出之间无共地的系统</a></p>
+<p>  <a
+target="_blank" rel="noopener" href="https://www.eet-china.com/mp/a51439.html">光耦的核心应用是隔离作用，常用于输入与输出之间无共地的系统</a></p>
 <p> </p>
 <h3 id="上拉下拉电阻">上拉/下拉电阻</h3>
-<p>  <a target="_blank" rel="noopener" href="https://nobuta.blog.csdn.net/article/details/81230836?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant">上拉电阻：将一个不确定信号（高或低电平），通过一个电阻与电源VCC相连，固定在高电平；同理下拉电阻就是：将一个不确定信号（高或低电平），通过一个电阻与地GND相连，固定在低电平</a></p>
+<p>  <a
+target="_blank" rel="noopener" href="https://nobuta.blog.csdn.net/article/details/81230836?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant">上拉电阻：将一个不确定信号（高或低电平），通过一个电阻与电源VCC相连，固定在高电平；同理下拉电阻就是：将一个不确定信号（高或低电平），通过一个电阻与地GND相连，固定在低电平</a></p>
 <p> </p>
 <h3 id="binning">Binning</h3>
-<p>  Binning 功能可将多个相邻像素合并为一个像素，降低分辨率的同时提高图像亮度。</p>
+<p>  Binning
+功能可将多个相邻像素合并为一个像素，降低分辨率的同时提高图像亮度。</p>
 <p>  下采样功能是在多个相邻像素中选择一个像素，可以降低输出分辨率。</p>
 <p> </p>
 <h3 id="黑电平">黑电平</h3>
 <p>  黑电平可以调整输出数据的灰度值偏移量，决定相机传感器不感光时的平均灰度值。</p>
 <p> </p>
 <h3 id="gamma校正">Gamma校正</h3>
-  通常相机芯片的输出与照射在芯片感光面的光子是线性的， Gamma 校正提供了一种输出非线性的映射机制。Gamma 值在 0.5 ~ 1 之间，图像暗处亮度提升；Gamma 值在 1 ~ 4 之间，图像暗处亮度下降。
+  通常相机芯片的输出与照射在芯片感光面的光子是线性的， Gamma
+校正提供了一种输出非线性的映射机制。Gamma 值在 0.5 ~ 1
+之间，图像暗处亮度提升；Gamma 值在 1 ~ 4 之间，图像暗处亮度下降。
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/08/f65e2096dc213ff0.png" width="300"/>
 </div>
@@ -423,7 +431,9 @@ Gamma曲线图
 <p> </p>
 <h2 id="环境配置">环境配置</h2>
 <h3 id="sdk下载与安装">SDK下载与安装</h3>
-<p>  <a target="_blank" rel="noopener" href="https://www.hikrobotics.com/cn/machinevision/service/download?module=0">MVS SDK 下载链接</a>，NX选ARM架构安装</p>
+<p>  <a
+target="_blank" rel="noopener" href="https://www.hikrobotics.com/cn/machinevision/service/download?module=0">MVS
+SDK 下载链接</a>，NX选ARM架构安装</p>
 <p> </p>
 <h3 id="巨帧与ip">巨帧与IP</h3>
 <p>  U口相机不用像网口一样配置开启巨帧和设置静态IP</p>
@@ -443,9 +453,11 @@ Gamma曲线图
 <p> </p>
 <h3 id="镜头">镜头</h3>
 <ul>
-<li>镜头焦距12mm（<a target="_blank" rel="noopener" href="https://blog.csdn.net/ding283595861/article/details/103194955">等效全画幅下53.52mm</a>）</li>
+<li>镜头焦距12mm（<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/ding283595861/article/details/103194955">等效全画幅下53.52mm</a>）</li>
 <li>光圈F/2.8-F/16</li>
-<li>视场角1.1"，HFOV(horizontal field of view) 59.8°, VFOV(vertical field of view) 46.2°, DFOV(display field of view) 70.5°</li>
+<li>视场角1.1"，HFOV(horizontal field of view) 59.8°, VFOV(vertical
+field of view) 46.2°, DFOV(display field of view) 70.5°</li>
 <li>最近摄距0.1m</li>
 <li>白点所在环分别为对焦环和光圈调整环，带有锁紧螺丝
 <div data-align="center">
@@ -457,7 +469,9 @@ Gamma曲线图
 </ul>
 <p> </p>
 <h3 id="正确曝光">正确曝光</h3>
-<p>  由于初始使用原生iso，画面需要数字增益来控制画面正确曝光：在采集控制(Acquisition Control)--&gt;自动曝光(Exposure Auto) 设置为连续，并将模拟控制(Analog Control)--&gt;自动增益(Gain Auto) 设置为连续</p>
+<p>  由于初始使用原生iso，画面需要数字增益来控制画面正确曝光：在采集控制(Acquisition
+Control)--&gt;自动曝光(Exposure Auto) 设置为连续，并将模拟控制(Analog
+Control)--&gt;自动增益(Gain Auto) 设置为连续</p>
 <p> </p>
 <h2 id="硬件同步触发">硬件同步触发</h2>
 <h3 id="硬件触发需求">硬件触发需求</h3>
@@ -477,18 +491,25 @@ Gamma曲线图
 <img src="https://i.bmp.ovh/imgs/2021/09/46ab8cf824ca71aa.jpg" width="300"/>
 </div>
 <center>
-红色+12V，蓝色I/O input 1, 黄色无连接 ，绿色I/O output 1, 白色 I/O ground, 黑色 GND
+红色+12V，蓝色I/O input 1, 黄色无连接 ，绿色I/O output 1, 白色 I/O
+ground, 黑色 GND
 </center></li>
 <li>连接好后，可以在MVS上同时打开显示两台相机，注意由于NX板载电压不足，两相机的USB应插在不同基座的接口上</li>
 </ul>
 <p> </p>
 <h3 id="nx配置固定频率输出信号">NX配置固定频率输出信号</h3>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/as480133937/article/details/103439546">PWM</a>在此不适用，如果快门时间很短，一个PWM波内可能拍几张</p></li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/jetson-gpio">GPIO</a>，使用simple/simple_out.py 单峰脉冲信号 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pin Definitions</span></span><br><span class="line">output_pin = <span class="number">18</span>  <span class="comment"># BCM pin 18, BOARD pin 12</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># Pin Setup:</span></span><br><span class="line">    GPIO.setmode(GPIO.BCM)  <span class="comment"># BCM pin-numbering scheme from Raspberry Pi</span></span><br><span class="line">    <span class="comment"># set pin as an output pin with optional initial state of HIGH</span></span><br><span class="line">    GPIO.setup(output_pin, GPIO.OUT, initial=GPIO.HIGH)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;Starting demo now! Press CTRL+C to exit&quot;</span>)</span><br><span class="line">    curr_value = GPIO.HIGH</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># Toggle the output every second</span></span><br><span class="line">            print(<span class="string">&quot;Outputting &#123;&#125; to pin &#123;&#125;&quot;</span>.<span class="built_in">format</span>(curr_value, output_pin))</span><br><span class="line">            GPIO.output(output_pin, curr_value)</span><br><span class="line">            curr_value ^= GPIO.HIGH</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        GPIO.cleanup()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://www.jetsonhacks.com/nvidia-jetson-xavier-nx-gpio-header-pinout/">NX pin口不等于GPIO口</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/as480133937/article/details/103439546">PWM</a>在此不适用，如果快门时间很短，一个PWM波内可能拍几张</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://github.com/NVIDIA/jetson-gpio">GPIO</a>，使用simple/simple_out.py
+单峰脉冲信号 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pin Definitions</span></span><br><span class="line">output_pin = <span class="number">18</span>  <span class="comment"># BCM pin 18, BOARD pin 12</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># Pin Setup:</span></span><br><span class="line">    GPIO.setmode(GPIO.BCM)  <span class="comment"># BCM pin-numbering scheme from Raspberry Pi</span></span><br><span class="line">    <span class="comment"># set pin as an output pin with optional initial state of HIGH</span></span><br><span class="line">    GPIO.setup(output_pin, GPIO.OUT, initial=GPIO.HIGH)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&quot;Starting demo now! Press CTRL+C to exit&quot;</span>)</span><br><span class="line">    curr_value = GPIO.HIGH</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># Toggle the output every second</span></span><br><span class="line">            print(<span class="string">&quot;Outputting &#123;&#125; to pin &#123;&#125;&quot;</span>.<span class="built_in">format</span>(curr_value, output_pin))</span><br><span class="line">            GPIO.output(output_pin, curr_value)</span><br><span class="line">            curr_value ^= GPIO.HIGH</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        GPIO.cleanup()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://www.jetsonhacks.com/nvidia-jetson-xavier-nx-gpio-header-pinout/">NX
+pin口不等于GPIO口</a></p></li>
 <li><p>蓝色杜邦线接GPIO13</p></li>
-<li><p>在MVS--&gt;数字IO控制中，选择LINE 2;在采集控制一栏，打开触发模式，触发源LINE 2,触发源选高电平</p>
+<li><p>在MVS--&gt;数字IO控制中，选择LINE
+2;在采集控制一栏，打开触发模式，触发源LINE 2,触发源选高电平</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2021/09/40af676189d09811.png" width="400"/>
 </div>
@@ -647,6 +668,25 @@ Gamma曲线图
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

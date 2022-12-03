@@ -130,7 +130,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -338,25 +338,40 @@ darknet
 <span id="more"></span>
 <h2 id="box.c">box.c</h2>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qijunhui/p/8284188.html">x=x+1，x+=1，x++的区别</a></p></li>
-<li><p>(a&gt;b)?y:n 如果A大于B，那么选择Y的结果，如果A小于B，那么选择N的结果。</p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/qijunhui/p/8284188.html">x=x+1，x+=1，x++的区别</a></p></li>
+<li><p>(a&gt;b)?y:n
+如果A大于B，那么选择Y的结果，如果A小于B，那么选择N的结果。</p></li>
 <li><p>计算两个矩形框相交部分矩形的某一边的边长（视调用情况，可能是相交部分矩形的高，也可能是宽）。<br />
-x1  第一个矩形框的x坐标（或者y坐标，视调用情况，如果计算的是相交部分矩形的宽，则输入的是x坐标)<br />
-w1  第一个矩形框的宽（而如果要计算相交部分矩形的高，则为y坐标，下面凡是说x坐标的，都可能为y坐标，当然，对应宽变为高)<br />
+x1
+ 第一个矩形框的x坐标（或者y坐标，视调用情况，如果计算的是相交部分矩形的宽，则输入的是x坐标)<br />
+w1 
+第一个矩形框的宽（而如果要计算相交部分矩形的高，则为y坐标，下面凡是说x坐标的，都可能为y坐标，当然，对应宽变为高)<br />
 x2  第二个矩形框的x坐标<br />
 w2  第二个矩形框的宽<br />
-  首先计算两个框左边的x坐标，比较大小，取其大者，记为left；而后计算两个框右边的x坐标，取其小者，记为right，right-left即得相交部分矩形的宽。两个矩形框相交部分矩形的宽或者高。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">overlap</span><span class="params">(<span class="keyword">float</span> x1, <span class="keyword">float</span> w1, <span class="keyword">float</span> x2, <span class="keyword">float</span> w2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> l1 = x1 - w1/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> l2 = x2 - w2/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> left = l1 &gt; l2 ? l1 : l2;</span><br><span class="line">    <span class="keyword">float</span> r1 = x1 + w1/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> r2 = x2 + w2/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> right = r1 &lt; r2 ? r1 : r2;</span><br><span class="line">    <span class="keyword">return</span> right - left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
-<li><p>计算IoU值,是目标检测精确度的一个评判指标，全称是intersection over union，翻译成中文就是交比并值，字面上的意思很直接，就是两个矩形相交部分的面积比两个矩形求并之后的总面积，用来做检测评判指标时，含义为模型检测到的矩形框与GroundTruth标记的矩形框之间的交比并值（即可反映检测到的矩形框与GroundTruth之间的重叠度），当两个矩形框完全重叠时，值为1；完全不相交时，值为0。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">box_intersection</span><span class="params">(box a, box b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> w = overlap(a.x, a.w, b.x, b.w);</span><br><span class="line">    <span class="keyword">float</span> h = overlap(a.y, a.h, b.y, b.h);</span><br><span class="line">    <span class="keyword">if</span>(w &lt; <span class="number">0</span> || h &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> area = w*h;</span><br><span class="line">    <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+  首先计算两个框左边的x坐标，比较大小，取其大者，记为left；而后计算两个框右边的x坐标，取其小者，记为right，right-left即得相交部分矩形的宽。两个矩形框相交部分矩形的宽或者高。
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">overlap</span><span class="params">(<span class="keyword">float</span> x1, <span class="keyword">float</span> w1, <span class="keyword">float</span> x2, <span class="keyword">float</span> w2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> l1 = x1 - w1/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> l2 = x2 - w2/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> left = l1 &gt; l2 ? l1 : l2;</span><br><span class="line">    <span class="keyword">float</span> r1 = x1 + w1/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> r2 = x2 + w2/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">float</span> right = r1 &lt; r2 ? r1 : r2;</span><br><span class="line">    <span class="keyword">return</span> right - left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>计算IoU值,是目标检测精确度的一个评判指标，全称是intersection over
+union，翻译成中文就是交比并值，字面上的意思很直接，就是两个矩形相交部分的面积比两个矩形求并之后的总面积，用来做检测评判指标时，含义为模型检测到的矩形框与GroundTruth标记的矩形框之间的交比并值（即可反映检测到的矩形框与GroundTruth之间的重叠度），当两个矩形框完全重叠时，值为1；完全不相交时，值为0。
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">box_intersection</span><span class="params">(box a, box b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> w = overlap(a.x, a.w, b.x, b.w);</span><br><span class="line">    <span class="keyword">float</span> h = overlap(a.y, a.h, b.y, b.h);</span><br><span class="line">    <span class="keyword">if</span>(w &lt; <span class="number">0</span> || h &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> area = w*h;</span><br><span class="line">    <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
 <li><p>pow(float x, float y)函数：计算x的y次幂</p></li>
 </ul>
 <p> </p>
 <h2 id="blas.c">blas.c</h2>
 <ul>
-<li>方差的无偏估计 （样本方差） <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\)</span>，你会发现样本均值这一项都包含在内。考虑到方差是衡量数据偏差程度的统计量，计算一下样本均值作为中间步骤的中间量，也不失其合理性。于是，为计算样本方差，样本里原有的 n个自由度，有一个自由度被分配给计算样本均值，剩下自由度即为n-1 。</li>
-<li>axpy是线性代数中一种基本操作，完成y= alpha*x + y操作，其中x,y为矢量，alpha为实数系数</li>
-<li>计算预测数组与真实标签数组中每对元素的l2范数值，或者说是计算squared error，注意此函数，并没有求和，没有将所有误差加起来，而是对网络输出的每个元素计算误差的平方值。<br />
-n  输出元素个数，也即pred中的元素个数，也是truth中的元素个数; pred   网络最终的输出值，或者说网络的预测值，其中输出元素个数为n（也即最后一层网络神经元个数为n）<br />
-truth   真实标签值，其中元素个数为n（也即最后一层网络神经元个数为n） delta   相当于本函数的输出，为网络的敏感度图（一般为cost_layer.c的敏感度图）<br />
+<li>方差的无偏估计 （样本方差） <span
+class="math inline">\(\frac{1}{n-1}
+\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\)</span>，你会发现样本均值这一项都包含在内。考虑到方差是衡量数据偏差程度的统计量，计算一下样本均值作为中间步骤的中间量，也不失其合理性。于是，为计算样本方差，样本里原有的
+n个自由度，有一个自由度被分配给计算样本均值，剩下自由度即为n-1 。</li>
+<li>axpy是线性代数中一种基本操作，完成y= alpha*x +
+y操作，其中x,y为矢量，alpha为实数系数</li>
+<li>计算预测数组与真实标签数组中每对元素的l2范数值，或者说是计算squared
+error，注意此函数，并没有求和，没有将所有误差加起来，而是对网络输出的每个元素计算误差的平方值。<br />
+n  输出元素个数，也即pred中的元素个数，也是truth中的元素个数; pred  
+网络最终的输出值，或者说网络的预测值，其中输出元素个数为n（也即最后一层网络神经元个数为n）<br />
+truth   真实标签值，其中元素个数为n（也即最后一层网络神经元个数为n）
+delta  
+相当于本函数的输出，为网络的敏感度图（一般为cost_layer.c的敏感度图）<br />
 error   相当于本函数的输出，包含每个输出元素的squared error</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">l2_cpu</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">float</span> *pred, <span class="keyword">float</span> *truth, <span class="keyword">float</span> *delta, <span class="keyword">float</span> *error)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="keyword">float</span> diff = truth[i] - pred[i];</span><br><span class="line">        error[i] = diff * diff;</span><br><span class="line">        delta[i] = diff;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -364,21 +379,32 @@ error   相当于本函数的输出，包含每个输出元素的squared error
 <li><p>softmax<br />
 input   一组输入图片数据（含义见下面softmax_cpu()注释，下同）<br />
 n   一组输入数据中含有的元素个数n=l.inputs/l.groups<br />
-temp   温度参数，关于softmax的温度参数，<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36560894/article/details/114874268">softmax with temperature</a><br />
+temp   温度参数，关于softmax的温度参数，<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36560894/article/details/114874268">softmax
+with temperature</a><br />
 stride   跨度<br />
-output   这一组输入图片数据对应的输出（也即l.output中与这一组输入对应的某一部分）<br />
-  本函数实现的就是标准的softmax函数处理，唯一有点变化的就是在做指数运算之前，将每个输入元素减去了该组输入元素中的最大值，以增加数值稳定性， <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">softmax</span><span class="params">(<span class="keyword">float</span> *input, <span class="keyword">int</span> n, <span class="keyword">float</span> temp, <span class="keyword">int</span> stride, <span class="keyword">float</span> *output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 赋初始最大值为float中的最小值-FLT_MAX（定义在float.h中）</span></span><br><span class="line">    <span class="keyword">float</span> largest = -FLT_MAX;</span><br><span class="line">    <span class="comment">// 寻找输入中的最大值，至于为什么要找出最大值，是为了数值计算上的稳定，详细请戳：http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/</span></span><br><span class="line">    <span class="comment">// 这篇博客写的不错，博客在接近尾声的时候，提到了为什么要减去输入中的最大值。</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(input[i*stride] &gt; largest) largest = input[i*stride];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="comment">// 在进行指数运算之间，如上面博客所说，首先减去最大值（当然温度参数也要除）</span></span><br><span class="line">        <span class="keyword">float</span> e = <span class="built_in">exp</span>(input[i*stride]/temp - largest/temp);</span><br><span class="line">        sum += e;                       <span class="comment">// 求和</span></span><br><span class="line">        output[i*stride] = e;           <span class="comment">// 并将每一个输入的结果保存在相应的输出中</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 最后一步：归一化转换为概率（就是softmax函数的原型～），最后的输出结果保存在output中</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        output[i*stride] /= sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1009009">赋值运算符</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351">softmax</a></p></li>
+output  
+这一组输入图片数据对应的输出（也即l.output中与这一组输入对应的某一部分）<br />
+  本函数实现的就是标准的softmax函数处理，唯一有点变化的就是在做指数运算之前，将每个输入元素减去了该组输入元素中的最大值，以增加数值稳定性，
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">softmax</span><span class="params">(<span class="keyword">float</span> *input, <span class="keyword">int</span> n, <span class="keyword">float</span> temp, <span class="keyword">int</span> stride, <span class="keyword">float</span> *output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">float</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 赋初始最大值为float中的最小值-FLT_MAX（定义在float.h中）</span></span><br><span class="line">    <span class="keyword">float</span> largest = -FLT_MAX;</span><br><span class="line">    <span class="comment">// 寻找输入中的最大值，至于为什么要找出最大值，是为了数值计算上的稳定，详细请戳：http://freemind.pluskid.org/machine-learning/softmax-vs-softmax-loss-numerical-stability/</span></span><br><span class="line">    <span class="comment">// 这篇博客写的不错，博客在接近尾声的时候，提到了为什么要减去输入中的最大值。</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(input[i*stride] &gt; largest) largest = input[i*stride];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="comment">// 在进行指数运算之间，如上面博客所说，首先减去最大值（当然温度参数也要除）</span></span><br><span class="line">        <span class="keyword">float</span> e = <span class="built_in">exp</span>(input[i*stride]/temp - largest/temp);</span><br><span class="line">        sum += e;                       <span class="comment">// 求和</span></span><br><span class="line">        output[i*stride] = e;           <span class="comment">// 并将每一个输入的结果保存在相应的输出中</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 最后一步：归一化转换为概率（就是softmax函数的原型～），最后的输出结果保存在output中</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        output[i*stride] /= sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1009009">赋值运算符</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://www.zhihu.com/question/23765351">softmax</a></p></li>
 </ul>
 <p> </p>
 <h2 id="section"></h2>
 <p> </p>
 <h2 id="参考">参考</h2>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012927281/article/details/86064511">linux codeblocks darknet Debug极简教程</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010122972/article/details/83541978?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link">Darknet 概述</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/hgpvision/darknet">Darknet 框架源码分析</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/u012927281/article/details/86064511">linux
+codeblocks darknet Debug极简教程</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/u010122972/article/details/83541978?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link">Darknet
+概述</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hgpvision/darknet">Darknet
+框架源码分析</a></li>
 </ul>
 
     </div>
@@ -515,6 +541,25 @@ output   这一组输入图片数据对应的输出（也即l.output中与这�
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

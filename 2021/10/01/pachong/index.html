@@ -131,7 +131,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -203,7 +203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -342,7 +342,8 @@
 <p>得到结果 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D:\ananconda\python.exe <span class="string">&quot;D:\pycharmm\PyCharm Community Edition 2020.3.4\plugins\python-ce\helpers\pydev\pydevd.py&quot;</span> --multiproc --qt-support=auto --client <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> --port <span class="number">3450</span> --file C:/Users/<span class="number">11734</span>/PycharmProjects/pythonProject1/main.py</span><br><span class="line">Connected to pydev debugger (build <span class="number">203.7717</span><span class="number">.65</span>)</span><br><span class="line"></span><br><span class="line">AI CS CV docker 写给CC 卡尔曼滤波 图像融合 好玩的 正则化表达式 爬虫 目标跟踪 自动驾驶</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="section"></h2>
 <h2 id="资料">资料</h2>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35324806?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=745016002512715776&amp;wechatShare=1&amp;s_r=0">爬虫基本原理</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35324806?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=745016002512715776&amp;wechatShare=1&amp;s_r=0">爬虫基本原理</a></p>
 
     </div>
 
@@ -479,6 +480,25 @@
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 

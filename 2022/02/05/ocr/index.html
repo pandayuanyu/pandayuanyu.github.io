@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2022/02/e21ef4ca47a1360c.png">
 <meta property="og:image" content="https://i.bmp.ovh/imgs/2022/02/e5062580998959df.png">
 <meta property="article:published_time" content="2022-02-05T02:32:11.000Z">
-<meta property="article:modified_time" content="2022-02-05T15:53:16.357Z">
+<meta property="article:modified_time" content="2022-02-05T16:10:13.127Z">
 <meta property="article:author" content="Yu Yuan">
 <meta property="article:tag" content="好玩的">
 <meta name="twitter:card" content="summary">
@@ -136,7 +136,7 @@
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">25</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
@@ -208,7 +208,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -285,10 +285,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-02-05 10:32:11 / Modified: 23:53:16" itemprop="dateCreated datePublished" datetime="2022-02-05T10:32:11+08:00">2022-02-05</time>
+      <time title="Created: 2022-02-05 10:32:11" itemprop="dateCreated datePublished" datetime="2022-02-05T10:32:11+08:00">2022-02-05</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-02-06 00:10:13" itemprop="dateModified" datetime="2022-02-06T00:10:13+08:00">2022-02-06</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -314,7 +320,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>8.6k</span>
+      <span>8.7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -333,7 +339,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <center>
-<font size=3>智能信息处理理论及应用课程大作业</font>
+<font size=5>智能信息处理理论及应用课程大作业</font>
 </center>
 <span id="more"></span>
 <p> </p>
@@ -434,12 +440,21 @@
 </ul>
 <p> </p>
 <h2 id="one-hot-编码label">one hot 编码label</h2>
-<p>  使用one hot编码器对类别进行“二进制化”操作，然后将其作为模型训练的特征。例如：假设“花”的特征可能的取值为daffodil（水仙）、lily（百合）、rose（玫瑰）。one hot编码将其转换为三个特征：is_daffodil、is_lily、is_rose，这些特征都是二进制的。本项目中one hot 为4列36行。one hot 编码label代码如下：</p>
+<p>  使用one
+hot编码器对类别进行“二进制化”操作，然后将其作为模型训练的特征。例如：假设“花”的特征可能的取值为daffodil（水仙）、lily（百合）、rose（玫瑰）。one
+hot编码将其转换为三个特征：is_daffodil、is_lily、is_rose，这些特征都是二进制的。本项目中one
+hot 为4列36行。one hot 编码label代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># one_hot.py</span></span><br><span class="line"><span class="keyword">import</span> common</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text2vec</span>(<span class="params">text</span>):</span></span><br><span class="line">    vectors=torch.zeros((common.captcha_size,</span><br><span class="line">    common.captcha_array.__len__()))</span><br><span class="line">    <span class="comment"># vectors[0,0] = 1</span></span><br><span class="line">    <span class="comment"># vectors[1,3] = 1</span></span><br><span class="line">    <span class="comment"># vectors[2,4] = 1</span></span><br><span class="line">    <span class="comment"># vectors[3, 1] = 1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(text)):</span><br><span class="line">        vectors[i,common.captcha_array.index(text[i])]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> vectors</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectotext</span>(<span class="params">vec</span>):</span></span><br><span class="line"></span><br><span class="line">    vec=torch.argmax(vec,dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    text_label=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> vec:</span><br><span class="line">        text_label+=common.captcha_array[v]</span><br><span class="line">    <span class="keyword">return</span>  text_label</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    vec=text2vec(<span class="string">&quot;aaab&quot;</span>)</span><br><span class="line">    print(vec.shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    print(vectotext(vec))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p> </p>
 <h2 id="基于vgg16的神经网络搭建">基于VGG16的神经网络搭建</h2>
 <h3 id="vgg16-简介">VGG16 简介</h3>
-<p>  VGG是由Simonyan 和Zisserman在文献《Very Deep Convolutional Networks for Large Scale Image Recognition》中提出卷积神经网络模型，其名称来源于作者所在的牛津大学视觉几何组(Visual Geometry Group)的缩写。该模型参加2014年的 ImageNet图像分类与定位挑战赛，取得了优异成绩：在分类任务上排名第二，在定位任务上排名第一。   VGG中根据卷积核大小和卷积层数目的不同，可分为A，A-LRN,B,C,D,E共6个配置(ConvNet Configuration)，其中以D,E两种配置较为常用，分别称为VGG16和VGG19。</p>
+<p>  VGG是由Simonyan 和Zisserman在文献《Very Deep Convolutional Networks
+for Large Scale Image
+Recognition》中提出卷积神经网络模型，其名称来源于作者所在的牛津大学视觉几何组(Visual
+Geometry Group)的缩写。该模型参加2014年的
+ImageNet图像分类与定位挑战赛，取得了优异成绩：在分类任务上排名第二，在定位任务上排名第一。
+  VGG中根据卷积核大小和卷积层数目的不同，可分为A，A-LRN,B,C,D,E共6个配置(ConvNet
+Configuration)，其中以D,E两种配置较为常用，分别称为VGG16和VGG19。</p>
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2022/02/c099fc70d5ef42fa.png" width="400"/>
 </div>
@@ -487,13 +502,18 @@ VGG16结构示意图
 </center>
 <p> </p>
 <h2 id="测试数据集实验">测试数据集实验</h2>
-  利用由1000张图片构成的测试集对训练出的模型进行测试。代码如下： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># predict.py</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">import</span> one_hot</span><br><span class="line"><span class="keyword">import</span> model</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> common</span><br><span class="line"><span class="keyword">import</span> my_datasets</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_pred</span>():</span></span><br><span class="line">    m = torch.load(<span class="string">&quot;model.pth&quot;</span>).cuda()</span><br><span class="line">    m.<span class="built_in">eval</span>()</span><br><span class="line">    test_data = my_datasets.mydatasets(<span class="string">&quot;datasets/test&quot;</span>)</span><br><span class="line"></span><br><span class="line">    test_dataloader = DataLoader(test_data, </span><br><span class="line">    batch_size=<span class="number">1</span>, shuffle=<span class="literal">False</span>)</span><br><span class="line">    test_length = test_data.__len__()</span><br><span class="line">    correct = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> i, (imgs, lables) <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_dataloader):</span><br><span class="line">        imgs = imgs.cuda()</span><br><span class="line">        lables = lables.cuda()</span><br><span class="line"></span><br><span class="line">        lables = lables.view(-<span class="number">1</span>, </span><br><span class="line">        common.captcha_array.__len__())</span><br><span class="line"></span><br><span class="line">        lables_text = one_hot.vectotext(lables)</span><br><span class="line">        predict_outputs = m(imgs)</span><br><span class="line">        predict_outputs = predict_outputs.view(-<span class="number">1</span>, </span><br><span class="line">        common.captcha_array.__len__())</span><br><span class="line">        predict_labels = one_hot.vectotext(predict_outputs)</span><br><span class="line">        <span class="keyword">if</span> predict_labels == lables_text:</span><br><span class="line">            correct += <span class="number">1</span></span><br><span class="line">            print(<span class="string">&quot;预测正确：正确值:&#123;&#125;,预测值:&#123;&#125;&quot;</span></span><br><span class="line">            .<span class="built_in">format</span>(lables_text, predict_labels))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;预测失败:正确值:&#123;&#125;,预测值:&#123;&#125;&quot;</span></span><br><span class="line">            .<span class="built_in">format</span>(lables_text, predict_labels))</span><br><span class="line">        <span class="comment"># m(imgs)</span></span><br><span class="line">    print(<span class="string">&quot;正确率&#123;&#125;%&quot;</span>.<span class="built_in">format</span>(correct / test_length * <span class="number">100</span>))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pred_pic</span>(<span class="params">pic_path</span>):</span></span><br><span class="line">    img=Image.<span class="built_in">open</span>(pic_path)</span><br><span class="line">    tersor_img=transforms.Compose([</span><br><span class="line">        transforms.Grayscale(),</span><br><span class="line">        transforms.Resize((<span class="number">60</span>,<span class="number">160</span>)),</span><br><span class="line">        transforms.ToTensor()</span><br><span class="line">    ])</span><br><span class="line">    img=tersor_img(img).cuda()</span><br><span class="line">    print(img.shape)</span><br><span class="line">    img=torch.reshape(img,(-<span class="number">1</span>,<span class="number">1</span>,<span class="number">60</span>,<span class="number">160</span>))</span><br><span class="line">    print(img.shape)</span><br><span class="line">    m = torch.load(<span class="string">&quot;model.pth&quot;</span>).cuda()</span><br><span class="line">    outputs = m(img)</span><br><span class="line">    outputs=outputs.view(-<span class="number">1</span>,<span class="built_in">len</span>(common.captcha_array))</span><br><span class="line">    outputs_lable=one_hot.vectotext(outputs)</span><br><span class="line">    print(outputs_lable)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_pred();</span><br><span class="line">    <span class="comment">#pred_pic(&quot;dataset/test/7u9o_1635053946.png&quot;)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> * 此模型的准确率为65%，差强人意
+  利用由1000张图片构成的测试集对训练出的模型进行测试。代码如下：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># predict.py</span></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">import</span> one_hot</span><br><span class="line"><span class="keyword">import</span> model</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> common</span><br><span class="line"><span class="keyword">import</span> my_datasets</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_pred</span>():</span></span><br><span class="line">    m = torch.load(<span class="string">&quot;model.pth&quot;</span>).cuda()</span><br><span class="line">    m.<span class="built_in">eval</span>()</span><br><span class="line">    test_data = my_datasets.mydatasets(<span class="string">&quot;datasets/test&quot;</span>)</span><br><span class="line"></span><br><span class="line">    test_dataloader = DataLoader(test_data, </span><br><span class="line">    batch_size=<span class="number">1</span>, shuffle=<span class="literal">False</span>)</span><br><span class="line">    test_length = test_data.__len__()</span><br><span class="line">    correct = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> i, (imgs, lables) <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_dataloader):</span><br><span class="line">        imgs = imgs.cuda()</span><br><span class="line">        lables = lables.cuda()</span><br><span class="line"></span><br><span class="line">        lables = lables.view(-<span class="number">1</span>, </span><br><span class="line">        common.captcha_array.__len__())</span><br><span class="line"></span><br><span class="line">        lables_text = one_hot.vectotext(lables)</span><br><span class="line">        predict_outputs = m(imgs)</span><br><span class="line">        predict_outputs = predict_outputs.view(-<span class="number">1</span>, </span><br><span class="line">        common.captcha_array.__len__())</span><br><span class="line">        predict_labels = one_hot.vectotext(predict_outputs)</span><br><span class="line">        <span class="keyword">if</span> predict_labels == lables_text:</span><br><span class="line">            correct += <span class="number">1</span></span><br><span class="line">            print(<span class="string">&quot;预测正确：正确值:&#123;&#125;,预测值:&#123;&#125;&quot;</span></span><br><span class="line">            .<span class="built_in">format</span>(lables_text, predict_labels))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">&quot;预测失败:正确值:&#123;&#125;,预测值:&#123;&#125;&quot;</span></span><br><span class="line">            .<span class="built_in">format</span>(lables_text, predict_labels))</span><br><span class="line">        <span class="comment"># m(imgs)</span></span><br><span class="line">    print(<span class="string">&quot;正确率&#123;&#125;%&quot;</span>.<span class="built_in">format</span>(correct / test_length * <span class="number">100</span>))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pred_pic</span>(<span class="params">pic_path</span>):</span></span><br><span class="line">    img=Image.<span class="built_in">open</span>(pic_path)</span><br><span class="line">    tersor_img=transforms.Compose([</span><br><span class="line">        transforms.Grayscale(),</span><br><span class="line">        transforms.Resize((<span class="number">60</span>,<span class="number">160</span>)),</span><br><span class="line">        transforms.ToTensor()</span><br><span class="line">    ])</span><br><span class="line">    img=tersor_img(img).cuda()</span><br><span class="line">    print(img.shape)</span><br><span class="line">    img=torch.reshape(img,(-<span class="number">1</span>,<span class="number">1</span>,<span class="number">60</span>,<span class="number">160</span>))</span><br><span class="line">    print(img.shape)</span><br><span class="line">    m = torch.load(<span class="string">&quot;model.pth&quot;</span>).cuda()</span><br><span class="line">    outputs = m(img)</span><br><span class="line">    outputs=outputs.view(-<span class="number">1</span>,<span class="built_in">len</span>(common.captcha_array))</span><br><span class="line">    outputs_lable=one_hot.vectotext(outputs)</span><br><span class="line">    print(outputs_lable)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_pred();</span><br><span class="line">    <span class="comment">#pred_pic(&quot;dataset/test/7u9o_1635053946.png&quot;)</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> * 此模型的准确率为65%，差强人意
 <div data-align="center">
 <img src="https://i.bmp.ovh/imgs/2022/02/e5062580998959df.png" width="200"/>
 </div>
 <center>
 预测结果
 </center>
+<ul>
+<li>模型文件链接：https://pan.baidu.com/s/1WsRkX2rF7DEGAGARiIGq_A
+提取码：6666</li>
+</ul>
 
     </div>
 
@@ -626,6 +646,25 @@ VGG16结构示意图
 
 
 
+<script>
+if (document.querySelectorAll('.pdf-container').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/pdfobject@2.2.4/pdfobject.min.js', () => {
+    document.querySelectorAll('.pdf-container').forEach(element => {
+      PDFObject.embed(element.dataset.target, element, {
+        pdfOpenParams: {
+          navpanes : 0,
+          toolbar  : 0,
+          statusbar: 0,
+          pagemode : 'thumbs',
+          view     : 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height   : element.dataset.height
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
 
